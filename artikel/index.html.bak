@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artikel - Tips & Inspirasi Pernikahan | Undangyah</title>
+    <meta name="description" content="Artikel dan tips seputar undangan pernikahan digital, inspirasi dekorasi, dan panduan persiapan pernikahan.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://undangyah.id/artikel/">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://undangyah.id/artikel/">
+    <meta property="og:title" content="Artikel - Tips & Inspirasi Pernikahan | Undangyah">
+    <meta property="og:description" content="Artikel dan tips seputar undangan pernikahan digital, inspirasi dekorasi, dan panduan persiapan pernikahan.">
+    <meta property="og:image" content="https://undangyah.id/og-image.png">
+    <meta property="og:site_name" content="Undangyah">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Artikel - Tips & Inspirasi Pernikahan | Undangyah">
+    <meta name="twitter:description" content="Artikel dan tips seputar undangan pernikahan digital, inspirasi dekorasi, dan panduan persiapan pernikahan.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      *{margin:0;padding:0;box-sizing:border-box}
+      body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:#1e293b;background:#f8fafc;line-height:1.6}
+      .container{max-width:900px;margin:0 auto;padding:40px 24px}
+      h1{font-size:1.8rem;font-weight:700;margin-bottom:8px}
+      .subtitle{color:#64748b;margin-bottom:32px}
+      .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+      .card{display:block;background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;text-decoration:none;color:#1e293b;transition:transform .2s}
+      .card:hover{transform:translateY(-4px)}
+      .card img{width:100%;aspect-ratio:16/9;object-fit:cover}
+      .card-body{padding:16px}
+      .card-date{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.5px}
+      .card-title{font-size:1rem;font-weight:600;margin:8px 0;line-height:1.4}
+      .card-excerpt{font-size:.85rem;color:#64748b;line-height:1.5}
+      .navbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid #e2e8f0;max-width:100%}
+      .navbar__logo img{height:24px;display:block}
+      .navbar__links{display:flex;gap:24px}
+      .navbar__links a{color:#475569;text-decoration:none;font-size:.875rem;font-weight:500;transition:color .2s}
+      .navbar__links a:hover,.navbar__links a.active{color:#1668f2}
+      .navbar__actions{display:flex;align-items:center;gap:12px}
+      .btn-ghost{color:#1668f2;text-decoration:none;font-size:.875rem;font-weight:600;padding:8px 16px;border-radius:10px;transition:background .2s}
+      .btn-ghost:hover{background:#f0f4ff}
+      .btn-primary{background:#1668f2;color:#fff;text-decoration:none;font-size:.875rem;font-weight:600;padding:8px 16px;border-radius:10px;transition:background .2s}
+      .btn-primary:hover{background:#1255d4}
+      .navbar__hamburger{display:none;background:none;border:none;cursor:pointer;color:#475569;padding:4px}
+      .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#fff;z-index:200;padding:20px 24px;flex-direction:column}
+      .mobile-menu.open{display:flex}
+      .mobile-menu__header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+      .mobile-menu__close{background:none;border:none;cursor:pointer;color:#475569;padding:4px}
+      .mobile-menu__nav{display:flex;flex-direction:column;gap:20px}
+      .mobile-menu__nav a{color:#1e293b;text-decoration:none;font-size:1.1rem;font-weight:500}
+      .mobile-menu__nav a.active{color:#1668f2}
+      .mobile-menu__cta{margin-top:auto;display:flex;flex-direction:column;gap:12px;padding-top:24px}
+      .mobile-menu__cta a{text-align:center;padding:12px;border-radius:10px;text-decoration:none;font-weight:600;font-size:.9rem}
+      .mobile-menu__cta .btn-ghost{border:1px solid #e2e8f0}
+      .mobile-menu__cta .btn-primary{background:#1668f2;color:#fff}
+      @media(max-width:768px){
+        .navbar__links{display:none}
+        .navbar__hamburger{display:block}
+        .navbar__actions .btn-ghost,.navbar__actions .btn-primary{display:none}
+      }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <a href="/" class="navbar__logo">
+            <img src="https://app.undangyah.id/wp-content/uploads/2026/01/undangyah.png" alt="Undangyah" height="24">
+        </a>
+        <nav class="navbar__links">
+            <a href="/#fitur">Fitur</a>
+            <a href="/#harga">Harga</a>
+            <a href="/#katalog">Katalog</a>
+            <a href="/#faq">FAQ</a>
+            <a href="/artikel/" class="active">Artikel</a>
+        </nav>
+        <div class="navbar__actions">
+            <a href="https://hi.undangyah.id" class="btn-ghost">Login</a>
+            <a href="https://hi.undangyah.id/checkout/nyobian" class="btn-primary">Buat Undangan</a>
+            <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Menu">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+        </div>
+    </header>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu__header">
+            <a href="/" class="navbar__logo">
+                <img src="https://app.undangyah.id/wp-content/uploads/2026/01/undangyah.png" alt="Undangyah" height="24">
+            </a>
+            <button class="mobile-menu__close" id="menuCloseBtn" aria-label="Tutup">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <nav class="mobile-menu__nav">
+            <a href="/#fitur">Fitur</a>
+            <a href="/#harga">Harga</a>
+            <a href="/#katalog">Katalog</a>
+            <a href="/#faq">FAQ</a>
+            <a href="/artikel/" class="active">Artikel</a>
+        </nav>
+        <div class="mobile-menu__cta">
+            <a href="https://hi.undangyah.id" class="btn-ghost">Login</a>
+            <a href="https://hi.undangyah.id/checkout/nyobian" class="btn-primary">Buat Undangan</a>
+        </div>
+    </div>
+    <script>
+    document.getElementById('hamburgerBtn').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+    document.getElementById('menuCloseBtn').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
+    </script>
+    <div class="container">
+        <h1>Tips & Inspirasi Pernikahan</h1>
+        <p class="subtitle">Panduan lengkap untuk mempersiapkan hari istimewa Anda</p>
+        <div class="grid">
+            <a href="/artikel/7-fitur-wajib-undangan-digital-yang-sering-diabaikan" class="card">
+                <img src="https://app.undangyah.id/wp-content/uploads/2026/05/artikel-7-fitur-wajib-undangan-digital-yang-sering-diabaikan-768x403.jpg" alt="7 Fitur Wajib Undangan Digital yang Sering Diabaikan" loading="lazy">
+                <div class="card-body">
+                    <span class="card-date">17 Mei 2026</span>
+                    <h2 class="card-title">7 Fitur Wajib Undangan Digital yang Sering Diabaikan</h2>
+                    <p class="card-excerpt">Memilih undangan digital untuk pernikahan bukan sekadar soal desain cantik. Banyak pasangan fokus pada tampilan visual, tapi lupa memastikan fitur-fitur fungsional yang justru menentukan kenyamanan tamu. Akibatnya, tamu bingung mencari&hellip;</p>
+                </div>
+            </a>
+            <a href="/artikel/checklist-persiapan-pernikahan-6-bulan" class="card">
+                <img src="https://app.undangyah.id/wp-content/uploads/2026/05/artikel-checklist-persiapan-pernikahan-6-bulan-768x403.jpg" alt="Checklist Persiapan Pernikahan 6 Bulan Sebelum Hari H" loading="lazy">
+                <div class="card-body">
+                    <span class="card-date">17 Mei 2026</span>
+                    <h2 class="card-title">Checklist Persiapan Pernikahan 6 Bulan Sebelum Hari H</h2>
+                    <p class="card-excerpt">Panduan lengkap checklist persiapan pernikahan dari 6 bulan sebelum hari H. Mulai dari booking venue hingga detail terakhir.</p>
+                </div>
+            </a>
+            <a href="/artikel/fitur-wajib-undangan-digital" class="card">
+                <img src="https://app.undangyah.id/wp-content/uploads/2026/05/artikel-fitur-wajib-undangan-digital-768x403.jpg" alt="7 Fitur Wajib dalam Undangan Digital yang Sering Diabaikan" loading="lazy">
+                <div class="card-body">
+                    <span class="card-date">17 Mei 2026</span>
+                    <h2 class="card-title">7 Fitur Wajib dalam Undangan Digital yang Sering Diabaikan</h2>
+                    <p class="card-excerpt">Ketahui 7 fitur penting undangan digital pernikahan yang sering terlewat. Pastikan undangan online Anda lengkap dan fungsional untuk tamu.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "undangyah.id",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "prerender": "node prerender-articles.cjs",
+    "build:landing": "node build-landing.cjs",
+    "build:full": "node build-landing.cjs && node prerender-articles.cjs && vite build"
+  },
+  "devDependencies": {
+    "vite": "^8.0.13"
+  }
+}

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="description" content="undangyah.id sedang dalam perbaikan. Kami akan segera kembali.">
+    <title>Sedang Dalam Perbaikan - undangyah.id</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(22, 104, 242, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(22, 104, 242, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(22, 104, 242, 0.02) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 560px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .icon-wrapper {
+            margin-bottom: 40px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .icon-wrapper svg {
+            width: 140px;
+            height: 140px;
+            filter: drop-shadow(0 10px 30px rgba(22, 104, 242, 0.12));
+        }
+
+        .brand {
+            margin-bottom: 28px;
+        }
+
+        .brand img {
+            height: 36px;
+            width: auto;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #64748b;
+            margin-bottom: 32px;
+            max-width: 460px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1668f2;
+            margin-bottom: 36px;
+        }
+
+        .status-badge.hidden { display: none; }
+
+        .status-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: #1668f2;
+            border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #1668f2;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(22, 104, 242, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #1255cc;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(22, 104, 242, 0.4);
+        }
+
+        .btn-primary:active { transform: translateY(0); }
+
+        .btn-primary svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .btn-primary.hidden { display: none; }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: #1668f2;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid #bfdbfe;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #eff6ff;
+            border-color: #1668f2;
+        }
+
+        .btn-secondary.hidden { display: none; }
+
+        .footer {
+            margin-top: 48px;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .footer a {
+            color: #1668f2;
+            text-decoration: none;
+        }
+
+        .decor {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .decor-1 {
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(22, 104, 242, 0.1);
+            top: -100px;
+            right: -100px;
+            animation: spin 40s linear infinite;
+        }
+
+        .decor-2 {
+            width: 200px;
+            height: 200px;
+            border: 1px solid rgba(22, 104, 242, 0.08);
+            bottom: -60px;
+            left: -60px;
+            animation: spin 30s linear infinite reverse;
+        }
+
+        @media (max-width: 640px) {
+            .icon-wrapper svg { width: 110px; height: 110px; }
+            h1 { font-size: 24px; }
+            .subtitle { font-size: 15px; }
+            .btn-primary { padding: 12px 24px; font-size: 14px; }
+            .container { padding: 0 10px; }
+        }
+
+        @media (max-width: 380px) {
+            h1 { font-size: 22px; }
+            .subtitle { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="decor decor-1"></div>
+    <div class="decor decor-2"></div>
+
+    <div class="container">
+        <div class="icon-wrapper">
+            <svg viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="70" cy="70" r="65" stroke="#1668f2" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.3"/>
+                <circle cx="70" cy="70" r="55" fill="#eff6ff"/>
+                <path d="M70 45c-1.4 0-2.7.1-4 .3l-1.5-4.8c-.3-.9-1.3-1.4-2.2-1.1l-4.6 1.5c-.9.3-1.4 1.3-1.1 2.2l1.5 4.8c-2.3 1.4-4.3 3.2-5.9 5.3l-4.8-1.5c-.9-.3-1.9.2-2.2 1.1l-1.5 4.6c-.3.9.2 1.9 1.1 2.2l4.8 1.5c-.5 2.1-.8 4.3-.8 6.5s.3 4.4.8 6.5l-4.8 1.5c-.9.3-1.4 1.3-1.1 2.2l1.5 4.6c.3.9 1.3 1.4 2.2 1.1l4.8-1.5c1.6 2.1 3.6 3.9 5.9 5.3l-1.5 4.8c-.3.9.2 1.9 1.1 2.2l4.6 1.5c.9.3 1.9-.2 2.2-1.1l1.5-4.8c1.3.2 2.6.3 4 .3s2.7-.1 4-.3l1.5 4.8c.3.9 1.3 1.4 2.2 1.1l4.6-1.5c.9-.3 1.4-1.3 1.1-2.2l-1.5-4.8c2.3-1.4 4.3-3.2 5.9-5.3l4.8 1.5c.9.3 1.9-.2 2.2-1.1l1.5-4.6c.3-.9-.2-1.9-1.1-2.2l-4.8-1.5c.5-2.1.8-4.3.8-6.5s-.3-4.4-.8-6.5l4.8-1.5c.9-.3 1.4-1.3 1.1-2.2l-1.5-4.6c-.3-.9-1.3-1.4-2.2-1.1l-4.8 1.5c-1.6-2.1-3.6-3.9-5.9-5.3l1.5-4.8c.3-.9-.2-1.9-1.1-2.2l-4.6-1.5c-.9-.3-1.9.2-2.2 1.1l-1.5 4.8c-1.3-.2-2.6-.3-4-.3z" fill="#1668f2" opacity="0.12"/>
+                <circle cx="70" cy="67" r="18" stroke="#1668f2" stroke-width="2.5" fill="none"/>
+                <circle cx="70" cy="67" r="8" fill="#1668f2" opacity="0.25"/>
+                <path d="M82 79l12 12c1.5 1.5 1.5 4 0 5.5s-4 1.5-5.5 0l-12-12" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M80 77c2.5-2.5 2.5-6.5 0-9s-6.5-2.5-9 0" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M95 35c-1.5-1.5-4-1.5-5.5 0-1.5-1.5-4-1.5-5.5 0-3 3 5.5 9 5.5 9s8.5-6 5.5-9z" fill="#f59e0b" opacity="0.7"/>
+                <circle cx="38" cy="45" r="2" fill="#1668f2" opacity="0.4"/>
+                <circle cx="105" cy="55" r="1.5" fill="#1668f2" opacity="0.3"/>
+                <circle cx="42" cy="95" r="1.5" fill="#f59e0b" opacity="0.5"/>
+            </svg>
+        </div>
+
+        <div class="brand">
+            <img src="https://app.undangyah.id/wp-content/uploads/2026/01/undangyah.png" alt="undangyah.id" />
+        </div>
+
+        <h1 id="m-title">Sedang Dalam Perbaikan</h1>
+
+        <p class="subtitle" id="m-subtitle">
+            Kami sedang melakukan peningkatan layanan untuk pengalaman yang lebih baik. 
+            Silakan kembali beberapa saat lagi.
+        </p>
+
+        <div class="status-badge" id="m-badge">
+            <span class="dot"></span>
+            <span id="m-badge-text">Segera kembali</span>
+        </div>
+
+        <br>
+
+        <div class="buttons">
+            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="btn-primary" id="m-btn-primary">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                <span id="m-btn-primary-text">Hubungi Kami</span>
+            </a>
+
+            <a href="#" target="_blank" rel="noopener noreferrer" class="btn-secondary hidden" id="m-btn-secondary">
+                <span id="m-btn-secondary-text"></span>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 <a href="https://undangyah.id">undangyah.id</a> — Platform Undangan Digital</p>
+        </div>
+    </div>
+
+    <script>
+    (async function() {
+        try {
+            const res = await fetch('https://app.undangyah.id/wp-json/weddingsaas/v1/landing/maintenance-config');
+            if (!res.ok) return;
+            const cfg = await res.json();
+
+            // Title
+            if (cfg.title) document.getElementById('m-title').textContent = cfg.title;
+
+            // Subtitle
+            if (cfg.subtitle) document.getElementById('m-subtitle').textContent = cfg.subtitle;
+
+            // Badge
+            const badge = document.getElementById('m-badge');
+            if (cfg.badge_visible === false) {
+                badge.classList.add('hidden');
+            } else {
+                badge.classList.remove('hidden');
+                if (cfg.badge_text) document.getElementById('m-badge-text').textContent = cfg.badge_text;
+            }
+
+            // Primary button
+            const btnPrimary = document.getElementById('m-btn-primary');
+            if (cfg.btn_primary_visible === false) {
+                btnPrimary.classList.add('hidden');
+            } else {
+                btnPrimary.classList.remove('hidden');
+                if (cfg.btn_primary_url) btnPrimary.href = cfg.btn_primary_url;
+                if (cfg.btn_primary_text) document.getElementById('m-btn-primary-text').textContent = cfg.btn_primary_text;
+            }
+
+            // Secondary button
+            const btnSecondary = document.getElementById('m-btn-secondary');
+            if (cfg.btn_secondary_visible && cfg.btn_secondary_text) {
+                btnSecondary.classList.remove('hidden');
+                if (cfg.btn_secondary_url) btnSecondary.href = cfg.btn_secondary_url;
+                document.getElementById('m-btn-secondary-text').textContent = cfg.btn_secondary_text;
+            } else {
+                btnSecondary.classList.add('hidden');
+            }
+        } catch (e) {
+            // Fallback: show defaults (already in HTML)
+        }
+    })();
+    </script>
+</body>
+</html>
