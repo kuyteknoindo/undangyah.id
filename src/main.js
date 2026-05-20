@@ -1,4 +1,4 @@
-const API_BASE = 'https://app.undangyah.id/wp-json/weddingsaas/v1';
+const API_BASE = 'https://app.undangyah.id/wp-json/undangyah/v1';
 
 import { initArtikelRouter } from './artikel.js';
 
@@ -52,7 +52,7 @@ const revealObserver = new IntersectionObserver((entries) => {
         const parent = el.parentElement;
         const siblings = [...parent.querySelectorAll('.reveal')];
         const index = siblings.indexOf(el);
-        delay = index * 60;
+        delay = index * 80;
       }
 
       setTimeout(() => {
@@ -62,7 +62,7 @@ const revealObserver = new IntersectionObserver((entries) => {
       revealObserver.unobserve(el);
     }
   });
-}, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
 // Observe all reveal elements, make hero content visible immediately
 document.querySelectorAll('.reveal').forEach(el => {
@@ -74,6 +74,23 @@ document.querySelectorAll('.reveal').forEach(el => {
     revealObserver.observe(el);
   }
 });
+
+// ===== Navbar Scroll Effect =====
+const navbar = document.querySelector('.navbar');
+if (navbar) {
+  let lastScroll = 0;
+  const scrollThreshold = 20;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+    if (currentScroll > scrollThreshold) {
+      navbar.classList.add('navbar--scrolled');
+    } else {
+      navbar.classList.remove('navbar--scrolled');
+    }
+    lastScroll = currentScroll;
+  }, { passive: true });
+}
 
 // ===== Count-Up Animation =====
 const countObserver = new IntersectionObserver((entries) => {
@@ -387,9 +404,6 @@ document.querySelectorAll('.faq-item__q').forEach(btn => {
     }
   });
 });
-
-// ===== Navbar scroll effect =====
-const navbar = document.getElementById('navbar');
 
 // ===== Testimonial carousel (auto-rotate 1 card at a time on mobile) =====
 const testimonialTrack = document.querySelector('.testimonials__track');

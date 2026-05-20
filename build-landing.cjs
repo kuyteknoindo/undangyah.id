@@ -11,7 +11,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-const API_BASE = 'https://app.undangyah.id/wp-json/weddingsaas/v1/landing';
+const API_BASE = 'https://app.undangyah.id/wp-json/undangyah/v1/landing';
 const INDEX_PATH = path.join(__dirname, 'index.html');
 const TEMPLATE_PATH = path.join(__dirname, 'index.template.html');
 
@@ -181,11 +181,7 @@ async function main() {
     generateFaqSection(faq) + '\n\n'
   );
 
-  // Replace Footer
-  html = html.replace(
-    /<footer class="footer">[\s\S]*?<\/footer>/,
-    generateFooterSection(footer)
-  );
+  // Footer is now dynamic via footer.js — no static replacement needed
 
   // Write output
   fs.writeFileSync(INDEX_PATH, html, 'utf-8');

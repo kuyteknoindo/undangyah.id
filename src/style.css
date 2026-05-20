@@ -65,12 +65,8 @@ button{border:none;background:none;cursor:pointer;font:inherit}
 .btn-white:hover{transform:scale(1.02);box-shadow:0 4px 16px rgba(255,255,255,.2)}
 .btn--lg{padding:14px 28px;font-size:.9rem}
 
-/* ===== Button Glow Effect (conic-gradient border rotation) ===== */
-.btn-glow{position:relative;overflow:hidden;z-index:1}
-.btn-glow::before{content:'';position:absolute;inset:-2px;border-radius:inherit;background:conic-gradient(from 0deg,var(--accent),var(--accent) 50%,rgba(255,255,255,.3) 51% 99%,var(--accent));z-index:-1;animation:glow-rotate 3s linear infinite;opacity:0;transition:opacity .3s}
-.btn-glow:hover::before{opacity:1}
-
-@keyframes glow-rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+/* ===== Button Glow (simple hover) ===== */
+.btn-glow{position:relative}
 
 /* ===== Promo Banner ===== */
 .promo-banner{background:var(--accent);color:var(--accent-text);padding:10px 24px;text-align:center;font-size:.8rem;position:relative;z-index:2}
@@ -237,8 +233,80 @@ button{border:none;background:none;cursor:pointer;font:inherit}
 .back-to-top:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.2)}
 
 /* ===== Reveal Animation ===== */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity var(--duration) var(--ease-out),transform var(--duration) var(--ease-out)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity var(--duration) var(--ease-out),transform var(--duration) var(--ease-out)}
 .reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Reveal variants */
+.reveal--up{transform:translateY(32px)}
+.reveal--down{transform:translateY(-24px)}
+.reveal--left{transform:translateX(-24px)}
+.reveal--right{transform:translateX(24px)}
+.reveal--scale{transform:scale(0.95);transform-origin:center}
+.reveal--up.visible,.reveal--down.visible,.reveal--left.visible,.reveal--right.visible,.reveal--scale.visible{transform:translate(0) scale(1)}
+
+/* Stagger delays */
+.reveal--d1{transition-delay:80ms}
+.reveal--d2{transition-delay:160ms}
+.reveal--d3{transition-delay:240ms}
+.reveal--d4{transition-delay:320ms}
+.reveal--d5{transition-delay:400ms}
+
+/* ===== Card Hover Effects (Salix-style) ===== */
+.feature-card{transition:transform 0.3s var(--ease-out),box-shadow 0.3s var(--ease-out)}
+.feature-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.06)}
+
+.pricing-card{transition:transform 0.3s var(--ease-out),box-shadow 0.3s var(--ease-out)}
+.pricing-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.08)}
+.pricing-card--popular:hover{transform:translateY(-8px);box-shadow:0 20px 48px rgba(0,0,0,0.12)}
+
+.catalog-card{transition:transform 0.3s var(--ease-out),box-shadow 0.3s var(--ease-out)}
+.catalog-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.06)}
+.catalog-card img{transition:transform 0.4s var(--ease-out)}
+.catalog-card:hover img{transform:scale(1.03)}
+
+.testimonial-card{transition:transform 0.3s var(--ease-out),box-shadow 0.3s var(--ease-out)}
+.testimonial-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.06)}
+
+/* ===== Navbar Scroll Effect ===== */
+.navbar{transition:background 0.3s,box-shadow 0.3s,border-color 0.3s}
+.navbar--scrolled{background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 8px rgba(0,0,0,0.04);border-bottom:1px solid rgba(229,231,235,0.6)}
+
+/* ===== Button Hover Enhancements ===== */
+.btn-primary{transition:transform 0.2s var(--ease-out),box-shadow 0.2s var(--ease-out),background 0.2s}
+.btn-primary:hover{transform:translateY(-1px) scale(1.02);box-shadow:0 6px 16px rgba(0,0,0,0.15)}
+.btn-primary:active{transform:translateY(0) scale(0.98)}
+
+.btn-outline{transition:transform 0.2s var(--ease-out),border-color 0.2s,background 0.2s}
+.btn-outline:hover{transform:translateY(-1px);border-color:var(--text-label);background:var(--card-bg)}
+.btn-outline:active{transform:translateY(0)}
+
+/* ===== Section Header Animation ===== */
+.section-header .section-label{transition:opacity 0.4s var(--ease-out),transform 0.4s var(--ease-out)}
+.section-header .section-title{transition:opacity 0.5s var(--ease-out) 0.1s,transform 0.5s var(--ease-out) 0.1s}
+.section-header .section-subtitle{transition:opacity 0.5s var(--ease-out) 0.2s,transform 0.5s var(--ease-out) 0.2s}
+
+/* ===== Hero Specific Animations ===== */
+.hero__title{opacity:0;transform:translateY(28px);animation:heroReveal 0.7s var(--ease-out) 0.1s forwards}
+.hero__subtitle{opacity:0;transform:translateY(20px);animation:heroReveal 0.6s var(--ease-out) 0.3s forwards}
+.hero__cta{opacity:0;transform:translateY(16px);animation:heroReveal 0.6s var(--ease-out) 0.5s forwards}
+.hero__visual{opacity:0;transform:translateY(24px) scale(0.97);animation:heroVisualReveal 0.8s var(--ease-out) 0.6s forwards}
+
+@keyframes heroReveal{to{opacity:1;transform:translateY(0)}}
+@keyframes heroVisualReveal{to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* ===== Smooth Link Underline ===== */
+.navbar__links a{position:relative}
+.navbar__links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:var(--text);transition:width 0.25s var(--ease-out)}
+.navbar__links a:hover::after{width:100%}
+
+/* ===== FAQ Accordion Smooth ===== */
+.faq-item{transition:background 0.2s}
+.faq-item:hover{background:rgba(0,0,0,0.01)}
+.faq-answer{transition:max-height 0.4s var(--ease-out),opacity 0.3s var(--ease-out),padding 0.3s}
+
+/* ===== CTA Section Glow ===== */
+.cta-box{transition:box-shadow 0.4s var(--ease-out)}
+.cta-box:hover{box-shadow:0 24px 64px rgba(15,15,17,0.2)}
 
 /* ===== Skeleton Pulse ===== */
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}

@@ -5,7 +5,7 @@
  * Run: node generate-sitemap.js
  */
 
-const API_BASE = 'https://app.undangyah.id/wp-json/weddingsaas/v1';
+const API_BASE = 'https://app.undangyah.id/wp-json/undangyah/v1';
 const SITE_URL = 'https://undangyah.id';
 
 async function generateSitemap() {

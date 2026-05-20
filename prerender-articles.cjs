@@ -13,7 +13,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const API_BASE = 'https://app.undangyah.id/wp-json/weddingsaas/v1/landing';
+const API_BASE = 'https://app.undangyah.id/wp-json/undangyah/v1/landing';
 const ARTIKEL_DIR = path.join(__dirname, 'artikel');
 const TEMPLATE_PATH = path.join(ARTIKEL_DIR, '_template.html');
 const PER_PAGE = 100; // fetch all at once for static generation
@@ -214,23 +214,9 @@ ${popular.map((a, i) => `                                <li><span class="num">$
                 </section>
             </section>
 
-            <!-- Footer -->
-            <footer class="footer">
-                <div class="footer__inner">
-                    <div class="footer__brand">
-                        <img src="https://app.undangyah.id/wp-content/uploads/2026/01/undangyah.png" alt="Undangyah" height="22">
-                    </div>
-                    <div class="footer__links">
-                        <a href="/#fitur">Fitur</a>
-                        <a href="/#harga">Harga</a>
-                        <a href="/#katalog">Katalog</a>
-                        <a href="/#faq">FAQ</a>
-                        <a href="/artikel/">Artikel</a>
-                        <a href="https://wa.me/62859106967901" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-                    </div>
-                    <p class="footer__copy">© 2026 Undangyah. Hak cipta dilindungi.</p>
-                </div>
-            </footer>
+            <!-- Footer (dynamic via footer.js) -->
+            <footer class="footer"></footer>
+            <script src="/footer.js?v=20260519"></script>
 
         </div>
     </div>
