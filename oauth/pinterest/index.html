@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest OAuth - Undangyah</title>
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: #f8fafc; }
+        .card { background: #fff; border-radius: 16px; padding: 40px; max-width: 500px; width: 90%; box-shadow: 0 4px 24px rgba(0,0,0,0.08); text-align: center; }
+        h1 { font-size: 1.3rem; color: #0f172a; margin-bottom: 12px; }
+        p { color: #64748b; font-size: 0.9rem; line-height: 1.6; }
+        .code-box { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin: 20px 0; word-break: break-all; font-family: monospace; font-size: 0.85rem; color: #334155; }
+        .success { color: #16a34a; }
+        .error { color: #dc2626; }
+        .url-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 12px; margin: 16px 0; font-size: 0.8rem; color: #1e40af; word-break: break-all; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div id="content">
+            <h1>Pinterest OAuth Callback</h1>
+            <p>Memproses authorization...</p>
+        </div>
+    </div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+        const state = params.get('state');
+        const error = params.get('error');
+        const el = document.getElementById('content');
+
+        if (error) {
+            el.innerHTML = `
+                <h1 class="error">❌ Authorization Gagal</h1>
+                <p>Error: ${error}</p>
+                <p>${params.get('error_description') || ''}</p>
+            `;
+        } else if (code) {
+            el.innerHTML = `
+                <h1 class="success">✅ Authorization Berhasil!</h1>
+                <p>Copy <strong>seluruh URL</strong> di address bar browser kamu, lalu paste ke terminal/chat.</p>
+                <div class="url-box">
+                    <strong>URL untuk di-copy:</strong><br><br>
+                    ${window.location.href}
+                </div>
+                <p style="margin-top:16px; font-size:0.8rem; color:#94a3b8;">Authorization code: ${code.substring(0, 20)}...</p>
+            `;
+        } else {
+            el.innerHTML = `
+                <h1>Pinterest OAuth</h1>
+                <p>Halaman ini digunakan untuk callback OAuth Pinterest.<br>Tidak ada yang perlu dilakukan di sini secara manual.</p>
+            `;
+        }
+    </script>
+</body>
+</html>

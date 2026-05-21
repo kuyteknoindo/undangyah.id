@@ -1,0 +1,26 @@
+{
+  "name": "Undangyah - Undangan Digital Premium",
+  "short_name": "Undangyah",
+  "description": "Buat undangan pernikahan digital premium dalam hitungan menit. RSVP, buku tamu, kado digital.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1668f2",
+  "orientation": "portrait-primary",
+  "lang": "id",
+  "categories": ["lifestyle", "social"],
+  "icons": [
+    {
+      "src": "https://app.undangyah.id/wp-content/uploads/2025/04/undangyah-ico.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://app.undangyah.id/wp-content/uploads/2025/04/undangyah-ico.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

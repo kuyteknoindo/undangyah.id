@@ -128,12 +128,59 @@ async function loadPromo() {
     if (!banner) return;
 
     let currentIndex = 0;
+    let countdownInterval = null;
+
+    // Template backgrounds (preset)
+    const TEMPLATE_STYLES = {
+      gradient: { bg: 'linear-gradient(135deg, #1e1b4b 0%, #4c1d95 50%, #7c3aed 100%)', color: '#ffffff' },
+      minimal: { bg: '#f5f5f5', color: '#0a0a0a' },
+      highlight: { bg: '#2563eb', color: '#ffffff' },
+      floating: { bg: 'linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%)', color: '#ffffff' },
+      pill: { bg: '#0a0a0a', color: '#ffffff' },
+    };
+
+    function startCountdown(endDate) {
+      if (countdownInterval) clearInterval(countdownInterval);
+      const cdEl = banner.querySelector('.promo-banner__countdown');
+      if (!cdEl || !endDate) { if (cdEl) cdEl.style.display = 'none'; return; }
+
+      const target = new Date(endDate).getTime();
+      function tick() {
+        const now = Date.now();
+        if (now >= target) { cdEl.style.display = 'none'; clearInterval(countdownInterval); return; }
+        const diff = target - now;
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        cdEl.textContent = `${String(d).padStart(2,'0')}:${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+        cdEl.style.display = '';
+      }
+      tick();
+      countdownInterval = setInterval(tick, 1000);
+    }
 
     function showPromo(promo) {
-      banner.style.background = promo.bg_color || '#0f0f11';
-      banner.style.color = promo.text_color || '#ffffff';
+      const tmpl = promo.template || 'custom';
+      const preset = TEMPLATE_STYLES[tmpl];
+
+      // Apply style based on template
+      if (preset && tmpl !== 'custom') {
+        banner.style.background = preset.bg;
+        banner.style.color = preset.color;
+      } else {
+        banner.style.background = promo.bg_color || '#0f0f11';
+        banner.style.color = promo.text_color || '#ffffff';
+      }
+
+      // Apply template class
+      banner.className = 'promo-banner promo-banner--' + tmpl;
+
       banner.querySelector('.promo-banner__title').textContent = promo.title || '';
       banner.querySelector('.promo-banner__desc').textContent = promo.description || '';
+
+      // Countdown
+      startCountdown(promo.end_date);
 
       const cta = banner.querySelector('.promo-banner__cta');
       if (promo.type === 'voucher' && promo.voucher_code) {

@@ -13,7 +13,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const API_BASE = 'https://app.undangyah.id/wp-json/undangyah/v1/landing';
+const API_BASE = 'http://127.0.0.1/wp-json/undangyah/v1/landing';
 const ARTIKEL_DIR = path.join(__dirname, 'artikel');
 const TEMPLATE_PATH = path.join(ARTIKEL_DIR, '_template.html');
 const PER_PAGE = 100; // fetch all at once for static generation
@@ -23,7 +23,7 @@ const PER_PAGE = 100; // fetch all at once for static generation
 function fetch(url) {
   return new Promise((resolve, reject) => {
     const mod = url.startsWith('https') ? https : http;
-    mod.get(url, { headers: { 'User-Agent': 'UndangyahSSG/1.0' } }, (res) => {
+    mod.get(url, { headers: { 'User-Agent': 'UndangyahSSG/1.0', 'Host': 'app.undangyah.id' } }, (res) => {
       if (res.statusCode !== 200) {
         reject(new Error(`HTTP ${res.statusCode} for ${url}`));
         return;
@@ -287,6 +287,92 @@ function getRelatedArticles(currentSlug, allArticles, count = 4) {
   return related.slice(0, count);
 }
 
+// ─── FAQ Schema Extraction ────────────────────────────────────────────────────
+
+function extractFaqSchema(contentHtml) {
+  const faqPairs = [];
+  
+  // Strategy 1: H2/H3 headings that contain '?'
+  const headingQRegex = /<h[23][^>]*>(.*?\?)<\/h[23]>/gi;
+  let match;
+  while ((match = headingQRegex.exec(contentHtml)) !== null) {
+    const question = stripHtml(match[1]).trim();
+    const afterHeading = contentHtml.slice(match.index + match[0].length);
+    const answerMatch = afterHeading.match(/^\s*(<p[^>]*>[\s\S]*?<\/p>|<ul[^>]*>[\s\S]*?<\/ul>|<ol[^>]*>[\s\S]*?<\/ol>)/i);
+    if (answerMatch) {
+      const answer = stripHtml(answerMatch[1]).trim();
+      if (question && answer) {
+        faqPairs.push({ question, answer });
+      }
+    }
+  }
+  
+  // Strategy 2: <strong>text?</strong> or <b>text?</b> followed by answer
+  const boldQRegex = /<(?:strong|b)[^>]*>(.*?\?)<\/(?:strong|b)>/gi;
+  while ((match = boldQRegex.exec(contentHtml)) !== null) {
+    const question = stripHtml(match[1]).trim();
+    // Skip if already captured by heading strategy
+    if (faqPairs.some(p => p.question === question)) continue;
+    const afterBold = contentHtml.slice(match.index + match[0].length);
+    // Look for next paragraph or text content
+    const answerMatch = afterBold.match(/^\s*(?:<\/p>\s*)?(<p[^>]*>[\s\S]*?<\/p>)/i) ||
+                        afterBold.match(/^\s*([\s\S]*?)(?=<(?:strong|b|h[23]|\/div|\/section)|$)/i);
+    if (answerMatch) {
+      const answer = stripHtml(answerMatch[1]).trim();
+      if (question && answer && answer.length > 10) {
+        faqPairs.push({ question, answer });
+      }
+    }
+  }
+  
+  // Strategy 3: Section with heading containing 'FAQ'/'Pertanyaan'/'Tanya'
+  const faqSectionRegex = /<h[23][^>]*>[^<]*(FAQ|Pertanyaan|Tanya Jawab|Tanya)[^<]*<\/h[23]>/gi;
+  while ((match = faqSectionRegex.exec(contentHtml)) !== null) {
+    const sectionStart = match.index + match[0].length;
+    // Find the next same-level or higher heading to delimit the section
+    const nextSectionMatch = contentHtml.slice(sectionStart).match(/<h[12][^>]*>/i);
+    const sectionEnd = nextSectionMatch ? sectionStart + nextSectionMatch.index : contentHtml.length;
+    const sectionContent = contentHtml.slice(sectionStart, sectionEnd);
+    
+    // Parse sub-headings (h3/h4) or bold questions within this section
+    const subHeadingRegex = /<h[34][^>]*>([\s\S]*?)<\/h[34]>/gi;
+    let subMatch;
+    while ((subMatch = subHeadingRegex.exec(sectionContent)) !== null) {
+      const question = stripHtml(subMatch[1]).trim();
+      if (faqPairs.some(p => p.question === question)) continue;
+      const afterSub = sectionContent.slice(subMatch.index + subMatch[0].length);
+      const answerMatch = afterSub.match(/^\s*(<p[^>]*>[\s\S]*?<\/p>|<ul[^>]*>[\s\S]*?<\/ul>|<ol[^>]*>[\s\S]*?<\/ol>)/i);
+      if (answerMatch) {
+        const answer = stripHtml(answerMatch[1]).trim();
+        if (question && answer) {
+          faqPairs.push({ question, answer });
+        }
+      }
+    }
+  }
+  
+  if (faqPairs.length === 0) return '';
+  
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqPairs.map(pair => ({
+      "@type": "Question",
+      "name": pair.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": pair.answer
+      }
+    }))
+  };
+  
+  return `<script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n    </script>`;
+}
+
+function stripHtml(html) {
+  return html.replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#039;/g, "'").replace(/&nbsp;/g, ' ');
+}
+
 function generateArticlePage(article, template, allArticles) {
   let html = template;
   html = html.replace(/\{\{TITLE\}\}/g, escapeHtml(article.title));
@@ -308,6 +394,10 @@ function generateArticlePage(article, template, allArticles) {
     `                                <li><a href="/artikel/${r.slug}/">${escapeHtml(r.title)}</a></li>`
   ).join('\n');
   html = html.replace(/\{\{RELATED_ARTICLES\}\}/g, relatedHtml);
+  
+  // FAQ Schema extraction
+  const faqSchema = extractFaqSchema(article.content || '');
+  html = html.replace(/\{\{FAQ_SCHEMA\}\}/g, faqSchema);
   
   return html;
 }
@@ -421,6 +511,15 @@ ${feedItems}
     console.log('  ' + out.trim().split('\n').slice(0, 3).join('\n  '));
   } catch (e) {
     console.error('  ⚠️ Indexing API submission failed:', e.message.split('\n')[0]);
+  }
+
+  // Submit to IndexNow (Bing, Yandex, Naver)
+  console.log('\n🔔 Submitting to IndexNow...');
+  try {
+    const out = execSync('cd /root/.hermes && python3 scripts/indexnow-submit.py 2>&1', { encoding: 'utf-8', timeout: 60000 });
+    console.log('  ' + out.trim().split('\n').slice(0, 3).join('\n  '));
+  } catch (e) {
+    console.error('  ⚠️ IndexNow submission failed:', e.message.split('\n')[0]);
   }
 }
 

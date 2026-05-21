@@ -69,12 +69,43 @@ button{border:none;background:none;cursor:pointer;font:inherit}
 .btn-glow{position:relative}
 
 /* ===== Promo Banner ===== */
-.promo-banner{background:var(--accent);color:var(--accent-text);padding:10px 24px;text-align:center;font-size:.8rem;position:relative;z-index:2}
-.promo-banner__inner{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
-.promo-banner__title{font-weight:600}
-.promo-banner__desc{opacity:.8}
-.promo-banner__cta{background:#fff;color:var(--accent);padding:5px 14px;border-radius:var(--radius-full);font-size:.75rem;font-weight:600;transition:transform .15s}
-.promo-banner__cta:hover{transform:scale(1.03)}
+.promo-banner{padding:10px 24px;text-align:center;font-size:.8rem;position:relative;z-index:2}
+.promo-banner__inner{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;max-width:1200px;margin:0 auto}
+.promo-banner__title{font-weight:700}
+.promo-banner__desc{opacity:.9}
+.promo-banner__countdown{font-size:.75rem;font-weight:600;font-variant-numeric:tabular-nums;background:rgba(0,0,0,.25);padding:3px 10px;border-radius:6px;letter-spacing:.05em}
+.promo-banner__cta{background:#fff;color:#1e1b4b;padding:5px 14px;border-radius:9999px;font-size:.75rem;font-weight:600;transition:opacity .15s;text-decoration:none;display:inline-flex;align-items:center}
+.promo-banner__cta:hover{opacity:.85}
+.promo-banner__close{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;color:inherit;font-size:18px;cursor:pointer;opacity:.6;transition:opacity .15s;line-height:1}
+.promo-banner__close:hover{opacity:1}
+
+/* Template: gradient */
+.promo-banner--gradient{background:linear-gradient(135deg,#1e1b4b 0%,#4c1d95 50%,#7c3aed 100%);color:#fff}
+.promo-banner--gradient .promo-banner__cta{background:#fff;color:#1e1b4b}
+
+/* Template: minimal */
+.promo-banner--minimal{background:#f5f5f5;color:#0a0a0a;border-bottom:1px solid #e5e7eb}
+.promo-banner--minimal .promo-banner__cta{background:#0a0a0a;color:#fff}
+.promo-banner--minimal .promo-banner__countdown{background:#e5e7eb;color:#0a0a0a}
+
+/* Template: highlight */
+.promo-banner--highlight .promo-banner__cta{background:#fff;color:#2563eb}
+.promo-banner--highlight .promo-banner__countdown{background:rgba(0,0,0,.15)}
+
+/* Template: floating */
+.promo-banner--floating{position:fixed;top:0;left:0;right:0;z-index:9999;box-shadow:0 2px 12px rgba(0,0,0,.15);animation:pb-slidein .3s ease-out}
+.promo-banner--floating .promo-banner__cta{background:#fff;color:#1e1b4b}
+@keyframes pb-slidein{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* Template: pill */
+.promo-banner--pill{background:transparent!important;padding:10px 24px}
+.promo-banner--pill .promo-banner__inner{background:#0a0a0a;color:#fff;padding:8px 20px;border-radius:9999px;gap:10px;width:fit-content}
+.promo-banner--pill .promo-banner__cta{background:rgba(255,255,255,.2);color:inherit;font-size:.7rem}
+.promo-banner--pill .promo-banner__countdown{font-size:.7rem;padding:2px 8px}
+
+/* Template: custom — uses inline bg_color/text_color */
+.promo-banner--custom .promo-banner__cta{background:rgba(255,255,255,.2);color:inherit;border:1px solid rgba(255,255,255,.4)}
+.promo-banner--custom .promo-banner__countdown{background:rgba(0,0,0,.2)}
 
 /* ===== Navbar ===== */
 .navbar{display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 24px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);transition:background .3s}
