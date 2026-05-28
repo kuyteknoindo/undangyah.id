@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta name="p:domain_verify" content="7160c9635b5cf4faf4542e81bd9e544e"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRD: Desain UI m.undangyah.id</title>
+<style>
+:root {
+  --bg: #ffffff;
+  --text: #1a1a2e;
+  --muted: #64748b;
+  --primary: #2563eb;
+  --card: #f8fafc;
+  --border: #e2e8f0;
+  --code-bg: #f1f5f9;
+  --radius: 12px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0a0a0a;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --primary: #60a5fa;
+    --card: #111111;
+    --border: #1e293b;
+    --code-bg: #1e293b;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  padding: 2rem 1.5rem;
+  max-width: 860px;
+  margin: 0 auto;
+}
+h1 { font-size: 2rem; font-weight: 800; margin: 2rem 0 1rem; }
+h2 { font-size: 1.4rem; font-weight: 700; margin: 2.5rem 0 0.8rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+h3 { font-size: 1.1rem; font-weight: 600; margin: 1.8rem 0 0.6rem; color: var(--primary); }
+p { margin: 0.5rem 0; }
+p.numbered { margin: 0.4rem 0; padding-left: 1.2rem; }
+hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+ul { padding-left: 1.5rem; margin: 0.5rem 0; }
+li { margin: 0.3rem 0; }
+li.sub { margin-left: 1.2rem; font-size: 0.9rem; color: var(--muted); }
+strong { font-weight: 600; }
+code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-family: "JetBrains Mono", monospace; }
+pre { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem; overflow-x: auto; margin: 1rem 0; }
+pre code { background: none; padding: 0; font-size: 0.82rem; line-height: 1.5; }
+.table-wrap { overflow-x: auto; margin: 1rem 0; }
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+th, td { padding: 0.6rem 0.8rem; border: 1px solid var(--border); text-align: left; }
+th { background: var(--card); font-weight: 600; }
+footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 0.8rem; }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<h1>PRD: Desain UI m.undangyah.id</h1>
+<p><strong>Versi:</strong> 1.0  </p>
+<p><strong>Tanggal:</strong> 22 Mei 2026  </p>
+<p><strong>Platform:</strong> Mobile-first PWA  </p>
+<p><strong>Stack:</strong> TanStack Start + Cloudflare Workers + Tailwind CSS v4</p>
+<hr>
+<h2>1. Overview & Tujuan Produk</h2>
+<p>m.undangyah.id adalah mobile dashboard untuk platform undangan digital pernikahan. Aplikasi ini memungkinkan pengguna mengelola undangan, memantau statistik, broadcast ke tamu, dan mengatur profil — semua dari smartphone.</p>
+<p><strong>Tujuan utama:</strong></p>
+<ul>
+<li>Pengalaman mobile-native yang cepat dan intuitif</li>
+<li>Akses cepat ke fitur utama (buat undangan, sebar, lihat statistik)</li>
+<li>Desain iOS-elegant: clean, flat, konsisten</li>
+</ul>
+<hr>
+<h2>2. Target User</h2>
+<ul>
+<li>Calon pengantin (usia 20-35 tahun)</li>
+<li>Familiar dengan smartphone, belum tentu tech-savvy</li>
+<li>Mengakses dashboard terutama dari HP (90%+ mobile traffic)</li>
+<li>Butuh workflow sederhana: buat → edit → sebar → pantau</li>
+</ul>
+<hr>
+<h2>3. Design System</h2>
+<h3>3.1 Color Palette</h3>
+<p><strong>Light Mode:</strong></p>
+<div class="table-wrap"><table><thead>
+<tr><th>Token</th><th>Nilai</th><th>Penggunaan</th></tr>
+</thead><tbody>
+<tr><td>`--primary`</td><td>oklch(0.58 0.24 264) — Electric Blue</td><td>CTA, badge aktif, accent</td></tr>
+<tr><td>`--background`</td><td>oklch(1 0 0) — Pure White</td><td>Background utama</td></tr>
+<tr><td>`--foreground`</td><td>oklch(0.2 0.04 270) — Dark Navy</td><td>Teks utama</td></tr>
+<tr><td>`--muted-foreground`</td><td>oklch(0.5 0.03 265) — Gray</td><td>Teks sekunder</td></tr>
+<tr><td>`--card`</td><td>oklch(1 0 0) — White</td><td>Card background</td></tr>
+<tr><td>`--border`</td><td>oklch(0.92 0.015 260) — Light Gray</td><td>Border, divider</td></tr>
+<tr><td>`--destructive`</td><td>oklch(0.6 0.22 25) — Red</td><td>Hapus, error</td></tr>
+</tbody></table></div>
+<p><strong>Dark Mode:</strong></p>
+<div class="table-wrap"><table><thead>
+<tr><th>Token</th><th>Nilai</th><th>Penggunaan</th></tr>
+</thead><tbody>
+<tr><td>`--primary`</td><td>oklch(0.98 0 0) — Near White</td><td>CTA, text primary</td></tr>
+<tr><td>`--background`</td><td>oklch(0 0 0) — Pure Black</td><td>Background (OLED-friendly)</td></tr>
+<tr><td>`--card`</td><td>oklch(0.04 0 0) — Near Black</td><td>Card surface</td></tr>
+<tr><td>`--border`</td><td>oklch(1 0 0 / 10%) — Subtle White</td><td>Border</td></tr>
+</tbody></table></div>
+<h3>3.2 Typography</h3>
+<ul>
+<li><strong>Body:</strong> Plus Jakarta Sans (sans-serif)</li>
+<li><strong>Display/Heading:</strong> Fraunces (serif, optical sizing)</li>
+<li><strong>Size scale:</strong> 10px (badge) → 11px (caption) → 12px (small) → 14px (body) → 16px (title) → 24-40px (hero number)</li>
+<li><strong>Weight:</strong> 400 (normal), 500 (medium), 600 (semibold), 700 (bold)</li>
+</ul>
+<h3>3.3 Spacing & Radius</h3>
+<ul>
+<li><strong>Base radius:</strong> 1.5rem (24px) — sangat rounded</li>
+<li><strong>Card radius:</strong> rounded-2xl (16px) atau rounded-3xl (24px)</li>
+<li><strong>Button radius:</strong> rounded-full (pill) untuk CTA, rounded-xl/2xl untuk secondary</li>
+<li><strong>Page padding:</strong> px-5 (20px horizontal)</li>
+<li><strong>Section gap:</strong> mt-6 sampai mt-7 (24-28px)</li>
+<li><strong>Card padding:</strong> p-3 sampai p-6</li>
+</ul>
+<h3>3.4 Komponen Dasar</h3>
+<p><strong>Button variants:</strong></p>
+<ul>
+<li>Primary: <code>bg-primary text-primary-foreground rounded-full</code> (pill shape)</li>
+<li>Secondary: <code>border border-border bg-card rounded-2xl</code></li>
+<li>Icon button: <code>h-11 w-11 rounded-full border border-border bg-card</code></li>
+<li>Destructive: <code>bg-destructive/10 text-destructive rounded-full</code></li>
+</ul>
+<p><strong>Card:</strong></p>
+<ul>
+<li><code>rounded-2xl border border-border bg-card p-3</code></li>
+<li>Dengan hover state untuk interactive cards</li>
+</ul>
+<p><strong>Badge/Chip:</strong></p>
+<ul>
+<li><code>rounded-full px-2.5 py-1 text-[10px] font-semibold</code></li>
+<li>Variants: primary (aktif), secondary (draft), accent (lainnya)</li>
+</ul>
+<p><strong>Input:</strong></p>
+<ul>
+<li><code>rounded-xl bg-input border-0 px-4 py-3 text-sm</code></li>
+</ul>
+<p><strong>Stat Card (4 tone variants):</strong></p>
+<ul>
+<li>Blue, Mint, Peach, Lavender</li>
+<li>Masing-masing punya: card bg, icon bg, delta text color</li>
+<li>Support dark mode</li>
+</ul>
+<hr>
+<h2>4. Sitemap & Struktur Halaman</h2>
+<pre><code>
+/ (Dashboard)
+├── /login
+├── /register
+├── /forgot-password
+├── /onboarding
+├── /catalog (Pilih Tema)
+├── /checkout/$slug
+├── /share (Sebar Undangan)
+├── /notifications
+├── /ai-assistant
+├── /help
+├── /invitations
+│   ├── /new (Buat Baru)
+│   ├── /trash
+│   └── /$id
+│       ├── /edit (Editor)
+│       ├── /edit/$section (Section Editor)
+│       ├── /share (Sebar per Undangan)
+│       ├── /rsvp (Daftar RSVP)
+│       ├── /broadcast (Kirim WA)
+│       ├── /analytics (Statistik)
+│       ├── /amplop (Amplop Digital)
+│       └── /preview
+├── /profile
+│   ├── /edit
+│   ├── /keamanan
+│   ├── /tagihan
+│   ├── /orders
+│   ├── /domain
+│   ├── /bantuan
+│   ├── /notifikasi
+│   ├── /affiliate
+│   ├── /analytics
+│   └── /paket
+</code></pre>
+<hr>
+<h2>5. Detail Per Halaman</h2>
+<h3>5.1 Dashboard (/)</h3>
+<p><strong>Layout:</strong></p>
+<p class="numbered"><strong>Header</strong> — Avatar (initials) + nama user + 3 icon buttons (Search, Bell, Menu)</p>
+<p class="numbered"><strong>Quota Hero Card</strong> — Blue card (rounded-3xl), badge paket, kuota used/total, progress bar, CTA "Buat Undangan Baru"</p>
+<p class="numbered"><strong>Stats Grid</strong> — 2x2 grid: Pengunjung, RSVP, Ucapan, Kuota Tersisa</p>
+<p class="numbered"><strong>Daftar Undangan</strong> — List card dengan thumbnail initials, title, visitor count, status badge</p>
+<p class="numbered"><strong>Kelola Undangan</strong> — Quick action section (muncul jika ada undangan)</p>
+<p class="numbered"><strong>Aktivitas Terbaru</strong> — Timeline card: nama tamu + aksi + waktu</p>
+<p class="numbered"><strong>Bottom Nav</strong> — Floating pill: Home, Catalog, + (buat), Share, Profile</p>
+<p><strong>Interaksi:</strong></p>
+<ul>
+<li>Pull-to-refresh (fetch ulang data)</li>
+<li>Skeleton loading state</li>
+<li>Empty state dengan CTA</li>
+<li>"Muat lainnya" untuk list > 5 item</li>
+<li>Command palette (Ctrl+K / search button)</li>
+</ul>
+<h3>5.2 Login (/login)</h3>
+<p><strong>Layout:</strong></p>
+<ul>
+<li>Centered card, max-w-md</li>
+<li>Logo + form (email/phone + password)</li>
+<li>Link ke register & forgot-password</li>
+<li>No header/navbar on mobile</li>
+</ul>
+<h3>5.3 Catalog (/catalog)</h3>
+<p><strong>Layout:</strong></p>
+<ul>
+<li>Grid tema undangan (thumbnail + nama + harga)</li>
+<li>Filter/search</li>
+<li>Preview button per tema</li>
+<li>CTA checkout</li>
+</ul>
+<h3>5.4 Invitation Editor (/invitations/$id/edit)</h3>
+<p><strong>Layout:</strong></p>
+<ul>
+<li>Section-based editor</li>
+<li>Sections: Cover, Mempelai, Acara, Galeri, Musik, RSVP, dll</li>
+<li>Each section expandable/collapsible</li>
+<li>Preview button (floating)</li>
+<li>Auto-save indicator</li>
+</ul>
+<h3>5.5 Share/Broadcast (/invitations/$id/share)</h3>
+<p><strong>Layout:</strong></p>
+<ul>
+<li>Daftar tamu (nama + nomor)</li>
+<li>Bulk select</li>
+<li>Send via WhatsApp button</li>
+<li>Status: terkirim/pending/gagal</li>
+<li>Add tamu baru (inline form)</li>
+</ul>
+<h3>5.6 RSVP (/invitations/$id/rsvp)</h3>
+<p><strong>Layout:</strong></p>
+<ul>
+<li>List tamu yang sudah RSVP</li>
+<li>Filter: Hadir / Tidak Hadir / Semua</li>
+<li>Detail: nama, jumlah tamu, ucapan</li>
+<li>Export option</li>
+</ul>
+<h3>5.7 Profile (/profile)</h3>
+<p><strong>Layout:</strong></p>
+<ul>
+<li>Avatar besar + nama + email</li>
+<li>Menu list (rounded cards):</li>
+<li class="sub">Edit Profil</li>
+<li class="sub">Keamanan</li>
+<li class="sub">Tagihan</li>
+<li class="sub">Pesanan</li>
+<li class="sub">Domain Custom</li>
+<li class="sub">Paket Layanan</li>
+<li class="sub">Affiliate</li>
+<li class="sub">Analytics</li>
+<li class="sub">Notifikasi</li>
+<li class="sub">Bantuan</li>
+<li>Logout button di bawah</li>
+</ul>
+<h3>5.8 AI Assistant (/ai-assistant)</h3>
+<p><strong>Layout:</strong></p>
+<ul>
+<li>Chat-like interface</li>
+<li>Suggestions/quick prompts</li>
+<li>Input field di bawah</li>
+<li>Konteks: bantu edit undangan, sarankan kata-kata</li>
+</ul>
+<hr>
+<h2>6. Navigation Pattern</h2>
+<h3>6.1 Bottom Navigation (Floating Pill)</h3>
+<pre><code>
+[ 🏠 Home ] [ 📱 Catalog ] [ ➕ Buat ] [ 📤 Share ] [ 👤 Profile ]
+</code></pre>
+<ul>
+<li>Fixed bottom, z-40</li>
+<li>Container: <code>max-w-md mx-auto px-5 pb-5</code></li>
+<li>Bar: <code>rounded-full border bg-card/95 backdrop-blur shadow-lg p-2</code></li>
+<li>Active state: <code>bg-secondary text-foreground</code></li>
+<li>CTA center: <code>bg-primary text-primary-foreground</code></li>
+<li>Tampil di: Dashboard, Catalog, Share, Profile</li>
+<li>Tersembunyi di: Editor, Login, Detail pages</li>
+</ul>
+<h3>6.2 Side Menu (Drawer)</h3>
+<ul>
+<li>Trigger: hamburger icon di header</li>
+<li>Slide dari kanan (translate-x)</li>
+<li>Overlay: <code>bg-black/40</code></li>
+<li>Content: dark mode toggle + menu items + logout</li>
+<li>Menu items: Tagihan, Analytics, Paket, Affiliate, Notifikasi, AI Assistant, Trash</li>
+</ul>
+<h3>6.3 Back Navigation</h3>
+<ul>
+<li>Halaman detail: back arrow di top-left</li>
+<li>Breadcrumb tidak digunakan (terlalu complex untuk mobile)</li>
+</ul>
+<hr>
+<h2>7. Dark Mode</h2>
+<p><strong>Strategi:</strong> Class-based (<code>.dark</code> on root)</p>
+<p><strong>Prinsip:</strong></p>
+<ul>
+<li>Background pure black (oklch(0 0 0)) — OLED friendly</li>
+<li>Card surface: near-black (oklch(0.04 0 0))</li>
+<li>Border: white 10% opacity</li>
+<li>Primary flip ke near-white untuk kontras</li>
+<li>Stat cards punya dedicated dark variants (darker bg, lighter text)</li>
+<li>Toggle via side menu drawer</li>
+</ul>
+<p><strong>Transisi:</strong> Instant (no animation on theme switch)</p>
+<hr>
+<h2>8. Performance Requirements</h2>
+<ul>
+<li><strong>First Contentful Paint:</strong> < 1.5s</li>
+<li><strong>Time to Interactive:</strong> < 3s</li>
+<li><strong>Bundle size:</strong> Minimal (code-split per route)</li>
+<li><strong>Runtime:</strong> Cloudflare Workers (edge, <50ms TTFB)</li>
+<li><strong>Caching:</strong> CF cache + stale-while-revalidate untuk API</li>
+<li><strong>Images:</strong> Lazy load, WebP, thumbnail untuk list</li>
+<li><strong>Skeleton:</strong> Tampilkan skeleton saat loading data</li>
+<li><strong>Offline:</strong> Service worker untuk shell caching (future)</li>
+</ul>
+<hr>
+<h2>9. Accessibility</h2>
+<ul>
+<li>Semua interactive element punya <code>aria-label</code></li>
+<li>Focus visible state (ring)</li>
+<li>Color contrast ratio ≥ 4.5:1 (text), ≥ 3:1 (large text)</li>
+<li>Touch target minimum 44x44px (h-11 w-11)</li>
+<li>Screen reader friendly: semantic HTML (nav, main, section, header)</li>
+</ul>
+<hr>
+<h2>10. Prinsip Desain</h2>
+<p class="numbered"><strong>iOS Elegant</strong> — Clean lines, generous whitespace, subtle borders</p>
+<p class="numbered"><strong>Flat</strong> — Tidak ada gradasi (kecuali hero card yang sudah ada). Warna solid.</p>
+<p class="numbered"><strong>Rounded</strong> — Semua elemen sangat rounded (24px base radius)</p>
+<p class="numbered"><strong>Consistent</strong> — Spacing, sizing, dan pattern yang sama di semua halaman</p>
+<p class="numbered"><strong>Mobile-first</strong> — Max-width 448px (max-w-md), centered</p>
+<p class="numbered"><strong>Minimal chrome</strong> — Fokus ke konten, navigasi tidak mengganggu</p>
+<p class="numbered"><strong>Feedback</strong> — Loading states, empty states, error states selalu ada</p>
+<hr>
+<h2>11. Flow Aplikasi (User Journey)</h2>
+<h3>11.1 Flow: User Baru (First Time)</h3>
+<pre><code>
+Register → Onboarding (3 slides) → Buat Undangan Baru → Editor → Dashboard
+</code></pre>
+<p><strong>Screen-by-screen:</strong></p>
+<p class="numbered"><strong>Register</strong> <code>/register</code></p>
+<li class="sub">Form: nama, email, nomor HP, password</li>
+<li class="sub">CTA: "Daftar" → redirect ke onboarding</li>
+<p class="numbered"><strong>Onboarding</strong> <code>/onboarding</code></p>
+<li class="sub">3 slide carousel (swipe/tap "Lanjut"):</li>
+<p>     - Slide 1: "Selamat datang 🎉" — intro platform</p>
+<p>     - Slide 2: "Atur acara Anda" — fitur utama</p>
+<p>     - Slide 3: "Tema & Galeri" — visual preview</p>
+<li class="sub">Dot indicator (active = pill panjang, inactive = dot kecil)</li>
+<li class="sub">CTA slide terakhir: "Mulai Buat Undangan" → <code>/invitations/new</code></li>
+<li class="sub">Skip link: "Lewati" → langsung ke Dashboard</li>
+<p class="numbered"><strong>Buat Undangan</strong> <code>/invitations/new</code> (3-step wizard)</p>
+<li class="sub">Progress bar: 3 segment (filled = primary color)</li>
+<li class="sub">Step 1 — Mempelai: input nama pria + wanita</li>
+<li class="sub">Step 2 — Tanggal & Link: date picker + slug input (real-time availability check ✓/✗)</li>
+<li class="sub">Step 3 — Pilih Tema: grid 2 kolom, search + filter tier, thumbnail preview</li>
+<li class="sub">Bottom fixed CTA: "Lanjutkan" → "Buat & Mulai Edit"</li>
+<li class="sub">Back button: arrow di header</li>
+<p class="numbered"><strong>Editor</strong> <code>/invitations/$id/edit</code></p>
+<li class="sub">Section-based editing (cover, mempelai, acara, galeri, musik, RSVP)</li>
+<li class="sub">Auto-save</li>
+<li class="sub">Preview floating button</li>
+<p class="numbered"><strong>Dashboard</strong> <code>/</code></p>
+<li class="sub">Landing setelah semua flow selesai</li>
+<hr>
+<h3>11.2 Flow: User Existing (Returning)</h3>
+<pre><code>
+Login → Dashboard → [Kelola Undangan / Lihat Stats / Sebar / Edit]
+</code></pre>
+<p><strong>Screen-by-screen:</strong></p>
+<p class="numbered"><strong>Login</strong> <code>/login</code></p>
+<li class="sub">Form: email/HP + password</li>
+<li class="sub">Link: "Lupa password?" → <code>/forgot-password</code></li>
+<li class="sub">Link: "Belum punya akun? Daftar" → <code>/register</code></li>
+<li class="sub">No header/navbar on mobile</li>
+<p class="numbered"><strong>Dashboard</strong> <code>/</code></p>
+<li class="sub">Header: avatar + nama + search/bell/menu icons</li>
+<li class="sub">Quota hero card (blue, progress bar, CTA "Buat Undangan Baru")</li>
+<li class="sub">Stats grid 2x2 (pengunjung, RSVP, ucapan, kuota tersisa)</li>
+<li class="sub">Daftar undangan (card list, max 5 + "Muat lainnya")</li>
+<li class="sub">Aktivitas terbaru (timeline)</li>
+<li class="sub">Bottom nav: Home | Catalog | + | Share | Profile</li>
+<hr>
+<h3>11.3 Flow: Sebar Undangan</h3>
+<pre><code>
+Dashboard → Pilih Undangan → Share Page → Input Tamu → Kirim via WA
+</code></pre>
+<p class="numbered"><strong>Share</strong> <code>/invitations/$id/share</code></p>
+<li class="sub">Daftar tamu (nama + nomor)</li>
+<li class="sub">Input tamu baru (inline)</li>
+<li class="sub">Bulk select checkboxes</li>
+<li class="sub">CTA: "Kirim via WhatsApp"</li>
+<li class="sub">Status per tamu: terkirim / pending / gagal</li>
+<p class="numbered"><strong>Broadcast</strong> <code>/invitations/$id/broadcast</code></p>
+<li class="sub">Template pesan (editable)</li>
+<li class="sub">Preview pesan</li>
+<li class="sub">Kirim massal</li>
+<hr>
+<h3>11.4 Flow: Upgrade Paket</h3>
+<pre><code>
+Dashboard (Upgrade link) → Catalog → Pilih Paket → Checkout → Pembayaran
+</code></pre>
+<p class="numbered"><strong>Catalog</strong> <code>/catalog</code></p>
+<li class="sub">Grid paket/tema dengan harga</li>
+<li class="sub">Filter kategori</li>
+<li class="sub">CTA per item: "Pilih"</li>
+<p class="numbered"><strong>Checkout</strong> <code>/checkout/$slug</code></p>
+<li class="sub">Detail paket terpilih</li>
+<li class="sub">Form: nama, email, HP (+ OTP verifikasi)</li>
+<li class="sub">Addon selection (optional)</li>
+<li class="sub">Voucher input + apply</li>
+<li class="sub">Ringkasan harga (subtotal, diskon, total)</li>
+<li class="sub">CTA: "Bayar Sekarang"</li>
+<hr>
+<h3>11.5 Flow: Kelola Profil</h3>
+<pre><code>
+Dashboard → Profile → [Edit / Keamanan / Tagihan / Domain / dll]
+</code></pre>
+<p class="numbered"><strong>Profile</strong> <code>/profile</code></p>
+<li class="sub">Avatar + nama + email</li>
+<li class="sub">Menu list → sub-pages</li>
+<p class="numbered"><strong>Sub-pages:</strong></p>
+<li class="sub"><code>/profile/edit</code> — Edit nama, email, foto</li>
+<li class="sub"><code>/profile/keamanan</code> — Ganti password</li>
+<li class="sub"><code>/profile/tagihan</code> — Riwayat pembayaran</li>
+<li class="sub"><code>/profile/orders</code> — Daftar pesanan</li>
+<li class="sub"><code>/profile/domain</code> — Custom domain setting</li>
+<li class="sub"><code>/profile/paket</code> — Paket aktif + upgrade</li>
+<li class="sub"><code>/profile/affiliate</code> — Referral program</li>
+<li class="sub"><code>/profile/analytics</code> — Statistik akun</li>
+<li class="sub"><code>/profile/notifikasi</code> — Pengaturan notif</li>
+<li class="sub"><code>/profile/bantuan</code> — FAQ + kontak</li>
+<hr>
+<h3>11.6 Flow: AI Assistant</h3>
+<pre><code>
+Dashboard (Menu drawer) → AI Assistant → Chat → Hasil/Saran
+</code></pre>
+<p class="numbered"><strong>AI Assistant</strong> <code>/ai-assistant</code></p>
+<li class="sub">Chat interface</li>
+<li class="sub">Quick suggestion chips</li>
+<li class="sub">Input field di bawah</li>
+<li class="sub">Konteks: bantu tulis kata-kata undangan, saran tema, edit konten</li>
+<hr>
+<h3>11.7 Navigasi Antar Flow</h3>
+<pre><code>
+┌─────────────────────────────────────────────────┐
+│                  BOTTOM NAV                       │
+├──────┬──────────┬───────┬─────────┬─────────────┤
+│ Home │ Catalog  │   +   │  Share  │   Profile   │
+│  /   │ /catalog │ /new  │ /share  │  /profile   │
+└──────┴──────────┴───────┴─────────┴─────────────┘
+
+┌─────────────────────────────────────────────────┐
+│               SIDE MENU (DRAWER)                 │
+├─────────────────────────────────────────────────┤
+│ 🌙 Mode Gelap [toggle]                          │
+│ ─────────────────────                           │
+│ 📄 Tagihan                                      │
+│ 📊 Analytics                                    │
+│ 📦 Paket Layanan                                │
+│ 👥 Affiliate                                    │
+│ 🔔 Notifikasi                                   │
+│ ✨ AI Assistant                                  │
+│ 🗑️ Trash                                        │
+│ ─────────────────────                           │
+│ [Keluar]                                        │
+└─────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>Aturan tampil/sembunyi:</strong></p>
+<ul>
+<li>Bottom nav: tampil di Dashboard, Catalog, Share, Profile</li>
+<li>Bottom nav: tersembunyi di Login, Register, Onboarding, Editor, Checkout</li>
+<li>Side menu: accessible dari semua halaman yang punya header</li>
+<li>Back button: tampil di semua halaman detail (bukan root nav)</li>
+</ul>
+<hr>
+<h2>12. Komponen UI Library</h2>
+<p>Berbasis shadcn/ui (Radix primitives + Tailwind):</p>
+<p>Accordion, Alert, AlertDialog, Avatar, Badge, Button, Calendar, Card, Carousel, Chart, Checkbox, Collapsible, Command, Dialog, Drawer, DropdownMenu, Form, Input, InputOTP, Label, Pagination, Popover, Progress, RadioGroup, ScrollArea, Select, Sheet, Skeleton, Slider, Switch, Table, Tabs, Textarea, Toggle, ToggleGroup, Tooltip</p>
+<p><strong>Custom:</strong></p>
+<ul>
+<li><code>CommandPalette</code> — Search overlay (Ctrl+K)</li>
+<li><code>KelolaUndangan</code> — Quick action panel</li>
+<li><code>Countdown</code> — Timer ke hari H</li>
+<li><code>SkeletonList</code> — Loading placeholder</li>
+<li><code>ThemeProvider</code> — Dark/light mode</li>
+<li><code>MusicSection</code> — Music player (editor)</li>
+</ul>
+<hr>
+<footer>
+  <p>PRD v1.0 — m.undangyah.id — 22 Mei 2026</p>
+</footer>
+</body>
+</html>

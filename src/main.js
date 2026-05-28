@@ -38,28 +38,13 @@ if (hamburgerBtn && mobileMenu) {
   });
 }
 
-// ===== Reveal Animations (IntersectionObserver) =====
+// ===== Reveal Animations (Bidirectional IntersectionObserver) =====
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      const el = entry.target;
-      const customDelay = el.dataset.delay;
-      let delay;
-
-      if (customDelay !== undefined) {
-        delay = parseInt(customDelay);
-      } else {
-        const parent = el.parentElement;
-        const siblings = [...parent.querySelectorAll('.reveal')];
-        const index = siblings.indexOf(el);
-        delay = index * 80;
-      }
-
-      setTimeout(() => {
-        el.classList.add('visible');
-      }, delay);
-
-      revealObserver.unobserve(el);
+      entry.target.classList.add('visible');
+    } else {
+      entry.target.classList.remove('visible');
     }
   });
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
@@ -70,9 +55,8 @@ document.querySelectorAll('.reveal').forEach(el => {
   if (rect.top < window.innerHeight) {
     const delay = parseInt(el.dataset.delay || '0');
     setTimeout(() => el.classList.add('visible'), delay);
-  } else {
-    revealObserver.observe(el);
   }
+  revealObserver.observe(el);
 });
 
 // ===== Navbar Scroll Effect =====
@@ -488,14 +472,10 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 
-// ===== Back to Top =====
-const backToTop = document.getElementById('backToTop');
-if (backToTop) {
+// ===== WhatsApp Float Button =====
+const waFloat = document.getElementById('waFloat');
+if (waFloat) {
   window.addEventListener('scroll', () => {
-    backToTop.classList.toggle('visible', window.scrollY > 400);
+    waFloat.classList.toggle('visible', window.scrollY > 400);
   }, { passive: true });
-
-  backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
 }

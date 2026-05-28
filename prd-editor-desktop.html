@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta name="p:domain_verify" content="7160c9635b5cf4faf4542e81bd9e544e"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRD: Editor Undangan Desktop - Undangyah</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: #1e293b;
+            background: #f8fafc;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+        
+        /* Header */
+        .doc-header {
+            background: linear-gradient(135deg, #1668f2 0%, #3b82f6 100%);
+            color: white;
+            padding: 48px 24px;
+            margin-bottom: 40px;
+            border-radius: 24px;
+        }
+        
+        .doc-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .doc-header .meta {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        .doc-header .badge {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+        
+        /* Content */
+        h1, h2, h3, h4 {
+            color: #0f172a;
+            font-weight: 600;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            margin: 48px 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        h3 {
+            font-size: 1.125rem;
+            margin: 32px 0 16px;
+            color: #1668f2;
+        }
+        
+        p {
+            margin-bottom: 16px;
+            color: #475569;
+        }
+        
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            color: #475569;
+        }
+        
+        /* Code blocks */
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 16px;
+            overflow-x: auto;
+            font-size: 0.8125rem;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+        
+        code {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.875em;
+            color: #dc2626;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.875rem;
+        }
+        
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 12px 16px;
+            text-align: left;
+        }
+        
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #0f172a;
+        }
+        
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .card-title {
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Highlight boxes */
+        .highlight {
+            background: #eff6ff;
+            border-left: 4px solid #1668f2;
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+        }
+        
+        .warning {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+        }
+        
+        /* Section list */
+        .section-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+        
+        .section-item {
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            color: #0f172a;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        
+        .section-item .icon {
+            font-size: 1.25rem;
+        }
+        
+        /* Flow steps */
+        .flow-steps {
+            counter-reset: step;
+        }
+        
+        .flow-step {
+            position: relative;
+            padding-left: 48px;
+            margin-bottom: 24px;
+        }
+        
+        .flow-step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            background: #1668f2;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        /* Form preview */
+        .form-preview {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+        
+        .form-field {
+            margin-bottom: 16px;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+            display: block;
+            font-size: 0.875rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.9375rem;
+            transition: border-color 0.2s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #1668f2;
+            box-shadow: 0 0 0 3px rgba(22, 104, 242, 0.1);
+        }
+        
+        /* Button */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: #1668f2;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+        }
+        
+        /* Grid layouts */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-list {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        /* Footer */
+        .doc-footer {
+            text-align: center;
+            padding: 48px 24px;
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+        
+        /* Responsive table */
+        @media (max-width: 640px) {
+            pre {
+                font-size: 0.75rem;
+                padding: 16px;
+            }
+            
+            h2 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="doc-header">
+            <h1>PRD: Editor Undangan Desktop</h1>
+            <div class="meta">
+                <span class="badge">Version 1.0</span>
+                <span>22 Mei 2026</span>
+                <span>Platform: Web Desktop</span>
+                <span>Route: /dashboard/edit/:id</span>
+            </div>
+        </header>
+
+        <h2>1. Overview</h2>
+        <p>Halaman Editor Undangan adalah tempat user mengedit konten undangan digital mereka. Editor menggunakan layout 2-kolom dengan sidebar navigation dan content area untuk form input.</p>
+        
+        <div class="highlight">
+            <strong>Perbedaan dengan Mobile:</strong>
+            <ul>
+                <li><strong>Desktop:</strong> Sidebar + Content (2 kolom)</li>
+                <li><strong>Mobile:</strong> Full screen dengan bottom navigation</li>
+                <li><strong>TIDAK ADA live preview panel</strong> di desktop (preview dibuka via tombol di topbar)</li>
+            </ul>
+        </div>
+
+        <h2>2. Entry Point</h2>
+        <p>User bisa masuk ke halaman editor dari:</p>
+        <ul>
+            <li>Dashboard Home → Card undangan → tombol "Edit"</li>
+            <li>Dashboard Home → Daftar undangan → klik row</li>
+            <li>URL langsung: <code>/dashboard/edit/:id</code></li>
+        </ul>
+
+        <h2>3. Layout Structure Desktop</h2>
+        <pre>
+┌─────────────────────────────────────────────────────────────────────────┐
+│ TOPBAR (Sticky)                                                         │
+│ [← Back] [Undangan: john-jane ▼] [Preview] [Save] [Publish]  [🔔] [👤]│
+├──────────────┬──────────────────────────────────────────────────────────┤
+│              │                                                          │
+│   SIDEBAR    │              CONTENT AREA                                │
+│   (220px)    │              (Main Shell)                                │
+│              │                                                          │
+│ ┌──────────┐ │  ┌────────────────────────────────────────────────────┐ │
+│ │ Welcome  │ │  │                                                    │ │
+│ │ ─────    │ │  │         Section Content                            │ │
+│ │ Setting  │ │  │         (Form inputs, fields, etc)                 │ │
+│ │ Acara    │ │  │                                                    │ │
+│ │ Mempelai │ │  │                                                    │ │
+│ │ LoveStory│ │  │                                                    │ │
+│ │ Quotes   │ │  └────────────────────────────────────────────────────┘ │
+│ │ Tema     │ │                                                          │
+│ │ Kado     │ │                                                          │
+│ │ Musik    │ │                                                          │
+│ │ Foto     │ │                                                          │
+│ │ Gallery  │ │                                                          │
+│ │ Stream   │ │                                                          │
+│ │ GCal     │ │                                                          │
+│ └──────────┘ │                                                          │
+└──────────────┴──────────────────────────────────────────────────────────┘</pre>
+
+        <div class="highlight">
+            <strong>Catatan:</strong>
+            <ul>
+                <li>Layout 2 kolom: Sidebar (220px fixed) + Content (flex)</li>
+                <li>Preview TIDAK ada di layout (dibuka via tombol topbar)</li>
+                <li>Sidebar sticky, scroll independent dari content</li>
+            </ul>
+        </div>
+
+        <h2>4. Sidebar Navigation</h2>
+        
+        <h3>4.1 Section List</h3>
+        <div class="section-list">
+            <div class="section-item"><span class="icon">🏠</span> Welcome</div>
+            <div class="section-item"><span class="icon">⚙️</span> Setting</div>
+            <div class="section-item"><span class="icon">📅</span> Acara</div>
+            <div class="section-item"><span class="icon">👤</span> Mempelai</div>
+            <div class="section-item"><span class="icon">💕</span> Love Story</div>
+            <div class="section-item"><span class="icon">💬</span> Quotes</div>
+            <div class="section-item"><span class="icon">🎨</span> Tema</div>
+            <div class="section-item"><span class="icon">🎁</span> Kado Digital</div>
+            <div class="section-item"><span class="icon">🎵</span> Musik</div>
+            <div class="section-item"><span class="icon">📷</span> Foto</div>
+            <div class="section-item"><span class="icon">🖼️</span> Gallery</div>
+            <div class="section-item"><span class="icon">📺</span> Live Stream</div>
+            <div class="section-item"><span class="icon">📅</span> Google Calendar</div>
+            <div class="section-item"><span class="icon">🎓</span> Tutorial</div>
+            <div class="section-item"><span class="icon">💬</span> Support</div>
+        </div>
+
+        <h3>4.2 Behavior</h3>
+        <ul>
+            <li><strong>Klik section</strong> → content area berubah menampilkan form section tersebut</li>
+            <li><strong>Active section:</strong> border kiri biru + background terang</li>
+            <li><strong>Progress indicator:</strong> checkmark hijau jika section sudah diisi</li>
+            <li><strong>Warning icon:</strong> merah jika ada field required kosong</li>
+        </ul>
+
+        <h2>5. Content Area - Detail Per Section</h2>
+
+        <h3>5.1 Section: Setting</h3>
+        <div class="form-preview">
+            <div class="form-field">
+                <label class="form-label">Judul Undangan *</label>
+                <input type="text" class="form-input" placeholder="Contoh: Pernikahan John & Jane">
+            </div>
+            <div class="form-field">
+                <label class="form-label">Slug / Custom Link</label>
+                <input type="text" class="form-input" value="john-jane-2026">
+                <small style="color: #64748b; font-size: 0.75rem;">Preview: undangyah.id/john-jane-2026</small>
+            </div>
+            <div class="two-col">
+                <div class="form-field">
+                    <label class="form-label">Tanggal Countdown</label>
+                    <input type="datetime-local" class="form-input">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Tanggal Cover</label>
+                    <input type="date" class="form-input">
+                </div>
+            </div>
+            <div class="form-field">
+                <label class="form-label">No. WhatsApp</label>
+                <input type="tel" class="form-input" placeholder="081234567890">
+            </div>
+        </div>
+
+        <h4>Feature Toggles</h4>
+        <div class="card">
+            <div class="form-field" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Kirim Ucapan</span>
+                <label style="position: relative; width: 48px; height: 26px;">
+                    <input type="checkbox" style="opacity: 0; width: 0; height: 0;">
+                    <span style="position: absolute; cursor: pointer; inset: 0; background: #1668f2; border-radius: 26px; transition: 0.2s;"></span>
+                    <span style="position: absolute; left: 4px; top: 4px; width: 18px; height: 18px; background: white; border-radius: 50%; transition: 0.2s;"></span>
+                </label>
+            </div>
+            <div class="form-field" style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Google Calendar</span>
+                <label style="position: relative; width: 48px; height: 26px;">
+                    <input type="checkbox" style="opacity: 0; width: 0; height: 0;">
+                    <span style="position: absolute; cursor: pointer; inset: 0; background: #cbd5e1; border-radius: 26px; transition: 0.2s;"></span>
+                    <span style="position: absolute; left: 4px; top: 4px; width: 18px; height: 18px; background: white; border-radius: 50%; transition: 0.2s;"></span>
+                </label>
+            </div>
+        </div>
+
+        <h3>5.2 Section: Acara (Repeater 3 acara)</h3>
+        <div class="form-preview">
+            <div style="background: #f8fafc; padding: 16px; border-radius: 12px; margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <strong>Acara 1</strong>
+                    <span class="badge" style="background: #dcfce7; color: #16a34a;">Aktif</span>
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Nama Acara</label>
+                    <input type="text" class="form-input" value="Akad Nikah">
+                </div>
+                <div class="two-col">
+                    <div class="form-field">
+                        <label class="form-label">Tanggal</label>
+                        <input type="date" class="form-input" value="2026-06-22">
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label">Waktu</label>
+                        <input type="time" class="form-input" value="09:00">
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Lokasi</label>
+                    <input type="text" class="form-input" value="Gedung Serbaguna Harmoni">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Alamat Lengkap</label>
+                    <textarea class="form-input" rows="2">Jl. Merdeka No. 123, Bandung, Jawa Barat 40111</textarea>
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Google Maps Link</label>
+                    <input type="url" class="form-input" placeholder="https://maps.google.com/...">
+                </div>
+            </div>
+            <div style="background: #f8fafc; padding: 16px; border-radius: 12px; opacity: 0.6;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <strong>Acara 2</strong>
+                    <span style="color: #64748b; font-size: 0.75rem;">Disabled</span>
+                </div>
+            </div>
+        </div>
+
+        <h3>5.3 Section: Mempelai</h3>
+        <div class="two-col">
+            <div class="form-preview">
+                <h4 style="margin-top: 0;">Mempelai Pria</h4>
+                <div class="form-field">
+                    <label class="form-label">Foto</label>
+                    <div style="border: 2px dashed #e2e8f0; border-radius: 12px; padding: 32px; text-align: center; color: #64748b;">
+                        📷 Upload Foto
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" class="form-input" placeholder="Ahmad Fauzi Rahman">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Nama Panggilan</label>
+                    <input type="text" class="form-input" placeholder="Fauzi">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Nama Ayah</label>
+                    <input type="text" class="form-input" placeholder="H. Abdullah Rahman">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Nama Ibu</label>
+                    <input type="text" class="form-input" placeholder="Hj. Siti Aminah">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Instagram</label>
+                    <input type="text" class="form-input" placeholder="@fauzi_official">
+                </div>
+            </div>
+            <div class="form-preview">
+                <h4 style="margin-top: 0;">Mempelai Wanita</h4>
+                <div class="form-field">
+                    <label class="form-label">Foto</label>
+                    <div style="border: 2px dashed #e2e8f0; border-radius: 12px; padding: 32px; text-align: center; color: #64748b;">
+                        📷 Upload Foto
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" class="form-input" placeholder="Jane Doe">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Nama Panggilan</label>
+                    <input type="text" class="form-input" placeholder="Jane">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Nama Ayah</label>
+                    <input type="text" class="form-input" placeholder="Budi Santoso">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Nama Ibu</label>
+                    <input type="text" class="form-input" placeholder="Dewi Santoso">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Instagram</label>
+                    <input type="text" class="form-input" placeholder="@jane_doe">
+                </div>
+            </div>
+        </div>
+
+        <h3>5.4 Section: Love Story (Repeater 4 cerita)</h3>
+        <div class="form-preview">
+            <div style="background: #eff6ff; padding: 16px; border-radius: 12px; margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <strong>💕 Cerita 1</strong>
+                    <button style="background: #ef4444; color: white; border: none; padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; cursor: pointer;">🗑 Hapus</button>
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Tahun</label>
+                    <input type="number" class="form-input" value="2022" style="width: 120px;">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Judul Cerita</label>
+                    <input type="text" class="form-input" value="Pertama Bertemu">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Cerita</label>
+                    <textarea class="form-input" rows="3">Kami pertama kali bertemu di acara komunitas photography...</textarea>
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Foto</label>
+                    <div style="border: 2px dashed #e2e8f0; border-radius: 12px; padding: 24px; text-align: center; color: #64748b;">
+                        📷 Upload Foto
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-secondary" style="width: 100%;">
+                ➕ Tambah Cerita
+            </button>
+        </div>
+
+        <h3>5.5 Section: Quotes</h3>
+        <div class="form-preview">
+            <h4 style="margin-top: 0;">Quotes Pembuka</h4>
+            <div class="form-field">
+                <label class="form-label">Judul</label>
+                <input type="text" class="form-input" placeholder="Assalamu'alaikum Wr. Wb.">
+            </div>
+            <div class="form-field">
+                <label class="form-label">Isi Quotes</label>
+                <textarea class="form-input" rows="4" placeholder="Dengan memohon rahmat dan ridho Allah SWT..."></textarea>
+            </div>
+            <h4 style="margin-top: 24px;">Quotes Penutup</h4>
+            <div class="form-field">
+                <label class="form-label">Judul</label>
+                <input type="text" class="form-input" placeholder="Hormat kami">
+            </div>
+            <div class="form-field">
+                <label class="form-label">Isi Quotes</label>
+                <textarea class="form-input" rows="3" placeholder="Merupakan kebahagiaan bagi kami..."></textarea>
+            </div>
+        </div>
+
+        <h3>5.6 Section: Tema</h3>
+        <div class="form-preview">
+            <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+                <button class="btn btn-primary" style="background: #1668f2;">Semua</button>
+                <button class="btn btn-secondary">Basic</button>
+                <button class="btn btn-secondary">Premium</button>
+                <button class="btn btn-secondary">Duluxe</button>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+                <div style="background: #f8fafc; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #e2e8f0;">
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 80px; border-radius: 8px; margin-bottom: 8px;"></div>
+                    <strong style="font-size: 0.875rem;">Elegant</strong>
+                    <div style="font-size: 0.75rem; color: #64748b;">Basic</div>
+                    <button class="btn btn-secondary" style="margin-top: 8px; width: 100%; font-size: 0.75rem; padding: 8px;">Pakai</button>
+                </div>
+                <div style="background: #eff6ff; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #1668f2;">
+                    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); height: 80px; border-radius: 8px; margin-bottom: 8px;"></div>
+                    <strong style="font-size: 0.875rem;">Romantic</strong>
+                    <div style="font-size: 0.75rem; color: #1668f2;">Premium ✓</div>
+                    <button class="btn btn-primary" style="margin-top: 8px; width: 100%; font-size: 0.75rem; padding: 8px;">Aktif</button>
+                </div>
+                <div style="background: #f8fafc; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #e2e8f0;">
+                    <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); height: 80px; border-radius: 8px; margin-bottom: 8px;"></div>
+                    <strong style="font-size: 0.875rem;">Modern</strong>
+                    <div style="font-size: 0.75rem; color: #64748b;">Basic</div>
+                    <button class="btn btn-secondary" style="margin-top: 8px; width: 100%; font-size: 0.75rem; padding: 8px;">Pakai</button>
+                </div>
+                <div style="background: #f8fafc; border-radius: 12px; padding: 12px; text-align: center; border: 2px solid #e2e8f0; opacity: 0.7;">
+                    <div style="background: #1e293b; height: 80px; border-radius: 8px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">🔒</div>
+                    <strong style="font-size: 0.875rem;">Luxury</strong>
+                    <div style="font-size: 0.75rem; color: #64748b;">Duluxe</div>
+                    <button class="btn btn-secondary" style="margin-top: 8px; width: 100%; font-size: 0.75rem; padding: 8px;">🔒 Upgrade</button>
+                </div>
+            </div>
+        </div>
+
+        <h3>5.7 Section: Kado Digital (Repeater Bank)</h3>
+        <div class="form-preview">
+            <div style="background: #f8fafc; padding: 16px; border-radius: 12px; margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <strong>Rekening 1</strong>
+                    <button style="background: #ef4444; color: white; border: none; padding: 4px 12px; border-radius: 6px; font-size: 0.75rem; cursor: pointer;">🗑 Hapus</button>
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Bank</label>
+                    <select class="form-input">
+                        <option>Mandiri</option>
+                        <option>BCA</option>
+                        <option>BRI</option>
+                        <option>BNI</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label class="form-label">No. Rekening</label>
+                    <input type="text" class="form-input" value="1300012345678">
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Nama Akun</label>
+                    <input type="text" class="form-input" value="John Doe">
+                </div>
+            </div>
+            <button class="btn btn-secondary" style="width: 100%;">
+                ➕ Tambah Rekening
+            </button>
+        </div>
+
+        <h3>5.8 Section: Musik</h3>
+        <div class="form-preview">
+            <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="radio" name="music" style="accent-color: #1668f2;"> Preset
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="radio" name="music" checked style="accent-color: #1668f2;"> YouTube
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="radio" name="music" style="accent-color: #1668f2;"> Custom Upload
+                </label>
+            </div>
+            <div class="form-field">
+                <label class="form-label">YouTube URL</label>
+                <input type="url" class="form-input" placeholder="https://youtube.com/watch?v=...">
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center; margin-top: 16px;">
+                <button class="btn btn-secondary">▶ Test Play</button>
+                <span style="color: #64748b;">Volume:</span>
+                <input type="range" style="flex: 1; accent-color: #1668f2;">
+                <span style="color: #64748b;">70%</span>
+            </div>
+        </div>
+
+        <h3>5.9 Section: Foto</h3>
+        <div class="form-preview">
+            <h4 style="margin-top: 0;">Foto Cover</h4>
+            <div class="form-field">
+                <div style="border: 2px dashed #e2e8f0; border-radius: 12px; padding: 48px; text-align: center; color: #64748b; margin-bottom: 12px;">
+                    <div style="font-size: 2rem; margin-bottom: 8px;">📷</div>
+                    <strong>Upload Foto Cover</strong>
+                    <div style="font-size: 0.75rem; margin-top: 4px;">Rekomendasi: 1920x1080</div>
+                </div>
+            </div>
+            <h4 style="margin-top: 24px;">Opening Photos</h4>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+                <div style="border: 2px dashed #e2e8f0; border-radius: 8px; padding: 24px; text-align: center; color: #64748b;">📷</div>
+                <div style="border: 2px dashed #e2e8f0; border-radius: 8px; padding: 24px; text-align: center; color: #64748b;">📷</div>
+                <div style="border: 2px dashed #e2e8f0; border-radius: 8px; padding: 24px; text-align: center; color: #64748b;">📷</div>
+            </div>
+        </div>
+
+        <h3>5.10 Section: Gallery</h3>
+        <div class="form-preview">
+            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;">
+                <div style="background: #f1f5f9; aspect-ratio: 1; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #64748b; position: relative;">
+                    <span style="font-size: 1.5rem;">🖼️</span>
+                    <button style="position: absolute; top: 4px; right: 4px; background: #ef4444; color: white; border: none; width: 20px; height: 20px; border-radius: 50%; font-size: 0.625rem; cursor: pointer;">✕</button>
+                </div>
+                <div style="background: #f1f5f9; aspect-ratio: 1; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #64748b; position: relative;">
+                    <span style="font-size: 1.5rem;">🖼️</span>
+                    <button style="position: absolute; top: 4px; right: 4px; background: #ef4444; color: white; border: none; width: 20px; height: 20px; border-radius: 50%; font-size: 0.625rem; cursor: pointer;">✕</button>
+                </div>
+                <div style="background: #f1f5f9; aspect-ratio: 1; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #64748b;">
+                    <span style="font-size: 1.5rem;">📷</span>
+                </div>
+                <div style="background: #f1f5f9; aspect-ratio: 1; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #64748b;">
+                    <span style="font-size: 1.5rem;">📷</span>
+                </div>
+                <div style="background: #eff6ff; aspect-ratio: 1; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #1668f2; cursor: pointer;">
+                    <span style="font-size: 1.5rem;">➕</span>
+                </div>
+            </div>
+            <p style="color: #64748b; font-size: 0.875rem; margin-top: 12px;">Max: 20 foto</p>
+        </div>
+
+        <h3>5.11 Section: Live Stream</h3>
+        <div class="form-preview">
+            <div class="form-field" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <span><strong>Enable Live Stream</strong></span>
+                <label style="position: relative; width: 48px; height: 26px;">
+                    <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                    <span style="position: absolute; cursor: pointer; inset: 0; background: #1668f2; border-radius: 26px; transition: 0.2s;"></span>
+                    <span style="position: absolute; left: 26px; top: 4px; width: 18px; height: 18px; background: white; border-radius: 50%; transition: 0.2s;"></span>
+                </label>
+            </div>
+            <div class="form-field">
+                <label class="form-label">Platform</label>
+                <select class="form-input">
+                    <option>YouTube</option>
+                    <option>Zoom</option>
+                    <option>Google Meet</option>
+                    <option>Instagram Live</option>
+                    <option>TikTok Live</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label class="form-label">Stream URL / Video ID</label>
+                <input type="text" class="form-input" placeholder="abc123XYZ">
+            </div>
+        </div>
+
+        <h3>5.12 Section: Google Calendar</h3>
+        <div class="form-preview">
+            <div class="form-field" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <span><strong>Enable Google Calendar</strong></span>
+                <label style="position: relative; width: 48px; height: 26px;">
+                    <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                    <span style="position: absolute; cursor: pointer; inset: 0; background: #1668f2; border-radius: 26px; transition: 0.2s;"></span>
+                    <span style="position: absolute; left: 26px; top: 4px; width: 18px; height: 18px; background: white; border-radius: 50%; transition: 0.2s;"></span>
+                </label>
+            </div>
+            <p style="font-size: 0.875rem; color: #64748b; margin-bottom: 16px;">Button yang akan muncul di undangan:</p>
+            <div style="display: flex; gap: 12px;">
+                <button class="btn btn-secondary">📅 Google Calendar</button>
+                <button class="btn btn-secondary">📅 Apple Calendar</button>
+                <button class="btn btn-secondary">📅 Outlook</button>
+            </div>
+        </div>
+
+        <h2>6. Topbar Actions</h2>
+        <pre>
+┌─────────────────────────────────────────────────────────────┐
+│ [← Back] [Undangan: john-jane ▼] [Preview] [Save] [Publish ▼]│
+└─────────────────────────────────────────────────────────────┘</pre>
+
+        <div class="card">
+            <div class="card-title">🔙 Back</div>
+            <p>Kembali ke Dashboard</p>
+        </div>
+        <div class="card">
+            <div class="card-title">📋 Undangan Dropdown</div>
+            <p>Switch antar undangan jika user punya multiple undangan</p>
+        </div>
+        <div class="card">
+            <div class="card-title">👁 Preview</div>
+            <p>Buka tab baru dengan URL <code>/undangyah.id/:slug?preview=true</code></p>
+        </div>
+        <div class="card">
+            <div class="card-title">💾 Save</div>
+            <p>Simpan draft. Auto-save berjalan setiap 30 detik (background)</p>
+        </div>
+        <div class="card">
+            <div class="card-title">🚀 Publish (Dropdown)</div>
+            <ul>
+                <li><strong>Publish Now:</strong> Set status = active</li>
+                <li><strong>Save as Draft:</strong> Simpan tanpa publish</li>
+                <li><strong>Schedule:</strong> Atur tanggal publish</li>
+            </ul>
+        </div>
+
+        <h2>7. Flow Lengkap</h2>
+        <div class="flow-steps">
+            <div class="flow-step">
+                <h3>Step 1: User klik Edit dari Dashboard</h3>
+                <p>Navigate ke <code>/dashboard/edit/:id</code><br>Fetch invitation data dari API<br>Loading state (skeleton)</p>
+            </div>
+            <div class="flow-step">
+                <h3>Step 2: Editor loaded</h3>
+                <p>Tampilkan Welcome view (default)<br>Sidebar menampilkan semua section<br>Progress indicator per section</p>
+            </div>
+            <div class="flow-step">
+                <h3>Step 3: User klik section di sidebar</h3>
+                <p>Content area berubah menampilkan form section tersebut<br>Load field values dari API<br>Tampilkan form dengan data yang sudah ada</p>
+            </div>
+            <div class="flow-step">
+                <h3>Step 4: User isi/edit form</h3>
+                <p>Input validation real-time<br>Auto-save setiap 30 detik (background)<br>Manual save via tombol "Simpan Section"</p>
+            </div>
+            <div class="flow-step">
+                <h3>Step 5: User klik Preview</h3>
+                <p>Buka tab baru dengan URL preview<br>Render undangan dengan data terbaru</p>
+            </div>
+            <div class="flow-step">
+                <h3>Step 6: User klik Publish</h3>
+                <p>Validasi semua required fields<br>Jika valid: set status = active, redirect ke Dashboard<br>Jika invalid: highlight section yang error</p>
+            </div>
+        </div>
+
+        <h2>8. Responsive Behavior</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Breakpoint</th>
+                    <th>Layout</th>
+                    <th>Behavior</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Desktop (≥1024px)</td>
+                    <td>Sidebar + Content (2 kolom)</td>
+                    <td>Sidebar fixed 220px</td>
+                </tr>
+                <tr>
+                    <td>Tablet (768-1023px)</td>
+                    <td>Sidebar collapsible</td>
+                    <td>Hamburger menu, content full</td>
+                </tr>
+                <tr>
+                    <td>Mobile (<768px)</td>
+                    <td>Sidebar sebagai drawer</td>
+                    <td>Slide from left, content full</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <footer class="doc-footer">
+            <p><strong>PRD: Editor Undangan Desktop</strong></p>
+            <p>Version 1.0 • 22 Mei 2026 • Undangyah</p>
+        </footer>
+    </div>
+</body>
+</html>

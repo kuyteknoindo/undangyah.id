@@ -7,7 +7,7 @@
     --text-label: #9ca3af;
     --border: #e5e7eb;
     --card-bg: #f9fafb;
-    --accent: #0f0f11;
+    --accent: #1E6FFF;
     --accent-text: #ffffff;
     --corner: #d1d5db;
     --yellow: #facc15;
@@ -259,13 +259,13 @@ button{border:none;background:none;cursor:pointer;font:inherit}
 .bottom-nav__item.active svg{stroke:var(--text)}
 
 /* ===== Back to Top ===== */
-.back-to-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:var(--accent);color:var(--accent-text);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:90;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .3s,transform .3s}
-.back-to-top.visible{opacity:1;pointer-events:all;transform:translateY(0)}
-.back-to-top:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.wa-float{position:fixed;bottom:24px;right:24px;width:52px;height:52px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(37,211,102,.4);z-index:90;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .3s,transform .3s;text-decoration:none}
+.wa-float.visible{opacity:1;pointer-events:all;transform:translateY(0)}
+.wa-float:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,211,102,.5)}
 
 /* ===== Reveal Animation ===== */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity var(--duration) var(--ease-out),transform var(--duration) var(--ease-out)}
-.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal{opacity:0;filter:blur(8px);transform:translateY(24px);transition:opacity var(--duration) var(--ease-out),filter var(--duration) var(--ease-out),transform var(--duration) var(--ease-out)}
+.reveal.visible{opacity:1;filter:blur(0);transform:translateY(0)}
 
 /* Reveal variants */
 .reveal--up{transform:translateY(32px)}

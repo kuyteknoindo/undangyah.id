@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta name="p:domain_verify" content="7160c9635b5cf4faf4542e81bd9e544e"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan: Rebuild Mobile UI — iOS Elegant</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, Inter, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; line-height: 1.6; color: #1a1a1a; background: #fafafa; }
+h1 { font-size: 28px; border-bottom: 2px solid #000; padding-bottom: 8px; }
+h2 { font-size: 22px; margin-top: 32px; color: #111; }
+h3 { font-size: 18px; margin-top: 24px; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 14px; }
+th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+th { background: #f0f0f0; font-weight: 600; }
+code { background: #f2f2f7; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+pre { background: #1a1a1a; color: #f0f0f0; padding: 16px; border-radius: 12px; overflow-x: auto; }
+pre code { background: none; color: inherit; }
+hr { border: none; border-top: 1px solid #e5e5ea; margin: 32px 0; }
+strong { color: #000; }
+ul, ol { padding-left: 20px; }
+li { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<h1>Rebuild Mobile UI hi.undangyah.id — iOS Elegant Style</h1>
+<h2>Goal</h2>
+<p><strong>Buat ulang dari awal</strong> tampilan mobile dashboard hi.undangyah.id dengan <strong>iOS Elegant</strong> style. Bukan override/patch CSS lama, tapi komponen mobile baru yang terpisah sepenuhnya.</p>
+<p><strong>Dua mode UI yang berbeda:</strong></p>
+<ul>
+<li><strong>Desktop</strong> → tetap seperti eksisting (tidak disentuh)</li>
+<li><strong>Mobile</strong> → UI baru dari awal, komponen sendiri, CSS sendiri</li>
+</ul>
+<p>Fokus: kesederhanaan, kejelasan, konsistensi, dan keeleganan.</p>
+<hr>
+<h2>Design System — &quot;Undangyah iOS Elegant&quot;</h2>
+<h3>Filosofi</h3>
+<ul>
+<li><strong>Senada dengan Landing Page</strong> — flat, monochrome, editorial/Swiss-grid inspired</li>
+<li><strong>Clean &amp; Minimal</strong> — setiap elemen punya tujuan, tidak ada dekorasi berlebihan</li>
+<li><strong>Flat colors only</strong> — TIDAK ADA gradasi warna di manapun (sama seperti LP)</li>
+<li><strong>Near-black accent</strong> — <code>#0f0f11</code> sebagai warna utama (sama persis dengan LP)</li>
+<li><strong>Generous whitespace</strong> — ruang napas antar elemen</li>
+<li><strong>Strong typography hierarchy</strong> — ukuran dan weight yang jelas membedakan level informasi</li>
+<li><strong>Consistent radius</strong> — pill untuk button, 12-16px untuk card</li>
+<li><strong>Mobile-first</strong> — desain dimulai dari 320px, scale up ke 480px max</li>
+</ul>
+<h3>Color Palette (Selaras dengan Landing Page)</h3>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Light</th>
+<th>Dark</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--bg-page</code></td>
+<td><code>#f8f8f8</code></td>
+<td><code>#0F0F0F</code></td>
+<td>Background halaman (= LP <code>--bg-site</code>)</td>
+</tr>
+<tr>
+<td><code>--bg-card</code></td>
+<td><code>#FFFFFF</code></td>
+<td><code>#1A1A1A</code></td>
+<td>Card/surface (= LP <code>--bg</code>)</td>
+</tr>
+<tr>
+<td><code>--bg-card-elevated</code></td>
+<td><code>#FFFFFF</code></td>
+<td><code>#222222</code></td>
+<td>Card yang lebih menonjol</td>
+</tr>
+<tr>
+<td><code>--bg-input</code></td>
+<td><code>#f9fafb</code></td>
+<td><code>#2A2A2A</code></td>
+<td>Input field background (= LP <code>--card-bg</code>)</td>
+</tr>
+<tr>
+<td><code>--accent</code></td>
+<td><code>#0f0f11</code></td>
+<td><code>#FFFFFF</code></td>
+<td>Primary action (= LP <code>--accent</code>)</td>
+</tr>
+<tr>
+<td><code>--accent-text</code></td>
+<td><code>#FFFFFF</code></td>
+<td><code>#0f0f11</code></td>
+<td>Text di atas accent (= LP <code>--accent-text</code>)</td>
+</tr>
+<tr>
+<td><code>--accent-blue</code></td>
+<td><code>#1668F2</code></td>
+<td><code>#4A9EFF</code></td>
+<td>Link, active state, secondary accent</td>
+</tr>
+<tr>
+<td><code>--accent-blue-soft</code></td>
+<td><code>rgba(22,104,242,0.08)</code></td>
+<td><code>rgba(74,158,255,0.12)</code></td>
+<td>Blue background subtle</td>
+</tr>
+<tr>
+<td><code>--text-primary</code></td>
+<td><code>#0f0f11</code></td>
+<td><code>#FFFFFF</code></td>
+<td>Heading, judul utama (= LP <code>--text</code>)</td>
+</tr>
+<tr>
+<td><code>--text-secondary</code></td>
+<td><code>#3C3C43</code></td>
+<td><code>#EBEBF5</code></td>
+<td>Body text</td>
+</tr>
+<tr>
+<td><code>--text-tertiary</code></td>
+<td><code>#6b7280</code></td>
+<td><code>#636366</code></td>
+<td>Label, caption, muted (= LP <code>--text-muted</code>)</td>
+</tr>
+<tr>
+<td><code>--text-label</code></td>
+<td><code>#9ca3af</code></td>
+<td><code>#48484A</code></td>
+<td>Placeholder, hint (= LP <code>--text-label</code>)</td>
+</tr>
+<tr>
+<td><code>--border</code></td>
+<td><code>#e5e7eb</code></td>
+<td><code>#2C2C2E</code></td>
+<td>Border card, separator (= LP <code>--border</code>)</td>
+</tr>
+<tr>
+<td><code>--separator</code></td>
+<td><code>#e5e7eb</code></td>
+<td><code>#2C2C2E</code></td>
+<td>Thin divider lines</td>
+</tr>
+<tr>
+<td><code>--success</code></td>
+<td><code>#34C759</code></td>
+<td><code>#30D158</code></td>
+<td>Status berhasil</td>
+</tr>
+<tr>
+<td><code>--warning</code></td>
+<td><code>#FF9500</code></td>
+<td><code>#FFD60A</code></td>
+<td>Status warning</td>
+</tr>
+<tr>
+<td><code>--danger</code></td>
+<td><code>#FF3B30</code></td>
+<td><code>#FF453A</code></td>
+<td>Status error/danger</td>
+</tr>
+<tr>
+<td><code>--nav-bg</code></td>
+<td><code>#0f0f11</code></td>
+<td><code>#1A1A1A</code></td>
+<td>Bottom nav background</td>
+</tr>
+<tr>
+<td><code>--nav-active</code></td>
+<td><code>#FFFFFF</code></td>
+<td><code>#FFFFFF</code></td>
+<td>Nav icon active</td>
+</tr>
+<tr>
+<td><code>--nav-inactive</code></td>
+<td><code>#636366</code></td>
+<td><code>#636366</code></td>
+<td>Nav icon inactive</td>
+</tr>
+</tbody></table>
+<h3>Typography (Sama dengan Landing Page)</h3>
+<p><strong>Font:</strong> Inter (sama persis dengan LP — self-hosted, weights 400-800)</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Size</th>
+<th>Weight</th>
+<th>Line Height</th>
+<th>Letter Spacing</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Display</td>
+<td>32px</td>
+<td>800</td>
+<td>1.1</td>
+<td>-0.03em</td>
+<td>Angka besar (quota, stats)</td>
+</tr>
+<tr>
+<td>H1</td>
+<td>26px</td>
+<td>700</td>
+<td>1.2</td>
+<td>-0.02em</td>
+<td>Judul halaman</td>
+</tr>
+<tr>
+<td>H2</td>
+<td>20px</td>
+<td>600</td>
+<td>1.3</td>
+<td>-0.01em</td>
+<td>Section title</td>
+</tr>
+<tr>
+<td>H3</td>
+<td>17px</td>
+<td>600</td>
+<td>1.4</td>
+<td>0</td>
+<td>Card title</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>15px</td>
+<td>400</td>
+<td>1.6</td>
+<td>0</td>
+<td>Teks utama (= LP body)</td>
+</tr>
+<tr>
+<td>Body Small</td>
+<td>13px</td>
+<td>400</td>
+<td>1.4</td>
+<td>0</td>
+<td>Secondary info</td>
+</tr>
+<tr>
+<td>Caption</td>
+<td>11px</td>
+<td>500</td>
+<td>1.3</td>
+<td>0.02em</td>
+<td>Label, badge, timestamp</td>
+</tr>
+<tr>
+<td>Label</td>
+<td>11px</td>
+<td>500</td>
+<td>1.3</td>
+<td>2px (uppercase)</td>
+<td>Section label (= LP section-label)</td>
+</tr>
+</tbody></table>
+<h3>Spacing (8px grid)</h3>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--space-xs</code></td>
+<td>4px</td>
+</tr>
+<tr>
+<td><code>--space-sm</code></td>
+<td>8px</td>
+</tr>
+<tr>
+<td><code>--space-md</code></td>
+<td>16px</td>
+</tr>
+<tr>
+<td><code>--space-lg</code></td>
+<td>24px</td>
+</tr>
+<tr>
+<td><code>--space-xl</code></td>
+<td>32px</td>
+</tr>
+<tr>
+<td><code>--space-2xl</code></td>
+<td>48px</td>
+</tr>
+<tr>
+<td>Page padding</td>
+<td>20px horizontal</td>
+</tr>
+<tr>
+<td>Card padding</td>
+<td>20px</td>
+</tr>
+<tr>
+<td>Card gap</td>
+<td>12px</td>
+</tr>
+</tbody></table>
+<h3>Border Radius (Senada dengan Landing Page)</h3>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Radius</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Card</td>
+<td>16px</td>
+<td>= LP pricing-card, CTA box</td>
+</tr>
+<tr>
+<td>Card inner</td>
+<td>14px</td>
+<td>= LP feature-card</td>
+</tr>
+<tr>
+<td>Button (semua)</td>
+<td>9999px</td>
+<td>Pill shape (= LP semua button)</td>
+</tr>
+<tr>
+<td>Input</td>
+<td>12px</td>
+<td>= LP <code>--radius</code></td>
+</tr>
+<tr>
+<td>Badge/Pill</td>
+<td>9999px</td>
+<td>= LP <code>--radius-full</code></td>
+</tr>
+<tr>
+<td>Bottom Nav</td>
+<td>0 (flat)</td>
+<td>Inverse radius technique</td>
+</tr>
+<tr>
+<td>Content area bawah</td>
+<td>24px</td>
+<td>Rounded bawah kiri-kanan</td>
+</tr>
+<tr>
+<td>Avatar</td>
+<td>50%</td>
+<td>Circle</td>
+</tr>
+<tr>
+<td>Thumbnail</td>
+<td>12px</td>
+<td>= LP <code>--radius</code></td>
+</tr>
+<tr>
+<td>Bottom sheet</td>
+<td>24px 24px 0 0</td>
+<td>Rounded atas</td>
+</tr>
+</tbody></table>
+<h3>Shadows (Subtle, sama dengan LP)</h3>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Value</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--shadow-card</code></td>
+<td><code>0 2px 8px rgba(0,0,0,0.04)</code></td>
+<td>Card default</td>
+</tr>
+<tr>
+<td><code>--shadow-card-hover</code></td>
+<td><code>0 8px 24px rgba(0,0,0,0.06)</code></td>
+<td>Card hover (= LP)</td>
+</tr>
+<tr>
+<td><code>--shadow-elevated</code></td>
+<td><code>0 12px 32px rgba(0,0,0,0.08)</code></td>
+<td>Elevated card (= LP feature-card hover)</td>
+</tr>
+<tr>
+<td><code>--shadow-nav</code></td>
+<td><code>0 1px 8px rgba(0,0,0,0.04)</code></td>
+<td>Header (= LP navbar scrolled)</td>
+</tr>
+<tr>
+<td><code>--shadow-btn-hover</code></td>
+<td><code>0 6px 16px rgba(0,0,0,0.15)</code></td>
+<td>Button hover (= LP btn-primary hover)</td>
+</tr>
+</tbody></table>
+<h3>Animations &amp; Transitions (Senada dengan LP)</h3>
+<pre><code class="language-css">/* Easing tokens (sama dengan LP) */
+--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+--ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+--duration: 500ms;
+--duration-fast: 200ms;
+
+/* Card hover lift (sama dengan LP) */
+card:hover { transform: translateY(-4px); transition: 0.3s var(--ease-out); }
+
+/* Button interaction (sama dengan LP) */
+button:hover { transform: translateY(-1px) scale(1.02); }
+button:active { transform: translateY(0) scale(0.98); }
+
+/* Page transitions */
+page-enter { opacity: 0; transform: translateY(16px); }
+page-enter-active { opacity: 1; transform: translateY(0); transition: 0.3s var(--ease-out); }
+
+/* Bottom sheet */
+sheet-enter { transform: translateY(100%); }
+sheet-enter-active { transform: translateY(0); transition: 0.3s var(--ease-out); }
+
+/* Skeleton loading pulse (sama dengan LP) */
+@keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: .5 } }
+</code></pre>
+<h3>Card Styles (Senada dengan Landing Page)</h3>
+<pre><code class="language-css">/* Card default — sama dengan LP feature-card/testimonial-card */
+.ios-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+.ios-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Input field — flat, no border, bg fill */
+.ios-input {
+  background: var(--bg-input);
+  border: none;
+  border-radius: 12px;
+  min-height: 50px;
+  padding: 0 16px;
+  font-size: 15px;
+  transition: box-shadow 0.2s;
+}
+
+.ios-input:focus {
+  box-shadow: 0 0 0 2px var(--accent-blue);
+}
+</code></pre>
+<h3>Button Styles (Senada dengan Landing Page)</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Background</th>
+<th>Text</th>
+<th>Border</th>
+<th>Radius</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Primary</td>
+<td><code>--accent</code> (#0f0f11)</td>
+<td><code>--accent-text</code> (#fff)</td>
+<td>none</td>
+<td>9999px (pill)</td>
+</tr>
+<tr>
+<td>Secondary/Outline</td>
+<td>transparent</td>
+<td><code>--text-primary</code></td>
+<td>1px <code>--border</code></td>
+<td>9999px (pill)</td>
+</tr>
+<tr>
+<td>Ghost</td>
+<td>transparent</td>
+<td><code>--text-tertiary</code></td>
+<td>none</td>
+<td>9999px (pill)</td>
+</tr>
+<tr>
+<td>Danger</td>
+<td><code>--danger</code></td>
+<td>white</td>
+<td>none</td>
+<td>9999px (pill)</td>
+</tr>
+<tr>
+<td>Blue (link action)</td>
+<td><code>--accent-blue</code></td>
+<td>white</td>
+<td>none</td>
+<td>9999px (pill)</td>
+</tr>
+</tbody></table>
+<p><strong>Behavior (sama dengan LP):</strong></p>
+<ul>
+<li>Hover: <code>translateY(-1px) scale(1.02)</code> + shadow <code>0 6px 16px rgba(0,0,0,0.15)</code></li>
+<li>Active: <code>translateY(0) scale(0.98)</code></li>
+<li>Semua button: <code>min-height: 50px</code>, <code>font-weight: 500-600</code>, <code>font-size: 15px</code>, <code>padding: 10px 20px</code></li>
+<li>Large modifier: <code>padding: 14px 28px</code>, <code>font-size: 16px</code></li>
+</ul>
+<h3>Bottom Navigation — INVERSE RADIUS TECHNIQUE</h3>
+<p><strong>Bukan nav yang rounded atas</strong>, tapi content area yang rounded bawah + background hitam di belakang:</p>
+<pre><code>┌─────────────────────────────────────┐
+│                                     │
+│         CONTENT AREA                │
+│         bg: putih/cream             │
+│                                     │
+│                                     │
+╰─────────────────────────────────────╯  ← border-radius: 0 0 24px 24px
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  ← background hitam (sama dgn nav)
+│  🏠    📋    🔗    👤              │  ← nav FLAT, no border-radius
+│  Home  Tema  Share Profile          │
+└─────────────────────────────────────┘  ← menempel ke edge bawah
+</code></pre>
+<p><strong>4 item di bottom nav:</strong></p>
+<ol>
+<li>Home — dashboard utama</li>
+<li>Tema — pilih template</li>
+<li>Share — bagikan undangan</li>
+<li>Profile — profil user</li>
+</ol>
+<h3>Header Mobile — Hamburger Menu</h3>
+<p><strong>Layout header (sticky top):</strong></p>
+<pre><code>┌─────────────────────────────────────┐
+│  Logo/Judul          [🔔]  [☰]     │
+└─────────────────────────────────────┘
+</code></pre>
+<ul>
+<li>Kiri: Logo Undangyah atau judul halaman</li>
+<li>Kanan: Notification bell (optional) + Hamburger icon (☰)</li>
+<li>Height: 56px + safe-area-inset-top</li>
+<li>Background: <code>--bg-page</code> dengan backdrop-filter blur</li>
+<li>Border-bottom: 1px <code>--separator</code></li>
+</ul>
+<p><strong>Hamburger Menu (Bottom Sheet / Slide-in):</strong>
+Saat icon ☰ di-tap, muncul bottom sheet dari bawah berisi menu tambahan:</p>
+<ul>
+<li>RSVP / Buku Tamu</li>
+<li>Tagihan</li>
+<li>Paket Layanan</li>
+<li>Bantuan / FAQ</li>
+<li>Dark Mode toggle</li>
+<li>Logout</li>
+</ul>
+<p>Bottom sheet: bg <code>--bg-card</code>, rounded atas 24px, handle bar 36px, item list dengan icon + label, min-height 44px per item, overlay backdrop gelap.</p>
+<p><strong>Implementasi:</strong></p>
+<pre><code class="language-css">/* Background gelap di belakang content */
+.app-mobile-wrapper {
+  background: #000; /* sama dengan nav */
+}
+
+/* Content area rounded bawah */
+.app-mobile-content {
+  background: var(--bg-page); /* putih/cream */
+  border-radius: 0 0 24px 24px;
+  min-height: calc(100vh - 72px);
+  overflow: hidden;
+}
+
+/* Nav bar flat, full width */
+.ios-bottom-nav {
+  background: #000;
+  /* TIDAK ada border-radius */
+  height: 72px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+</code></pre>
+<ul>
+<li>Background: hitam solid (<code>#000000</code> light / <code>#1A1A1A</code> dark)</li>
+<li>Position: fixed bottom, full width</li>
+<li>Height: 72px + safe-area-inset-bottom</li>
+<li>Icon: 22px, stroke style (Lucide icons)</li>
+<li>Active: icon putih + label putih</li>
+<li>Inactive: icon <code>#636366</code> + label <code>#636366</code></li>
+<li>4 items: Home, Templates, Share, Profile</li>
+</ul>
+<hr>
+<h2>Halaman yang Dibuat Ulang</h2>
+<h3>1. LOGIN (<code>/login</code>)</h3>
+<p><strong>Layout:</strong></p>
+<ul>
+<li>Full screen, centered vertically</li>
+<li>Logo Undangyah di atas (height 28px)</li>
+<li>Heading: &quot;Masuk ke akun Anda&quot; (H1, 26px, bold)</li>
+<li>Subtitle: &quot;Kelola undangan digital Anda&quot; (Body, tertiary color)</li>
+</ul>
+<p><strong>Form:</strong></p>
+<ul>
+<li>Input email: bg <code>--bg-input</code>, radius 12px, height 50px, padding 16px</li>
+<li>Input password: sama, dengan toggle visibility icon</li>
+<li>&quot;Lupa password?&quot; link di kanan bawah password</li>
+<li>Button &quot;Masuk&quot; — full width, hitam, radius 14px, height 50px</li>
+<li>Divider &quot;atau&quot;</li>
+<li>Button Google — full width, outline style, icon Google di kiri</li>
+<li>Footer: &quot;Belum punya akun? Daftar&quot; link</li>
+</ul>
+<p><strong>Tidak ada:</strong></p>
+<ul>
+<li>Gradasi</li>
+<li>Ilustrasi besar</li>
+<li>Background pattern</li>
+</ul>
+<hr>
+<h3>2. DASHBOARD HOME (<code>/dashboard</code>)</h3>
+<p><strong>Header:</strong></p>
+<ul>
+<li>Sticky top, blur backdrop</li>
+<li>Kiri: &quot;Halo, [Nama]&quot; (H2) + &quot;Selamat datang&quot; (caption, tertiary)</li>
+<li>Kanan: Avatar 40px (rounded full)</li>
+</ul>
+<p><strong>Quota Card (WAJIB ADA):</strong></p>
+<ul>
+<li>Card putih, radius 20px, padding 20px</li>
+<li>Judul: &quot;Kuota Undangan&quot; (H3)</li>
+<li>Display besar: &quot;3/5&quot; (Display size, 32px bold) — undangan terpakai/total</li>
+<li>Progress bar: height 6px, radius 999px, bg <code>--bg-input</code>, fill <code>--accent</code></li>
+<li>Info row: &quot;Paket Basic • Aktif sampai 20 Jun 2026&quot; (caption)</li>
+<li>Button: &quot;Upgrade Paket&quot; — secondary style, full width</li>
+</ul>
+<p><strong>Quick Actions (2 kolom grid):</strong></p>
+<ul>
+<li>&quot;Buat Undangan&quot; — card dengan icon + label</li>
+<li>&quot;Lihat Template&quot; — card dengan icon + label</li>
+<li>Masing-masing: bg <code>--bg-card</code>, radius 20px, padding 16px, icon 24px di atas, label 13px di bawah</li>
+</ul>
+<p><strong>Undangan Saya:</strong></p>
+<ul>
+<li>Section title: &quot;Undangan Saya&quot; (H2) + &quot;Lihat Semua&quot; link di kanan</li>
+<li>Card per undangan:<ul>
+<li>Thumbnail tema (aspect 16:9, radius 12px)</li>
+<li>Judul undangan (H3, 17px semibold)</li>
+<li>Status badge: pill, font 11px</li>
+<li>Row: tanggal acara + jumlah tamu RSVP</li>
+<li>3-dot menu (44px touch target)</li>
+</ul>
+</li>
+</ul>
+<p><strong>RSVP Activity (ringkasan):</strong></p>
+<ul>
+<li>Card: &quot;Aktivitas RSVP&quot;</li>
+<li>Angka besar: total tamu confirmed</li>
+<li>Mini list: 3 tamu terbaru (avatar + nama + waktu)</li>
+</ul>
+<hr>
+<h3>3. EDIT UNDANGAN (<code>/dashboard/edit/:id</code>)</h3>
+<p><strong>Welcome Screen (section picker):</strong></p>
+<ul>
+<li>Header sticky: Back button (44px) + Judul undangan (ellipsis) + Menu (44px)</li>
+<li>Grid 3 kolom: icon section (40px circle bg <code>--bg-input</code>) + label 11px</li>
+<li>Sections: Setting, Mempelai, Acara, Love Story, Galeri, Musik, Quotes, Kado, Livestream, GCalendar</li>
+</ul>
+<p><strong>Section Editor (setelah pilih section):</strong></p>
+<ul>
+<li>Header: Back + Section title + Save indicator</li>
+<li>Form fields stacked vertikal</li>
+<li>Input: height 50px, bg <code>--bg-input</code>, radius 12px, padding 16px</li>
+<li>Textarea: min-height 120px, same style</li>
+<li>Label: 13px, semibold, <code>--text-tertiary</code>, margin-bottom 6px</li>
+<li>Field gap: 16px</li>
+<li>Image upload: dashed border card, 120px height, icon + &quot;Tap untuk upload&quot;</li>
+</ul>
+<p><strong>UX Improvements:</strong></p>
+<ul>
+<li><strong>Label + input grouping</strong> — setiap field dibungkus card kecil (grouped fields). Contoh: Nama Pria + Foto Pria = 1 card &quot;Mempelai Pria&quot;</li>
+<li><strong>Section progress indicator</strong> — di header section editor, dot/step indicator supaya user tahu posisi mereka</li>
+<li><strong>Inline validation</strong> — error message langsung di bawah field, bukan toast yang hilang</li>
+<li><strong>Sticky save button</strong> — selalu visible di bawah, user tidak perlu scroll ke atas</li>
+<li><strong>Empty state per field</strong> — foto yang belum diupload tampilkan placeholder jelas dengan CTA &quot;Tap untuk upload&quot;</li>
+</ul>
+<p><strong>Gallery Modal — Fullscreen Bottom Sheet:</strong></p>
+<ul>
+<li>Tab rename: <strong>&quot;Galeri&quot; | &quot;Upload&quot; | &quot;Drive&quot;</strong> (singkat, jelas)</li>
+<li>Modal jadi fullscreen bottom sheet di mobile (bukan centered modal kecil)</li>
+<li>Grid foto: 3 kolom, aspect-ratio 1:1, radius 8px</li>
+<li>Upload area: simple button &quot;Pilih Foto&quot; + progress bar (bukan drag zone)</li>
+<li>Selected state: overlay checkmark biru di corner foto</li>
+<li>Footer: button &quot;Pilih Gambar&quot; (primary, full width)</li>
+</ul>
+<p><strong>Save FAB:</strong></p>
+<ul>
+<li>Fixed bottom-right</li>
+<li>Hitam, radius 14px, padding 14px 24px</li>
+<li>Text: &quot;Simpan&quot; + checkmark icon</li>
+<li>Shadow: <code>--shadow-elevated</code></li>
+<li>Bottom offset: 88px + safe-area (di atas nav)</li>
+</ul>
+<p><strong>Section Details:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Fields</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Setting</td>
+<td>Judul, slug, tanggal, waktu, timezone</td>
+</tr>
+<tr>
+<td>Mempelai</td>
+<td>Nama pria, nama wanita, foto pria, foto wanita, nama ayah/ibu, urutan</td>
+</tr>
+<tr>
+<td>Acara</td>
+<td>Nama acara, tanggal, waktu mulai, waktu selesai, tempat, alamat, maps link</td>
+</tr>
+<tr>
+<td>Love Story</td>
+<td>Timeline items (tanggal + judul + deskripsi), sortable</td>
+</tr>
+<tr>
+<td>Galeri</td>
+<td>Grid foto (3 kolom), upload multiple, drag reorder</td>
+</tr>
+<tr>
+<td>Musik</td>
+<td>Search + list musik, play preview (44px button), select</td>
+</tr>
+<tr>
+<td>Quotes</td>
+<td>Textarea ayat/quotes, sumber</td>
+</tr>
+<tr>
+<td>Kado</td>
+<td>Toggle aktif, rekening (bank + no rek + nama), e-wallet</td>
+</tr>
+<tr>
+<td>Livestream</td>
+<td>Toggle aktif, platform, URL</td>
+</tr>
+<tr>
+<td>GCalendar</td>
+<td>Auto-generate dari data acara, preview link</td>
+</tr>
+</tbody></table>
+<hr>
+<h3>4. RSVP (<code>/dashboard/rsvp</code>)</h3>
+<p><strong>Header:</strong></p>
+<ul>
+<li>&quot;RSVP&quot; (H1) + filter icon button</li>
+</ul>
+<p><strong>Summary Cards (horizontal scroll):</strong></p>
+<ul>
+<li>3 cards: Total Tamu | Hadir | Tidak Hadir</li>
+<li>Masing-masing: angka besar (Display) + label (caption) + warna indicator</li>
+</ul>
+<p><strong>Guest List:</strong></p>
+<ul>
+<li>Search input (height 44px, icon search, radius 12px)</li>
+<li>Filter chips: Semua | Hadir | Tidak Hadir | Pending (horizontal scroll)</li>
+<li>Card per tamu:<ul>
+<li>Avatar initial (40px, bg <code>--bg-input</code>)</li>
+<li>Nama (H3) + jumlah tamu (badge)</li>
+<li>Status pill (hijau/merah/abu)</li>
+<li>Ucapan (body small, max 2 line, ellipsis)</li>
+<li>Timestamp (caption)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Empty state:</strong></p>
+<ul>
+<li>Ilustrasi simple (SVG line art)</li>
+<li>&quot;Belum ada tamu&quot; (H2)</li>
+<li>&quot;Bagikan undangan untuk mulai menerima RSVP&quot; (body, tertiary)</li>
+<li>Button &quot;Bagikan Undangan&quot; (primary)</li>
+</ul>
+<hr>
+<h3>5. SHARE (<code>/dashboard/sebar</code>)</h3>
+<p><strong>Header:</strong></p>
+<ul>
+<li>&quot;Bagikan Undangan&quot; (H1)</li>
+</ul>
+<p><strong>Preview Card:</strong></p>
+<ul>
+<li>Thumbnail undangan (aspect 16:9, radius 12px)</li>
+<li>Link undangan (monospace, bg <code>--bg-input</code>, radius 12px, padding 12px)</li>
+<li>Button &quot;Salin Link&quot; (secondary, icon copy)</li>
+</ul>
+<p><strong>Share Methods:</strong></p>
+<ul>
+<li>Card list, masing-masing:<ul>
+<li>Icon platform (WhatsApp hijau, Telegram biru, dll) — 40px</li>
+<li>Nama platform (H3)</li>
+<li>Deskripsi singkat (caption)</li>
+<li>Chevron right</li>
+<li>Min-height 64px per item</li>
+</ul>
+</li>
+</ul>
+<p><strong>Blast WhatsApp:</strong></p>
+<ul>
+<li>Card: &quot;Kirim ke Banyak Tamu&quot;</li>
+<li>Input: pilih/upload daftar tamu</li>
+<li>Template pesan (textarea, editable)</li>
+<li>Button &quot;Kirim Blast&quot; (primary)</li>
+<li>Quota indicator: &quot;Sisa kuota: 45/50 pesan&quot;</li>
+</ul>
+<hr>
+<h3>6. CHECKOUT (<code>/checkout/:slug</code>)</h3>
+<p><strong>Layout:</strong> Standalone (no bottom nav)</p>
+<p><strong>Header:</strong></p>
+<ul>
+<li>Back button + &quot;Checkout&quot; (H2) + logo kecil</li>
+</ul>
+<p><strong>Product Card:</strong></p>
+<ul>
+<li>Nama paket (H2)</li>
+<li>Harga (Display, 32px bold)</li>
+<li>Durasi + fitur ringkas (body small)</li>
+<li>Badge &quot;POPULER&quot; jika premium</li>
+</ul>
+<p><strong>Addons (optional):</strong></p>
+<ul>
+<li>Toggle cards: icon + nama + harga + switch</li>
+</ul>
+<p><strong>Form Section:</strong></p>
+<ul>
+<li>Jika belum login: input nomor WA + OTP verification</li>
+<li>Jika sudah login: info user (readonly card)</li>
+</ul>
+<p><strong>Payment Methods:</strong></p>
+<ul>
+<li>Radio card list:<ul>
+<li>Logo payment (height 24px)</li>
+<li>Nama method</li>
+<li>Radio indicator kanan</li>
+<li>Active: border <code>--accent</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Voucher:</strong></p>
+<ul>
+<li>Input + button &quot;Terapkan&quot; inline</li>
+<li>Success state: badge hijau + nominal diskon</li>
+</ul>
+<p><strong>Summary (sticky bottom):</strong></p>
+<ul>
+<li>Card: subtotal, diskon, total</li>
+<li>Button &quot;Bayar Rp[total]&quot; — full width, hitam, height 54px</li>
+<li>Safe area padding bottom</li>
+</ul>
+<hr>
+<h2>Pendekatan: Rebuild (Bukan Override)</h2>
+<h3>Kenapa Rebuild, Bukan Override?</h3>
+<ul>
+<li>CSS override gagal karena file lama punya specificity tinggi + inline styles di <code>AppLayout.tsx</code></li>
+<li>Terlalu banyak <code>!important</code> = unmaintainable</li>
+<li>Komponen lama terlalu coupled dengan styling One UI</li>
+</ul>
+<h3>Arsitektur Baru</h3>
+<pre><code>src/
+├── components/mobile/          ← KOMPONEN MOBILE BARU (dari awal)
+│   ├── IosBottomNav.tsx        ← ✅ sudah dibuat
+│   ├── IosDashboard.tsx        ← dashboard home baru
+│   ├── IosEditWelcome.tsx      ← section picker baru
+│   ├── IosEditSection.tsx      ← section editor baru
+│   ├── IosGalleryModal.tsx     ← gallery fullscreen sheet
+│   ├── IosRsvp.tsx             ← RSVP page baru
+│   ├── IosShare.tsx            ← share/sebar page baru
+│   ├── IosCheckout.tsx         ← checkout page baru
+│   ├── IosProfile.tsx          ← profile page baru
+│   └── IosThemes.tsx           ← themes page baru
+├── styles/
+│   └── ios-mobile.css          ← ✅ sudah dibuat (design system tokens)
+└── layout/
+    └── AppLayout.tsx           ← switch: isMobile ? &lt;IosMobileApp /&gt; : &lt;DesktopApp /&gt;
+</code></pre>
+<h3>Cara Kerja</h3>
+<ol>
+<li><code>AppLayout.tsx</code> detect mobile via <code>useIsMobileLayout()</code></li>
+<li>Jika mobile → render komponen <code>IosMobileApp</code> (wrapper baru)</li>
+<li>Jika desktop → render layout eksisting (tidak berubah)</li>
+<li>Komponen mobile import data/hooks yang sama, tapi render UI sendiri</li>
+<li>Satu file CSS (<code>ios-mobile.css</code>) sebagai design system — semua komponen mobile pakai token ini</li>
+<li>File CSS lama TIDAK dihapus — tetap dipakai desktop</li>
+</ol>
+<h3>Keuntungan</h3>
+<ul>
+<li>Desktop 100% tidak terpengaruh</li>
+<li>Tidak ada perang specificity</li>
+<li>Komponen mobile bisa di-iterate tanpa takut break desktop</li>
+<li>Clean separation of concerns</li>
+</ul>
+<hr>
+<h2>File yang Akan Dibuat (Baru)</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Fungsi</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>src/components/mobile/IosMobileApp.tsx</code></td>
+<td>Wrapper utama mobile (routing + nav)</td>
+</tr>
+<tr>
+<td><code>src/components/mobile/IosBottomNav.tsx</code></td>
+<td>✅ Bottom nav (sudah ada)</td>
+</tr>
+<tr>
+<td><code>src/components/mobile/IosDashboard.tsx</code></td>
+<td>Dashboard home</td>
+</tr>
+<tr>
+<td><code>src/components/mobile/IosEditWelcome.tsx</code></td>
+<td>Edit undangan — section picker</td>
+</tr>
+<tr>
+<td><code>src/components/mobile/IosEditSection.tsx</code></td>
+<td>Edit undangan — form editor</td>
+</tr>
+<tr>
+<td><code>src/components/mobile/IosGalleryModal.tsx</code></td>
+<td>Gallery fullscreen bottom sheet</td>
+</tr>
+<tr>
+<td><code>src/components/mobile/IosRsvp.tsx</code></td>
+<td>RSVP page</td>
+</tr>
+<tr>
+<td><code>src/components/mobile/IosShare.tsx</code></td>
+<td>Share/sebar page</td>
+</tr>
+<tr>
+<td><code>src/components/mobile/IosCheckout.tsx</code></td>
+<td>Checkout page</td>
+</tr>
+<tr>
+<td><code>src/components/mobile/IosProfile.tsx</code></td>
+<td>Profile page</td>
+</tr>
+<tr>
+<td><code>src/components/mobile/IosThemes.tsx</code></td>
+<td>Themes/template page</td>
+</tr>
+<tr>
+<td><code>src/styles/ios-mobile.css</code></td>
+<td>✅ Design system tokens (sudah ada)</td>
+</tr>
+</tbody></table>
+<h2>File yang Dimodifikasi</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Perubahan</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>src/layout/AppLayout.tsx</code></td>
+<td>Tambah branch: <code>if (isMobile) return &lt;IosMobileApp /&gt;</code></td>
+</tr>
+<tr>
+<td><code>src/main.tsx</code></td>
+<td>Import <code>ios-mobile.css</code></td>
+</tr>
+</tbody></table>
+<h2>File yang TIDAK Disentuh</h2>
+<ul>
+<li>Semua file desktop (sidebar, desktop layout, desktop CSS)</li>
+<li><code>dashboard-mobile.css</code> (tetap ada, tidak dipakai mobile baru)</li>
+<li><code>edit-page.css</code> (tetap ada untuk desktop)</li>
+<li><code>mobile-pages.css</code> (legacy, tidak dihapus)</li>
+</ul>
+<hr>
+<h2>Execution Plan (Urutan Implementasi)</h2>
+<h3>Phase 1: Design System Foundation</h3>
+<ol>
+<li>Buat <code>ios-design-system.css</code> dengan semua token baru</li>
+<li>Update <code>:root</code> di <code>index.css</code> — override token lama</li>
+<li>Update font: hapus Plus Jakarta Sans dari heading, Inter only</li>
+<li>Update bottom nav: pill hitam, rounded atas, flat bawah</li>
+</ol>
+<h3>Phase 2: Login &amp; Auth</h3>
+<ol start="5">
+<li>Buat ulang login page mobile</li>
+<li>Update PhoneVerification modal (sudah diperbaiki, sesuaikan token)</li>
+</ol>
+<h3>Phase 3: Dashboard Home</h3>
+<ol start="7">
+<li>Buat ulang DashboardMobileView — quota card, quick actions, undangan list</li>
+<li>Update RSVP activity section</li>
+</ol>
+<h3>Phase 4: Edit Undangan</h3>
+<ol start="9">
+<li>Buat ulang welcome screen (section picker grid)</li>
+<li>Update form fields styling (input, textarea, upload)</li>
+<li>Update save FAB</li>
+<li>Pastikan semua section editor konsisten</li>
+</ol>
+<h3>Phase 5: RSVP &amp; Share</h3>
+<ol start="13">
+<li>Buat ulang RSVP page mobile (summary + guest list)</li>
+<li>Buat ulang Share/Sebar page mobile</li>
+</ol>
+<h3>Phase 6: Checkout</h3>
+<ol start="15">
+<li>Buat ulang checkout mobile form</li>
+<li>Payment method cards</li>
+<li>Sticky summary bottom</li>
+</ol>
+<h3>Phase 7: Polish &amp; Dark Mode</h3>
+<ol start="18">
+<li>Verify semua halaman di dark mode</li>
+<li>Test di 320px, 375px, 414px, 480px</li>
+<li>Accessibility check (touch targets, contrast)</li>
+</ol>
+<hr>
+<h2>Validasi &amp; Testing</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Build tanpa error (<code>npm run build</code>)</li>
+<li><input disabled="" type="checkbox"> Semua halaman accessible di 320px width</li>
+<li><input disabled="" type="checkbox"> Touch target minimum 44px di semua interactive element</li>
+<li><input disabled="" type="checkbox"> Dark mode konsisten di semua halaman</li>
+<li><input disabled="" type="checkbox"> Tidak ada gradasi warna di manapun</li>
+<li><input disabled="" type="checkbox"> Bottom nav konsisten di semua dashboard pages</li>
+<li><input disabled="" type="checkbox"> Font hanya Inter (no Plus Jakarta Sans di mobile)</li>
+<li><input disabled="" type="checkbox"> Spacing mengikuti 8px grid</li>
+<li><input disabled="" type="checkbox"> Border radius konsisten sesuai design system</li>
+</ul>
+<hr>
+
+
+</body>
+</html>

@@ -1,0 +1,2365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta name="p:domain_verify" content="7160c9635b5cf4faf4542e81bd9e544e"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PRD Detail UI — m.undangyah.id</title>
+<style>
+:root{--bg:#fff;--t:#1a1a2e;--m:#64748b;--p:#2563eb;--c:#f8fafc;--b:#e2e8f0;--cb:#f1f5f9;--r:12px}
+@media(prefers-color-scheme:dark){:root{--bg:#0a0a0a;--t:#f1f5f9;--m:#94a3b8;--p:#60a5fa;--c:#111;--b:#1e293b;--cb:#1e293b}}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Plus Jakarta Sans",-apple-system,sans-serif;background:var(--bg);color:var(--t);line-height:1.7;padding:2rem 1.5rem;max-width:900px;margin:0 auto}
+h1{font-size:2rem;font-weight:800;margin:2rem 0 1rem}
+h2{font-size:1.4rem;font-weight:700;margin:2.5rem 0 .8rem;padding-top:1.5rem;border-top:2px solid var(--p)}
+h3{font-size:1.1rem;font-weight:600;margin:1.6rem 0 .5rem;color:var(--p)}
+h4{font-size:.95rem;font-weight:600;margin:1rem 0 .3rem}
+p{margin:.4rem 0}p.n{padding-left:1.2rem}
+hr{border:none;border-top:1px solid var(--b);margin:2rem 0}
+ul{padding-left:1.4rem;margin:.4rem 0}
+li{margin:.2rem 0}li.s{margin-left:1rem;font-size:.9rem;color:var(--m)}
+strong{font-weight:700}
+code{background:var(--cb);padding:1px 5px;border-radius:4px;font-size:.82em;font-family:"JetBrains Mono",monospace}
+pre{background:var(--c);border:1px solid var(--b);border-radius:var(--r);padding:1rem;overflow-x:auto;margin:.8rem 0}
+pre code{background:none;padding:0;font-size:.78rem;line-height:1.5}
+.tw{overflow-x:auto;margin:.8rem 0;border-radius:var(--r)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th,td{padding:.45rem .6rem;border:1px solid var(--b);text-align:left}
+th{background:var(--c);font-weight:600;white-space:nowrap}
+footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--b);text-align:center;color:var(--m);font-size:.8rem}
+@media(max-width:640px){body{padding:1rem}h1{font-size:1.5rem}h2{font-size:1.2rem}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<h1>PRD UI Detail — m.undangyah.id</h1>
+<p><strong>Versi:</strong> 1.0  </p>
+<p><strong>Tanggal:</strong> 22 Mei 2026  </p>
+<p><strong>Platform:</strong> Mobile Web (max-w-md, iOS-like elegant, flat design)  </p>
+<p><strong>Stack:</strong> TanStack Start + CF Workers + Tailwind CSS v4</p>
+<hr>
+<h2>1. Design Tokens (src/styles.css)</h2>
+<h3>Radius System</h3>
+<pre><code>
+--radius: 1.5rem (24px) — base
+--radius-sm: calc(var(--radius) - 4px) = 20px
+--radius-md: calc(var(--radius) - 2px) = 22px
+--radius-lg: var(--radius) = 24px
+--radius-xl: calc(var(--radius) + 4px) = 28px
+--radius-2xl: calc(var(--radius) + 8px) = 32px
+--radius-3xl: calc(var(--radius) + 12px) = 36px
+--radius-4xl: calc(var(--radius) + 16px) = 40px
+</code></pre>
+<h3>Color Palette</h3>
+<h4>Light Mode (:root)</h4>
+<div class="tw"><table><thead>
+<tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+</thead><tbody>
+<tr><td><code>--background</code></td><td><code>oklch(1 0 0)</code></td><td>Halaman background, pure white</td></tr>
+<tr><td><code>--foreground</code></td><td><code>oklch(0.2 0.04 270)</code></td><td>Teks utama, near-black</td></tr>
+<tr><td><code>--card</code></td><td><code>oklch(1 0 0)</code></td><td>Card background</td></tr>
+<tr><td><code>--primary</code></td><td><code>oklch(0.58 0.24 264)</code></td><td>Electric Blue — tombol utama, aksen</td></tr>
+<tr><td><code>--primary-foreground</code></td><td><code>oklch(1 0 0)</code></td><td>Teks di atas primary</td></tr>
+<tr><td><code>--secondary</code></td><td><code>oklch(0.97 0.01 260)</code></td><td>Background sekunder, badge</td></tr>
+<tr><td><code>--secondary-foreground</code></td><td><code>oklch(0.2 0.04 270)</code></td><td>Teks di atas secondary</td></tr>
+<tr><td><code>--muted</code></td><td><code>oklch(0.96 0.008 260)</code></td><td>Background muted</td></tr>
+<tr><td><code>--muted-foreground</code></td><td><code>oklch(0.5 0.03 265)</code></td><td>Teks muted, placeholder</td></tr>
+<tr><td><code>--accent</code></td><td><code>oklch(0.93 0.05 260)</code></td><td>Background aksen</td></tr>
+<tr><td><code>--accent-foreground</code></td><td><code>oklch(0.2 0.04 270)</code></td><td>Teks aksen</td></tr>
+<tr><td><code>--destructive</code></td><td><code>oklch(0.6 0.22 25)</code></td><td>Tombol hapus, error</td></tr>
+<tr><td><code>--destructive-foreground</code></td><td><code>oklch(1 0 0)</code></td><td>Teks destructive</td></tr>
+<tr><td><code>--border</code></td><td><code>oklch(0.92 0.015 260)</code></td><td>Border, divider</td></tr>
+<tr><td><code>--input</code></td><td><code>oklch(0.92 0.02 260)</code></td><td>Input background</td></tr>
+<tr><td><code>--ring</code></td><td><code>oklch(0.58 0.24 264)</code></td><td>Focus ring</td></tr>
+</tbody></table></div>
+<h4>Dark Mode (.dark)</h4>
+<div class="tw"><table><thead>
+<tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+</thead><tbody>
+<tr><td><code>--background</code></td><td><code>oklch(0 0 0)</code></td><td>Pure black</td></tr>
+<tr><td><code>--foreground</code></td><td><code>oklch(0.98 0 0)</code></td><td>Near-white text</td></tr>
+<tr><td><code>--card</code></td><td><code>oklch(0.04 0 0)</code></td><td>Card background, dark gray</td></tr>
+<tr><td><code>--primary</code></td><td><code>oklch(0.98 0 0)</code></td><td>Inverted: white on black</td></tr>
+<tr><td><code>--primary-foreground</code></td><td><code>oklch(0 0 0)</code></td><td>Teks hitam di atas primary</td></tr>
+<tr><td><code>--secondary</code></td><td><code>oklch(0.12 0 0)</code></td><td>Dark secondary</td></tr>
+<tr><td><code>--muted</code></td><td><code>oklch(0.10 0 0)</code></td><td>Muted background</td></tr>
+<tr><td><code>--muted-foreground</code></td><td><code>oklch(0.65 0 0)</code></td><td>Muted text</td></tr>
+<tr><td><code>--accent</code></td><td><code>oklch(0.14 0 0)</code></td><td>Accent background</td></tr>
+<tr><td><code>--border</code></td><td><code>oklch(1 0 0 / 10%)</code></td><td>10% white border</td></tr>
+<tr><td><code>--input</code></td><td><code>oklch(1 0 0 / 15%)</code></td><td>15% white input</td></tr>
+<tr><td><code>--ring</code></td><td><code>oklch(0.65 0 0)</code></td><td>Focus ring dark</td></tr>
+</tbody></table></div>
+<h3>Typography</h3>
+<div class="tw"><table><thead>
+<tr><th>Element</th><th>Font</th><th>Size</th><th>Weight</th><th>Color</th></tr>
+</thead><tbody>
+<tr><td>Body</td><td>Plus Jakarta Sans</td><td>default (14px base)</td><td>400</td><td>foreground</td></tr>
+<tr><td>Headline/h1</td><td>Fraunces (serif)</td><td>~2xl-3xl (24-30px)</td><td>700</td><td>foreground</td></tr>
+<tr><td>H1 bold</td><td>Plus Jakarta Sans</td><td>2xl-3xl</td><td>700</td><td>foreground</td></tr>
+<tr><td>h3/subtitle</td><td>Plus Jakarta Sans</td><td>base (16px)</td><td>600</td><td>foreground</td></tr>
+<tr><td>Caption</td><td>Plus Jakarta Sans</td><td>xs (11-12px)</td><td>400-500</td><td>muted-foreground</td></tr>
+<tr><td>Button text</td><td>Plus Jakarta Sans</td><td>sm (14px)</td><td>600</td><td>varies</td></tr>
+<tr><td>Input</td><td>Plus Jakarta Sans</td><td>sm (14px)</td><td>400</td><td>foreground</td></tr>
+</tbody></table></div>
+<h3>Spacing System</h3>
+<ul>
+<li>Container: <code>max-w-md</code> (max 448px)</li>
+<li>Section padding: <code>px-5</code> (20px horizontal)</li>
+<li>Card padding: <code>p-3</code> to <code>p-5</code> (12px to 20px)</li>
+<li>Gap between cards: <code>gap-3</code> (12px)</li>
+<li>Section gap: <code>mt-6</code> to <code>mt-7</code> (24px to 28px)</li>
+<li>Bottom nav height: ~80px + pb-5</li>
+</ul>
+<h3>Component Patterns</h3>
+<ul>
+<li><strong>Buttons:</strong> <code>rounded-xl</code> (20px) atau <code>rounded-full</code> untuk FAB/CTA utama</li>
+<li><strong>Cards:</strong> <code>rounded-2xl</code> (32px) dengan <code>border border-border</code></li>
+<li><strong>Inputs:</strong> <code>rounded-xl</code> (20px), <code>h-13</code> (52px height), <code>py-3.5</code></li>
+<li><strong>Icons:</strong> Lucide React, ukuran: <code>h-3 w-3</code> (12px), <code>h-4 w-4</code> (16px), <code>h-5 w-5</code> (20px)</li>
+<li><strong>Avatar:</strong> <code>h-11 w-11</code> (44px) rounded-full untuk header, <code>h-20 w-20</code> (80px) untuk profile</li>
+</ul>
+<hr>
+<h2>2. Root Layout (<code>/</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+RootShell (html &gt; body)
+└── RootComponent
+    ├── QueryClientProvider
+    ├── ThemeProvider
+    ├── Outlet (page content)
+    ├── CommandPalette (global overlay)
+    └── Toaster (sonner notifications)
+</code></pre>
+<h3>Elements</h3>
+<h4>Toaster</h4>
+<ul>
+<li>Position: <code>top-center</code></li>
+<li>Rich colors enabled</li>
+<li>Close button visible</li>
+<li>Animasi dari tw-animate-css</li>
+</ul>
+<h4>Command Palette (Dialog)</h4>
+<ul>
+<li>Menggunakan komponen UI <code>CommandDialog</code> dari shadcn/ui</li>
+<li>Trigger: <code>Ctrl/Cmd + K</code> atau dispatch event <code>command-palette:open</code></li>
+<li>Icon per item: <code>h-4 w-4</code>, <code>mr-2</code></li>
+<li>Group heading: font-semibold, xs</li>
+<li>Empty state: "Tidak ada hasil ditemukan."</li>
+</ul>
+<h4>Device Redirect Logic</h4>
+<ul>
+<li>Domain <code>m.undangyah.id</code> + desktop device (>768px + pointer:fine) → redirect ke <code>hi.undangyah.id</code></li>
+<li>Domain <code>hi.undangyah.id</code> + mobile device → redirect ke <code>m.undangyah.id</code></li>
+</ul>
+<hr>
+<h2>3. Halaman: Login (<code>/login</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+div.min-h-screen.flex.flex-col
+├── header (fixed/relative, flex, px-6 pt-5)
+│   └── img.logo (h-6)
+├── main (mx-auto max-w-md, flex-1 flex-col justify-center, px-6 py-6)
+│   ├── div.hero-copy
+│   │   ├── h1 (text-3xl font-bold)
+│   │   └── p (text-sm text-muted-foreground)
+│   ├── div.error (conditional)
+│   ├── form
+│   │   ├── div.email-field
+│   │   │   ├── label (text-xs text-muted-foreground)
+│   │   │   └── div.relative &gt; Mail.icon + input
+│   │   ├── div.password-field
+│   │   │   ├── label
+│   │   │   └── div.relative &gt; Lock.icon + input + Eye button
+│   │   ├── div.forgot-link
+│   │   └── button.submit (full-width, h-13, rounded-xl)
+│   └── p.link-register (text-center text-xs)
+└── div.loading-overlay (conditional, fixed inset-0, z-50)
+</code></pre>
+<h3>Elements</h3>
+<h4>Logo Header</h4>
+<ul>
+<li>Posisi: relative, px-6 pt-5</li>
+<li>Dimensi: <code>h-6</code> (24px height)</li>
+<li>Icon: logo image dari URL eksternal</li>
+</ul>
+<h4>Hero Heading</h4>
+<ul>
+<li>Font: Plus Jakarta Sans, <strong>bold</strong></li>
+<li>Size: <code>text-3xl</code> (30px)</li>
+<li>Line height: <code>leading-tight</code></li>
+<li>Color: foreground</li>
+<li>Text: "Selamat datang<br />kembali"</li>
+</ul>
+<h4>Hero Subtitle</h4>
+<ul>
+<li>Font: Plus Jakarta Sans</li>
+<li>Size: <code>text-sm</code> (14px)</li>
+<li>Weight: 400</li>
+<li>Color: muted-foreground</li>
+<li>Margin top: <code>mt-2</code> (8px)</li>
+</ul>
+<h4>Error Alert</h4>
+<ul>
+<li>Background: destructive/10</li>
+<li>Border: destructive (light: red-200, dark: red-900)</li>
+<li>Padding: <code>px-4 py-3</code></li>
+<li>Font: <code>text-xs</code></li>
+<li>Border radius: <code>rounded-xl</code> (20px)</li>
+<li>Color: destructive</li>
+<li>Dark mode: <code>dark:bg-red-950/50 dark:text-red-300</code></li>
+</ul>
+<h4>Email Input Field</h4>
+<ul>
+<li>Label: <code>text-xs font-medium text-muted-foreground</code></li>
+<li>Container wrapper: <code>h-13 w-full rounded-xl border border-border bg-card</code></li>
+<li>Input: <code>pl-11 pr-4 py-3.5 text-sm outline-none</code></li>
+<li>Icon (Mail): <code>pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground</code></li>
+<li>Focus: <code>focus:border-primary</code></li>
+<li>Placeholder: "kamu@email.com"</li>
+</ul>
+<h4>Password Input Field</h4>
+<ul>
+<li>Label: <code>text-xs font-medium text-muted-foreground</code></li>
+<li>Container: <code>h-13 w-full rounded-xl border border-border bg-card</code></li>
+<li>Icon (Lock): <code>pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground</code></li>
+<li>Input: <code>pl-11 pr-12 py-3.5 text-sm outline-none</code></li>
+<li>Toggle button: <code>absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full</code></li>
+<li>Icon (Eye/EyeOff): <code>h-4 w-4 text-muted-foreground hover:bg-secondary</code></li>
+<li>Focus: <code>focus:border-primary</code></li>
+<li>Placeholder: "••••••••"</li>
+</ul>
+<h4>Forgot Password Link</h4>
+<ul>
+<li>Posisi: flex items-center justify-end</li>
+<li>Padding: <code>pt-1</code></li>
+<li>Font: <code>text-xs font-medium text-foreground</code></li>
+<li>Hover: underline</li>
+</ul>
+<h4>Submit Button</h4>
+<ul>
+<li>Dimensi: <code>h-13 w-full</code></li>
+<li>Background: primary</li>
+<li>Padding: <code>py-3.5</code></li>
+<li>Border radius: <code>rounded-xl</code> (20px)</li>
+<li>Font: <code>text-sm font-semibold text-primary-foreground</code></li>
+<li>Hover: <code>hover:opacity-90</code></li>
+<li>Disabled: <code>disabled:opacity-80</code></li>
+<li>Icon (ArrowRight/Loader2): <code>h-4 w-4</code></li>
+<li>Icon (Loader2): <code>animate-spin</code></li>
+</ul>
+<h4>Link ke Register</h4>
+<ul>
+<li>Text: <code>text-xs text-muted-foreground</code></li>
+<li>Link: <code>font-semibold text-foreground</code></li>
+<li>Arrow text: "←"</li>
+</ul>
+<h4>Loading Overlay</h4>
+<ul>
+<li>Position: <code>fixed inset-0 z-50</code></li>
+<li>Background: <code>bg-background/70 backdrop-blur-sm</code></li>
+<li>Content: flex items-center justify-center</li>
+<li>Card: <code>rounded-2xl border border-border bg-card px-8 py-6 shadow-lg</code></li>
+<li>Icon (Loader2): <code>h-7 w-7 animate-spin text-primary</code></li>
+<li>Text: <code>text-xs font-medium</code></li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Normal:</strong> Semua field kosong</li>
+<li><strong>Error:</strong> Alert merah muncul di bawah form</li>
+<li><strong>Loading:</strong> Overlay semi-transparan dengan spinner</li>
+<li><strong>Focus:</strong> Border berubah jadi primary (Electric Blue)</li>
+</ul>
+<h3>Dark Mode Differences</h3>
+<ul>
+<li>Background: pure black</li>
+<li>Foreground: near-white</li>
+<li>Card: dark gray (oklch 0.04 0 0)</li>
+<li>Input background: lebih gelap dengan opacity</li>
+</ul>
+<h3>Interaksi</h3>
+<ul>
+<li>Tap: input focus, button press</li>
+<li>Submit: POST ke API <code>/undangyah/v1/app/login</code></li>
+<li>Toggle password: show/hide dengan EyeOff/Eye icon</li>
+</ul>
+<hr>
+<h2>4. Halaman: Register (<code>/register</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+div.min-h-screen.bg-background
+└── div.max-w-md (mx-auto flex min-h-screen flex-col px-6 pb-10)
+    ├── header (flex items-center justify-between pt-5)
+    │   └── img.logo (h-6)
+    ├── div.progress (flex gap-1.5 mt-8)
+    │   └── 3x div (h-1 flex-1 rounded-full)
+    ├── h1 (text-2xl font-bold mt-6)
+    ├── div.error (conditional)
+    ├── form/step-1 (mt-6 space-y-4)
+    ├── div/step-2 (mt-6 space-y-5) — OTP
+    └── div/step-4 (mt-12 flex flex-col items-center text-center) — Success
+</code></pre>
+<h3>Elements</h3>
+<h4>Progress Indicator</h4>
+<ul>
+<li>3 bar dengan <code>gap-1.5</code> (6px)</li>
+<li>Bar: <code>h-1 flex-1 rounded-full</code></li>
+<li>Active: <code>bg-primary</code></li>
+<li>Inactive: <code>bg-secondary</code></li>
+<li>Transition: <code>transition-colors</code></li>
+</ul>
+<h4>Form Fields (Step 1)</h4>
+<ul>
+<li>Same pattern dengan Login (icon + input)</li>
+<li>4 fields: Nama (User icon), Email (Mail icon), WhatsApp (Phone icon), Password (Lock icon)</li>
+<li>Input height: <code>py-3.5</code></li>
+<li>Border: <code>rounded-xl</code></li>
+<li>Focus: <code>focus:border-primary</code></li>
+</ul>
+<h4>Continue Button</h4>
+<ul>
+<li><code>flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3.5 text-sm font-semibold text-primary-foreground</code></li>
+<li>Disabled: <code>disabled:opacity-50</code></li>
+<li>Icon: ArrowRight atau Loader2 (animate-spin)</li>
+</ul>
+<h4>OTP Input (Step 2)</h4>
+<ul>
+<li>Container: <code>flex justify-center gap-2.5</code></li>
+<li>Input: <code>h-13 w-11 rounded-xl border border-border bg-card text-center text-lg font-bold</code></li>
+<li>Focus: <code>focus:border-primary</code></li>
+<li>6 digit inputs dengan auto-focus navigation</li>
+</ul>
+<h4>Phone Display Card</h4>
+<ul>
+<li><code>flex items-center gap-3 rounded-xl border border-border bg-card p-4</code></li>
+<li>Icon container: <code>flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10</code></li>
+<li>Icon (Phone): <code>h-5 w-5 text-primary</code></li>
+</ul>
+<h4>Resend OTP Button</h4>
+<ul>
+<li>Active: <code>text-xs text-muted-foreground</code> (countdown)</li>
+<li>Inactive: <code>text-xs font-semibold text-primary</code></li>
+</ul>
+<h4>Success State (Step 4)</h4>
+<ul>
+<li>Icon container: <code>flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-950</code></li>
+<li>Icon (Check): <code>h-8 w-8 text-emerald-600</code></li>
+<li>Heading: <code>text-lg font-bold</code></li>
+<li>Subtitle: <code>text-sm text-muted-foreground</code></li>
+<li>Auto-redirect: 1500ms ke dashboard</li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Step 1:</strong> Form input data diri</li>
+<li><strong>Step 2:</strong> OTP verification dengan 6-digit input</li>
+<li><strong>Step 4:</strong> Success dengan auto-redirect</li>
+<li><strong>Error:</strong> Alert dengan <code>bg-destructive/10 text-destructive</code></li>
+<li><strong>Loading:</strong> Spinner di button, button disabled</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Background: pure black</li>
+<li>Input background: dark gray</li>
+<li>OTP inputs: dark surface</li>
+</ul>
+<h3>Interaksi</h3>
+<ul>
+<li>Keyboard navigation antar OTP input (Backspace, Arrow keys)</li>
+<li>Auto-focus next input saat karakter dimasukkan</li>
+<li>Countdown timer untuk resend OTP (60 detik)</li>
+</ul>
+<hr>
+<h2>5. Halaman: Onboarding (<code>/onboarding</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+div.flex.min-h-screen.flex-col.bg-background
+└── div.max-w-md (mx-auto flex w-full flex-1 flex-col px-6 pt-6 pb-8)
+    ├── header.flex (items-center justify-between)
+    │   ├── div.brand (flex items-center gap-2)
+    │   │   ├── div.h-9.w-9.rounded-xl.bg-primary
+    │   │   │   └── Sparkles icon (h-4 w-4 text-primary-foreground)
+    │   │   └── span (text-sm font-semibold)
+    │   └── Link &quot;Lewati&quot; (text-xs text-muted-foreground)
+    ├── div.center-content (flex flex-1 flex-col items-center justify-center text-center)
+    │   ├── div.icon-container (flex h-20 w-20 items-center justify-center rounded-2xl bg-primary text-primary-foreground)
+    │   │   └── Heart/Calendar/Image icon (h-7 w-7)
+    │   ├── h1.font-serif (text-3xl font-bold)
+    │   └── p (text-sm text-muted-foreground max-w-xs)
+    ├── div.pagination (flex items-center justify-center gap-1.5)
+    │   └── 3x span (h-1.5 rounded-full)
+    └── button.cta (flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3.5 text-sm font-semibold text-primary-foreground)
+</code></pre>
+<h3>Elements</h3>
+<h4>Brand Badge</h4>
+<ul>
+<li>Container: <code>flex items-center gap-2</code></li>
+<li>Icon box: <code>h-9 w-9 rounded-xl bg-primary text-primary-foreground</code></li>
+<li>Icon: <code>Sparkles h-4 w-4</code></li>
+<li>Text: <code>text-sm font-semibold</code></li>
+</ul>
+<h4>Skip Link</h4>
+<ul>
+<li>Position: top-right</li>
+<li>Font: <code>text-xs text-muted-foreground</code></li>
+<li>Style: text link</li>
+<li>Target: navigasi ke "/"</li>
+</ul>
+<h4>Slide Icon</h4>
+<ul>
+<li>Container: <code>h-20 w-20 rounded-2xl bg-primary text-primary-foreground</code></li>
+<li>Icon center: <code>h-7 w-7</code></li>
+<li>3 slides dengan icons berbeda: Heart, Calendar, Image</li>
+</ul>
+<h4>Slide Title</h4>
+<ul>
+<li>Font: Fraunces (serif), <code>text-3xl font-bold</code></li>
+<li>Line height: <code>leading-tight</code></li>
+</ul>
+<h4>Slide Description</h4>
+<ul>
+<li>Font: Plus Jakarta Sans</li>
+<li>Size: <code>text-sm</code></li>
+<li>Color: muted-foreground</li>
+<li>Max width: <code>max-w-xs</code> (320px)</li>
+<li>Margin top: <code>mt-3</code></li>
+</ul>
+<h4>Pagination Dots</h4>
+<ul>
+<li>Container: <code>flex gap-1.5</code></li>
+<li>Active dot: <code>w-6 bg-primary</code> (24px width)</li>
+<li>Inactive dot: <code>w-1.5 bg-secondary</code> (6px width)</li>
+<li>Height: <code>h-1.5</code> (6px)</li>
+<li>Transition: <code>transition-all</code></li>
+</ul>
+<h4>CTA Button</h4>
+<ul>
+<li>Full width: <code>w-full</code></li>
+<li>Padding: <code>py-3.5</code></li>
+<li>Border radius: <code>rounded-xl</code> (20px)</li>
+<li>Font: <code>text-sm font-semibold text-primary-foreground</code></li>
+<li>Last slide: text "Mulai Buat Undangan" + Check icon</li>
+<li>Other slides: text "Lanjut" + ArrowRight icon</li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Slide 1:</strong> "Selamat datang 🎉", Heart icon</li>
+<li><strong>Slide 2:</strong> "Atur acara Anda", Calendar icon</li>
+<li><strong>Slide 3:</strong> "Tema & Galeri", Image icon</li>
+<li><strong>Active dot:</strong> Wide (24px), primary color</li>
+<li><strong>Inactive dot:</strong> Narrow (6px), secondary color</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Background: pure black</li>
+<li>Icon container: primary (inverted to white)</li>
+</ul>
+<h3>Interaksi</h3>
+<ul>
+<li>Tap next: increment slide index, navigate on last</li>
+<li>Tap skip: navigate to "/invitations/new"</li>
+<li>Pagination animates with CSS transition</li>
+</ul>
+<hr>
+<h2>6. Halaman: Dashboard (<code>/</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+div.min-h-screen.bg-background
+└── div.max-w-md (mx-auto pb-28)
+    ├── header.flex (items-center justify-between px-5 pt-6 pb-5)
+    ├── section.quota-hero (px-5 mt-6)
+    ├── section.stats (px-5 mt-6)
+    ├── section.invitations (px-5 mt-7)
+    ├── Quick Actions (KelolaUndangan component)
+    ├── section.activities (px-5 mt-7)
+    └── Bottom Navigation (fixed bottom-0)
+</code></pre>
+<h3>Elements</h3>
+<h4>Header Bar</h4>
+<ul>
+<li>Layout: <code>flex items-center justify-between px-5 pt-6 pb-5</code></li>
+<li>Left: Avatar + Greeting</li>
+<li>Right: Search button + Bell button + Menu button</li>
+</ul>
+<h4>User Avatar (Header)</h4>
+<ul>
+<li>Container: <code>flex h-11 w-11 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-semibold</code></li>
+<li>Size: 44x44px</li>
+<li>Content: initials (2 huruf pertama nama)</li>
+<li>Text: <code>text-sm font-semibold text-primary-foreground</code></li>
+</ul>
+<h4>Greeting Text</h4>
+<ul>
+<li>Welcome text: <code>text-xs text-muted-foreground</code></li>
+<li>User name: <code>text-base font-semibold leading-tight</code></li>
+</ul>
+<h4>Icon Buttons (Header)</h4>
+<ul>
+<li>Container: <code>flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card</code></li>
+<li>Icon size: <code>h-5 w-5</code></li>
+<li>Icons: Search (Search icon), Bell (Bell icon), Menu (Menu icon)</li>
+<li>Stroke: muted-foreground</li>
+</ul>
+<h4>Quota Hero Card</h4>
+<ul>
+<li>Container: <code>relative overflow-hidden rounded-3xl bg-[#2563eb] p-6 text-white</code></li>
+<li>Dimensions: full width - 40px, padding 24px</li>
+<li>Border radius: <code>rounded-3xl</code> (40px)</li>
+<li>Background: Electric Blue (#2563eb)</li>
+<li>Decorative circles: <code>absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/5</code></li>
+</ul>
+<h4>Quota Badge</h4>
+<ul>
+<li>Container: <code>flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-[11px] font-medium text-white backdrop-blur</code></li>
+<li>Icon: <code>Sparkles h-3 w-3</code></li>
+<li>Border radius: full (pill shape)</li>
+</ul>
+<h4>Upgrade Link</h4>
+<ul>
+<li>Font: <code>text-[11px] font-medium text-white/80</code></li>
+<li>Hover: underline</li>
+<li>Position: top-right dari badge</li>
+</ul>
+<h4>Quota Number</h4>
+<ul>
+<li>Label: <code>text-xs text-white/70</code></li>
+<li>Number: <code>text-4xl font-bold tabular-nums</code></li>
+<li>Total: <code>text-sm text-white/70</code></li>
+<li>Format: "X / Y undangan"</li>
+</ul>
+<h4>Quota Progress Bar</h4>
+<ul>
+<li>Container: <code>mt-4 h-2 w-full overflow-hidden rounded-full bg-white/15</code></li>
+<li>Fill: <code>h-full rounded-full bg-white transition-all</code></li>
+<li>Width: calculated percentage</li>
+</ul>
+<h4>Quota Expiry Text</h4>
+<ul>
+<li>Font: <code>text-[11px] text-white/70</code></li>
+<li>Margin top: <code>mt-2</code></li>
+</ul>
+<h4>Create Button (Hero)</h4>
+<ul>
+<li>Container: <code>mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-white px-4 py-3</code></li>
+<li>Font: <code>text-sm font-semibold text-[#2563eb]</code></li>
+<li>Icon: <code>Plus h-4 w-4</code></li>
+<li>Width: full width</li>
+<li>Border radius: full (pill)</li>
+</ul>
+<h4>Stats Cards (Grid 2x2)</h4>
+<ul>
+<li>Grid: <code>grid grid-cols-2 gap-3</code></li>
+<li>Card dimensions: varied, padding <code>p-4</code></li>
+<li>Border radius: <code>rounded-2xl</code> (32px)</li>
+<li>Border: <code>border</code> dengan warna tone-specific</li>
+<li>Tone colors (4 variants):</li>
+<li class="s"><strong>Blue:</strong> card <code>bg-[#eaf2ff]</code>, border <code>border-[#cfe0ff]</code>, icon <code>bg-[#2563ff] text-white</code></li>
+<li class="s"><strong>Mint:</strong> card <code>bg-[#e6f7f1]</code>, border <code>border-[#c4ecdd]</code>, icon <code>bg-[#10b981] text-white</code></li>
+<li class="s"><strong>Peach:</strong> card <code>bg-[#fff1e8]</code>, border <code>border-[#ffdcc4]</code>, icon <code>bg-[#f97316] text-white</code></li>
+<li class="s"><strong>Lavender:</strong> card <code>bg-[#f1ecff]</code>, border <code>border-[#dcd1ff]</code>, icon <code>bg-[#8b5cf6] text-white</code></li>
+</ul>
+<h4>Stat Card Icon</h4>
+<ul>
+<li>Container: <code>flex h-8 w-8 items-center justify-center rounded-full</code></li>
+<li>Icon size: <code>h-4 w-4</code></li>
+<li>Icon color: white</li>
+</ul>
+<h4>Stat Card Value</h4>
+<ul>
+<li>Font: <code>text-xl font-bold leading-tight text-foreground</code></li>
+<li>Tabular nums untuk number formatting</li>
+</ul>
+<h4>Stat Card Label</h4>
+<ul>
+<li>Font: <code>text-xs text-muted-foreground</code></li>
+</ul>
+<h4>Stat Card Delta</h4>
+<ul>
+<li>Font: <code>text-[10px] font-semibold</code></li>
+<li>Color: tone-specific</li>
+</ul>
+<h4>Section Title (Daftar Undangan)</h4>
+<ul>
+<li>Font: <code>text-base font-semibold</code></li>
+<li>Margin bottom: <code>mb-3</code></li>
+</ul>
+<h4>View All Link</h4>
+<ul>
+<li>Font: <code>text-xs text-muted-foreground</code></li>
+<li>Position: right-aligned</li>
+</ul>
+<h4>Invitation Card</h4>
+<ul>
+<li>Container: <code>flex items-center gap-3 rounded-2xl border border-border bg-card p-3</code></li>
+<li>Border radius: <code>rounded-2xl</code> (32px)</li>
+<li>Padding: <code>p-3</code></li>
+</ul>
+<h4>Invitation Initials Box</h4>
+<ul>
+<li>Container: <code>flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-secondary text-xs font-semibold</code></li>
+<li>Size: 40x40px</li>
+</ul>
+<h4>Invitation Title</h4>
+<ul>
+<li>Font: <code>text-sm font-semibold leading-tight</code></li>
+<li>Truncate: aktif</li>
+</ul>
+<h4>Invitation Stats</h4>
+<ul>
+<li>Font: <code>text-[11px] text-muted-foreground</code></li>
+<li>Icon: <code>h-3 w-3</code></li>
+</ul>
+<h4>Status Badge</h4>
+<ul>
+<li>Pill shape: <code>rounded-full px-2.5 py-1 text-[10px] font-semibold</code></li>
+<li>Aktif: <code>bg-primary text-primary-foreground</code></li>
+<li>Draft: <code>bg-secondary text-foreground</code></li>
+<li>Border radius: full (pill)</li>
+</ul>
+<h4>Chevron Arrow</h4>
+<ul>
+<li>Container: <code>flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground</code></li>
+<li>Icon: <code>ChevronRight h-4 w-4</code></li>
+</ul>
+<h4>Delete Button (Admin)</h4>
+<ul>
+<li>Container: <code>flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-destructive/10 text-destructive</code></li>
+<li>Icon: <code>X h-3.5 w-3.5</code></li>
+<li>Only visible untuk admin</li>
+</ul>
+<h4>Load More Button</h4>
+<ul>
+<li>Container: <code>flex w-full items-center justify-center gap-2 rounded-2xl border border-border bg-card py-3</code></li>
+<li>Font: <code>text-sm font-medium text-muted-foreground</code></li>
+</ul>
+<h4>Empty State Card</h4>
+<ul>
+<li>Container: <code>rounded-2xl border border-dashed border-border bg-card px-5 py-8 text-center</code></li>
+<li>Icon: <code>h-14 w-14 rounded-2xl bg-secondary flex items-center justify-center</code></li>
+<li>Icon (Sparkles): <code>h-5 w-5 text-muted-foreground</code></li>
+<li>Title: <code>text-sm font-semibold mt-3</code></li>
+<li>Subtitle: <code>text-xs text-muted-foreground mt-1</code></li>
+<li>CTA: <code>mt-4 inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-xs font-semibold text-primary-foreground</code></li>
+</ul>
+<h4>Bottom Navigation</h4>
+<ul>
+<li>Container: <code>fixed inset-x-0 bottom-0 z-40</code></li>
+<li>Wrapper: <code>mx-auto max-w-md px-5 pb-5</code></li>
+<li>Nav bar: <code>flex items-center justify-around rounded-full border border-border bg-card/95 p-2 shadow-lg backdrop-blur</code></li>
+<li>Item size: <code>h-12 w-12 rounded-full</code></li>
+<li>Active item: <code>bg-secondary text-foreground</code></li>
+<li>Inactive item: <code>text-muted-foreground</code></li>
+<li>Center FAB: <code>bg-primary text-primary-foreground</code></li>
+</ul>
+<h4>Side Menu Drawer</h4>
+<ul>
+<li>Overlay: <code>fixed inset-0 z-50 bg-black/40</code></li>
+<li>Drawer: <code>fixed inset-y-0 right-0 z-50 w-[78%] max-w-xs bg-background shadow-2xl</code></li>
+<li>Transition: <code>transition-transform duration-300</code></li>
+<li>Transform: <code>translate-x-0</code> (open) / <code>translate-x-full</code> (closed)</li>
+</ul>
+<h4>Menu Header</h4>
+<ul>
+<li>Layout: <code>flex items-center justify-between px-6 pt-6 pb-4</code></li>
+<li>Title: <code>text-lg font-semibold</code></li>
+<li>Close button: <code>h-9 w-9 rounded-full border border-border</code></li>
+</ul>
+<h4>Dark Mode Toggle</h4>
+<ul>
+<li>Container: <code>flex items-center justify-between rounded-2xl border border-border bg-card px-4 py-3.5</code></li>
+<li>Icon (Sun): <code>h-4 w-4 text-muted-foreground</code></li>
+<li>Label: <code>text-sm font-medium</code></li>
+<li>Toggle switch: <code>relative inline-flex h-7 w-12 shrink-0 items-center rounded-full transition-colors</code></li>
+<li>Active: <code>bg-primary</code></li>
+<li>Inactive: <code>bg-input</code></li>
+<li>Knob: <code>inline-block h-5 w-5 rounded-full bg-white shadow-sm transition-transform</code></li>
+<li>Active transform: <code>translate-x-6</code></li>
+<li>Inactive transform: <code>translate-x-1</code></li>
+</ul>
+<h4>Menu Items</h4>
+<ul>
+<li>Container: <code>flex items-center justify-between rounded-2xl px-3 py-3 text-left transition hover:bg-secondary</code></li>
+<li>Icon container: <code>flex h-9 w-9 items-center justify-center rounded-xl bg-secondary text-foreground</code></li>
+<li>Icon: <code>h-4 w-4</code></li>
+<li>Label: <code>text-sm font-medium</code></li>
+<li>Chevron: <code>ChevronRight h-4 w-4 text-muted-foreground</code></li>
+</ul>
+<h4>Logout Button</h4>
+<ul>
+<li>Container: <code>block w-full rounded-2xl border border-border bg-card py-3 text-center text-sm font-medium</code></li>
+<li>Position: <code>absolute inset-x-0 bottom-0 px-6 pb-6</code></li>
+</ul>
+<h4>Activity Row</h4>
+<ul>
+<li>Container: <code>flex items-center gap-3 rounded-2xl border border-border bg-card p-3</code></li>
+<li>Avatar: <code>h-10 w-10 rounded-full bg-secondary text-xs font-semibold</code></li>
+<li>Text: <code>text-sm font-medium</code></li>
+<li>Subtext: <code>text-[11px] text-muted-foreground</code></li>
+<li>Icon (Clock): <code>h-3 w-3</code></li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Loading:</strong> Skeleton cards dengan animate-pulse</li>
+<li><strong>Empty:</strong> Empty state card dengan CTA</li>
+<li><strong>Populated:</strong> List of invitation cards</li>
+<li><strong>Admin view:</strong> Delete button visible</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Background: pure black</li>
+<li>Card backgrounds: dark surface</li>
+<li>Quota hero: pure black (no blue)</li>
+<li>Bottom nav: semi-transparent black</li>
+</ul>
+<h3>Responsive</h3>
+<ul>
+<li>Max width: 448px (md)</li>
+<li>Full height untuk touch</li>
+<li>Safe area di bottom untuk iOS</li>
+</ul>
+<hr>
+<h2>7. Halaman: Buat Undangan Baru (<code>/invitations/new</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+div.min-h-screen.bg-background
+└── div.max-w-md (mx-auto pb-32)
+    ├── header.flex (items-center justify-between px-5 pt-6 pb-4)
+    ├── div.progress (px-5)
+    ├── div.error (mx-5 mt-4)
+    ├── div.steps (px-5 pt-8)
+    │   ├── Step 1: Mempelai form
+    │   ├── Step 2: Tanggal &amp; Link form
+    │   └── Step 3: Theme grid
+    └── Fixed Bottom Action Bar
+</code></pre>
+<h3>Elements</h3>
+<h4>Back Button (Header)</h4>
+<ul>
+<li>Container: <code>flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card</code></li>
+<li>Icon: <code>ArrowLeft h-4 w-4</code></li>
+<li>Action: navigate back atau ke "/"</li>
+</ul>
+<h4>Step Indicator</h4>
+<ul>
+<li>Font: <code>text-xs text-muted-foreground</code></li>
+<li>Format: "Langkah X dari 3"</li>
+</ul>
+<h4>Progress Bars</h4>
+<ul>
+<li>Container: <code>flex gap-2</code></li>
+<li>Bar: <code>h-1.5 flex-1 rounded-full</code></li>
+<li>Active: <code>bg-primary</code></li>
+<li>Inactive: <code>bg-secondary</code></li>
+</ul>
+<h4>Step 1: Mempelai</h4>
+<ul>
+<li>Title: <code>text-2xl font-bold</code></li>
+<li>Subtitle: <code>text-sm text-muted-foreground mt-1</code></li>
+<li>Form fields dengan icon (Heart)</li>
+</ul>
+<h4>Form Field Component</h4>
+<ul>
+<li>Label: <code>text-xs font-medium text-muted-foreground</code></li>
+<li>Required star: <code>text-red-500</code></li>
+<li>Container: <code>mt-1.5 flex items-center gap-2 rounded-2xl border border-border bg-card px-4</code></li>
+<li>Icon: <code>h-4 w-4 text-muted-foreground</code></li>
+<li>Input: <code>flex-1 bg-transparent py-3.5 text-sm outline-none</code></li>
+<li>Date input: native <code>type="date"</code></li>
+</ul>
+<h4>Step 2: Tanggal & Link</h4>
+<ul>
+<li>Title: <code>text-2xl font-bold</code></li>
+<li>Slug input container: <code>flex items-center overflow-hidden rounded-2xl border bg-card</code></li>
+<li>Border color states:</li>
+<li class="s">Available: <code>border-emerald-400</code></li>
+<li class="s">Taken: <code>border-red-400</code></li>
+<li class="s">Default: <code>border-border</code></li>
+<li>Slug prefix: <code>text-xs text-muted-foreground pl-4</code></li>
+<li>Slug input: <code>flex-1 bg-transparent px-2 py-3.5 text-sm outline-none</code></li>
+<li>Slug status icon: Loader2 (checking), Check (available)</li>
+</ul>
+<h4>Step 3: Theme Grid</h4>
+<ul>
+<li>Title: <code>text-2xl font-bold</code></li>
+<li>Subtitle: <code>text-xs text-muted-foreground</code></li>
+<li>Search bar: <code>flex flex-1 items-center overflow-hidden rounded-lg border border-border bg-card</code></li>
+<li>Search input: <code>flex-1 bg-transparent px-3 py-2.5 text-xs outline-none</code></li>
+<li>Search button: <code>bg-primary text-primary-foreground px-3.5 h-full flex items-center justify-center</code></li>
+<li>Search icon: <code>h-3.5 w-3.5</code></li>
+</ul>
+<h4>Tier Filter Chips</h4>
+<ul>
+<li>Container: <code>mt-3 flex gap-1.5 overflow-x-auto pb-1</code></li>
+<li>Chip: <code>shrink-0 rounded-lg border px-3.5 py-1.5 text-[11px] font-semibold transition</code></li>
+<li>Active: <code>border-primary bg-primary text-primary-foreground</code></li>
+<li>Inactive: <code>border-border bg-card text-foreground</code></li>
+</ul>
+<h4>Theme Card</h4>
+<ul>
+<li>Container: <code>overflow-hidden rounded-md border bg-card p-2 transition</code></li>
+<li>Border active: <code>border-primary ring-2 ring-primary/30</code></li>
+<li>Border inactive: <code>border-border</code></li>
+<li>Thumbnail: <code>aspect-square rounded-[5px] bg-secondary overflow-hidden</code></li>
+<li>Image: <code>h-full w-full object-cover</code></li>
+<li>Check badge: <code>absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-primary-foreground</code></li>
+<li>Check icon: <code>h-3 w-3</code></li>
+<li>Overlay: <code>absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/40 p-2 text-center</code></li>
+<li>Badge text: <code>text-[8px] uppercase tracking-[0.2em] opacity-70 text-white</code></li>
+<li>Name: <code>font-serif text-xs italic text-white</code></li>
+<li>Category: <code>text-[10px] text-muted-foreground</code></li>
+<li>Title: <code>text-sm font-semibold leading-tight truncate</code></li>
+<li>Select button: <code>w-full rounded-md border py-1.5 text-[11px] font-semibold transition</code></li>
+<li>Selected: <code>border-primary bg-primary text-primary-foreground</code></li>
+<li>Unselected: <code>border-primary bg-transparent text-primary</code></li>
+</ul>
+<h4>Theme Grid</h4>
+<ul>
+<li>Layout: <code>mt-4 grid grid-cols-2 gap-3</code></li>
+</ul>
+<h4>Loading State</h4>
+<ul>
+<li>Container: <code>flex items-center justify-center py-12</code></li>
+<li>Icon: <code>Loader2 h-6 w-6 animate-spin text-muted-foreground</code></li>
+</ul>
+<h4>Bottom Action Bar</h4>
+<ul>
+<li>Container: <code>fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 backdrop-blur</code></li>
+<li>Inner: <code>mx-auto max-w-md px-5 py-4</code></li>
+<li>Button: <code>flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-50</code></li>
+<li>Icon (Loader2): <code>h-4 w-4 animate-spin</code></li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Step 1:</strong> Nama mempelai pria & wanita</li>
+<li><strong>Step 2:</strong> Tanggal + slug + availability check</li>
+<li><strong>Step 3:</strong> Theme selection grid</li>
+<li><strong>Loading:</strong> Spinner, disabled buttons</li>
+<li><strong>Error:</strong> Red alert box</li>
+<li><strong>Slug checking:</strong> Spinner icon</li>
+<li><strong>Slug available:</strong> Green checkmark</li>
+<li><strong>Slug taken:</strong> Red border</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Background: pure black</li>
+<li>Card: dark surface</li>
+<li>Theme overlay: gradient dari black</li>
+</ul>
+<h3>Interaksi</h3>
+<ul>
+<li>Step navigation via bottom button</li>
+<li>Theme selection tap to toggle</li>
+<li>Slug auto-clean (alphanumeric + dash only)</li>
+<li>Debounced slug availability check (500ms)</li>
+</ul>
+<hr>
+<h2>8. Halaman: Edit Undangan (<code>/invitations/$id/edit</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+div.min-h-screen.bg-background
+└── div.max-w-md (mx-auto pb-10)
+    ├── header.flex (items-center justify-between px-5 pt-6 pb-4)
+    ├── section.hero (px-5)
+    │   └── Dark hero card dengan progress
+    ├── section.grid (mt-7 px-5)
+    │   └── 3-column grid of EditTiles
+    └── section.tips (mt-7 px-5)
+        └── Tips card
+</code></pre>
+<h3>Elements</h3>
+<h4>Back Button</h4>
+<ul>
+<li>Link to="/"</li>
+<li>Container: <code>flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card</code></li>
+<li>Icon: <code>ArrowLeft h-4 w-4</code></li>
+</ul>
+<h4>Header Title</h4>
+<ul>
+<li>Main: <code>text-sm font-semibold</code></li>
+<li>Sub: <code>mt-0.5 flex items-center gap-1 text-[10px] text-muted-foreground</code></li>
+<li>Sub icon (Cloud): <code>h-3 w-3</code></li>
+<li>Saving state: <code>animate-pulse</code></li>
+</ul>
+<h4>Share Button</h4>
+<ul>
+<li>Link to="/invitations/$id/share"</li>
+<li>Container: <code>flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card</code></li>
+<li>Icon: <code>Share2 h-4 w-4</code></li>
+</ul>
+<h4>Hero Card (Dark)</h4>
+<ul>
+<li>Container: <code>overflow-hidden rounded-3xl bg-[#0f0f11] p-5 text-white</code></li>
+<li>Border radius: <code>rounded-3xl</code> (40px)</li>
+<li>Background: near-black (#0f0f11)</li>
+<li>Padding: <code>p-5</code> (20px)</li>
+</ul>
+<h4>Status Badge</h4>
+<ul>
+<li>Container: <code>flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-semibold</code></li>
+<li>Active: <code>bg-emerald-500/20 text-emerald-300</code></li>
+<li>Draft: <code>bg-white/10 text-white/70</code></li>
+<li>Dot: <code>h-1.5 w-1.5 rounded-full</code></li>
+<li>Active dot: <code>bg-emerald-400</code></li>
+<li>Draft dot: <code>bg-white/50</code></li>
+</ul>
+<h4>Hero Title</h4>
+<ul>
+<li>Font: <code>text-xl font-bold</code></li>
+<li>Color: white</li>
+<li>Source: invitation title atau couple name</li>
+</ul>
+<h4>Hero Subtitle</h4>
+<ul>
+<li>Font: <code>text-xs text-white/70</code></li>
+<li>Format: "{date} · undangyah.id/{slug}"</li>
+</ul>
+<h4>Progress Section</h4>
+<ul>
+<li>Label: <code>text-[11px] text-white/70</code></li>
+<li>Number: <code>text-2xl font-bold tabular-nums text-white</code></li>
+<li>Unit: <code>text-base font-medium text-white/70</code></li>
+<li>Right side: <code>text-sm font-semibold</code></li>
+<li>Subtext: <code>text-[11px] text-white/70</code></li>
+</ul>
+<h4>Progress Bar</h4>
+<ul>
+<li>Container: <code>mt-3 h-2 w-full overflow-hidden rounded-full bg-white/15</code></li>
+<li>Fill: <code>h-full rounded-full bg-white transition-all</code></li>
+</ul>
+<h4>Action Buttons Row</h4>
+<ul>
+<li>Layout: <code>mt-5 grid grid-cols-3 gap-2</code></li>
+<li>Button: <code>flex items-center justify-center gap-1.5 rounded-full py-2.5 text-xs font-semibold</code></li>
+<li>Preview: <code>bg-white/10 text-white backdrop-blur</code></li>
+<li>RSVP: <code>bg-white/10 text-white backdrop-blur</code></li>
+<li>Amplop: <code>bg-white text-[#0f0f11]</code></li>
+<li>Amplop icon (Wallet): <code>h-4 w-4</code></li>
+</ul>
+<h4>Section Title</h4>
+<ul>
+<li>Font: <code>text-base font-semibold</code></li>
+<li>Margin: <code>mb-3</code></li>
+</ul>
+<h4>Edit Tile Grid</h4>
+<ul>
+<li>Layout: <code>grid grid-cols-3 gap-3</code></li>
+</ul>
+<h4>Edit Tile</h4>
+<ul>
+<li>Container: <code>flex flex-col items-center text-center</code></li>
+<li>Icon container: <code>relative flex h-16 w-16 items-center justify-center rounded-2xl bg-[#2563eb] text-white shadow-sm</code></li>
+<li>Icon size: <code>h-5 w-5</code></li>
+<li>Complete badge: <code>absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-white ring-2 ring-background</code></li>
+<li>Badge icon: <code>h-3 w-3</code></li>
+<li>Progress badge: <code>absolute -right-1 -top-1 flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-secondary px-1 text-[9px] font-bold text-muted-foreground ring-2 ring-background</code></li>
+<li>Label: <code>mt-2 text-[11px] font-medium leading-tight</code></li>
+</ul>
+<h4>Tips Card</h4>
+<ul>
+<li>Container: <code>rounded-2xl border border-dashed border-border bg-card p-4</code></li>
+<li>Title: <code>text-sm font-semibold</code></li>
+<li>Text: <code>text-xs text-muted-foreground mt-1</code></li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Loading:</strong> Full screen spinner</li>
+<li><strong>Draft:</strong> Status badge gray</li>
+<li><strong>Published:</strong> Status badge green</li>
+<li><strong>Saving:</strong> Cloud icon pulses</li>
+<li><strong>Section complete:</strong> Green checkmark badge</li>
+<li><strong>Section incomplete:</strong> Progress percentage badge</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Hero card: pure black</li>
+<li>Edit tiles: blue (#2563eb)</li>
+<li>Progress badges: dark backgrounds</li>
+</ul>
+<h3>Interaksi</h3>
+<ul>
+<li>Toggle status: POST ke API</li>
+<li>Tap tile: navigate to section edit</li>
+<li>Toast notifications untuk save/error</li>
+</ul>
+<hr>
+<h2>9. Halaman: Share Undangan (<code>/invitations/$id/share</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+div.bg-secondary/40
+├── Pull indicator
+└── div.max-w-md (mx-auto pb-28)
+    ├── header.flex
+    ├── section.tambah-tamu (px-5 pt-5)
+    ├── section.link (px-5)
+    ├── section.daftar-tamu (px-5 mt-5)
+    ├── Sticky search + filter
+    ├── section.list (px-5 pt-3)
+    ├── FAB (fixed bottom-6 right-6)
+    ├── Bulk action bar (fixed bottom)
+    ├── Alert dialogs
+    ├── Import modal (fixed)
+    └── Edit guest modal (fixed)
+</code></pre>
+<h3>Elements</h3>
+<h4>Header</h4>
+<ul>
+<li>Layout: <code>flex items-center justify-between px-5 pt-6 pb-4</code></li>
+<li>Back button: <code>ArrowLeft</code> + Home button</li>
+<li>Title: <code>text-sm font-semibold</code></li>
+<li>Menu button: <code>Menu h-4 w-4</code></li>
+</ul>
+<h4>Tambah Tamu Card</h4>
+<ul>
+<li>Container: <code>rounded-2xl bg-background p-5 shadow-sm</code></li>
+<li>Title: <code>text-base font-bold</code></li>
+<li>Subtitle: <code>text-[11px] text-muted-foreground</code></li>
+</ul>
+<h4>Step Pills</h4>
+<ul>
+<li>Layout: <code>grid grid-cols-2 gap-2</code></li>
+<li>Container: <code>flex items-center gap-3 rounded-2xl border p-3 text-left transition</code></li>
+<li>Active: <code>border-primary bg-primary/5</code></li>
+<li>Inactive: <code>border-border bg-background</code></li>
+<li>Number badge: <code>flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold</code></li>
+<li>Active badge: <code>bg-primary text-primary-foreground</code></li>
+<li>Inactive badge: <code>bg-secondary text-foreground</code></li>
+<li>Step title: <code>text-sm font-bold leading-tight</code></li>
+<li>Step sub: <code>text-[10px] text-muted-foreground truncate</code></li>
+</ul>
+<h4>Input Fields</h4>
+<ul>
+<li>Name input: <code>w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none</code></li>
+<li>Phone input: <code>flex-1 rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none</code></li>
+<li>Remove row button: <code>flex h-10 w-10 items-center justify-center rounded-full border border-border</code></li>
+<li>Remove icon: <code>X h-4 w-4 text-muted-foreground</code></li>
+<li>Add row button: <code>flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-background py-3 text-sm font-semibold</code></li>
+<li>Add icon: <code>Plus h-4 w-4</code></li>
+</ul>
+<h4>Group Input</h4>
+<ul>
+<li>Label: <code>text-sm font-bold</code></li>
+<li>Input: <code>mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none</code></li>
+</ul>
+<h4>Next Button</h4>
+<ul>
+<li>Container: <code>mt-3 w-full rounded-full bg-primary py-3.5 text-sm font-semibold text-primary-foreground</code></li>
+</ul>
+<h4>Template Textarea</h4>
+<ul>
+<li>Container: <code>mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none</code></li>
+<li>Rows: 7</li>
+<li>Variable tags: <code>code rounded bg-secondary px-1 text-[10px]</code></li>
+</ul>
+<h4>Action Buttons Row (Step 2)</h4>
+<ul>
+<li>Back: <code>flex-1 rounded-full border border-border bg-background py-3 text-sm font-semibold</code></li>
+<li>Save: <code>flex-[1.5] rounded-full bg-primary py-3 text-sm font-semibold text-primary-foreground</code></li>
+</ul>
+<h4>Link Card</h4>
+<ul>
+<li>Container: <code>rounded-2xl bg-background p-4 shadow-sm</code></li>
+<li>Label: <code>text-xs font-semibold text-muted-foreground</code></li>
+<li>Link display: <code>flex items-center gap-2 rounded-xl border border-border bg-secondary/40 p-2 pl-3</code></li>
+<li>Icon (Link2): <code>h-4 w-4 shrink-0 text-muted-foreground</code></li>
+<li>URL text: <code>flex-1 truncate text-xs</code></li>
+<li>Copy button: <code>flex items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-[11px] font-semibold text-primary-foreground</code></li>
+<li>Copy icon: <code>Copy h-3 w-3</code> atau <code>Check h-3 w-3</code> saat copied</li>
+</ul>
+<h4>Guest Section Title</h4>
+<ul>
+<li>Font: <code>text-base font-bold</code></li>
+<li>Export button: <code>flex items-center gap-1 text-xs font-semibold text-primary</code></li>
+</ul>
+<h4>Sticky Search Bar</h4>
+<ul>
+<li>Container: <code>sticky top-0 z-20 -mx-0 mt-1 bg-secondary/80 px-5 py-2 backdrop-blur</code></li>
+<li>Input container: <code>flex items-center gap-2 rounded-xl border border-border bg-background px-3</code></li>
+<li>Icon (Search): <code>h-4 w-4 text-muted-foreground</code></li>
+<li>Input: <code>flex-1 bg-transparent py-2.5 text-xs outline-none</code></li>
+<li>Clear button: <code>X h-3.5 w-3.5 text-muted-foreground</code></li>
+</ul>
+<h4>Filter Chips</h4>
+<ul>
+<li>Container: <code>flex gap-1.5 overflow-x-auto</code></li>
+<li>Chip: <code>shrink-0 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-semibold transition</code></li>
+<li>Active: <code>bg-primary text-primary-foreground</code></li>
+<li>Inactive: <code>border border-border bg-background text-muted-foreground</code></li>
+<li>Count badge: <code>rounded-full px-1.5 text-[10px]</code></li>
+<li>Active badge: <code>bg-primary-foreground/20</code></li>
+<li>Inactive badge: <code>bg-secondary</code></li>
+</ul>
+<h4>Guest Card (GuestCard component)</h4>
+<ul>
+<li>Container: <code>rounded-2xl bg-background p-4 shadow-sm transition</code></li>
+<li>Checked: <code>ring-2 ring-primary</code></li>
+<li>Checkbox: <code>mt-2 h-4 w-4 rounded border-border</code></li>
+<li>Avatar: <code>flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary</code></li>
+<li>Name: <code>text-sm font-bold capitalize</code></li>
+<li>Group badge: <code>mt-0.5 inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold</code></li>
+<li>Phone: <code>mt-1 text-[11px] text-muted-foreground</code></li>
+<li>Status badge: <code>shrink-0 rounded-full px-2.5 py-1 text-[10px] font-semibold</code></li>
+<li>Opened: <code>bg-emerald-100 text-emerald-700</code></li>
+<li>Not opened: <code>bg-amber-100 text-amber-700</code></li>
+</ul>
+<h4>Status Tags</h4>
+<ul>
+<li>Container: <code>mt-3 flex flex-wrap gap-1.5</code></li>
+<li>Tag: <code>rounded-full px-2.5 py-1 text-[10px] font-semibold</code></li>
+<li>Sent: <code>bg-emerald-100 text-emerald-700</code></li>
+<li>Not sent: <code>bg-amber-100 text-amber-700</code></li>
+<li>RSVP Hadir: <code>bg-emerald-100 text-emerald-700</code></li>
+<li>RSVP Tidak: <code>bg-rose-100 text-rose-700</code></li>
+<li>RSVP Pending: <code>bg-amber-100 text-amber-700</code></li>
+</ul>
+<h4>Action Buttons Grid</h4>
+<ul>
+<li>Layout: <code>mt-3 grid grid-cols-3 gap-2</code></li>
+<li>Button: <code>flex items-center justify-center gap-1.5 rounded-xl border py-2 text-[11px] font-semibold</code></li>
+<li>WA button: <code>border-emerald-200 bg-emerald-50 text-emerald-700</code></li>
+<li>Copy button: <code>bg-secondary text-foreground border-border</code></li>
+<li>More button: <code>bg-blue-50 text-blue-700 border-blue-200</code></li>
+</ul>
+<h4>Empty State</h4>
+<ul>
+<li>Container: <code>flex flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-background/60 px-6 py-12 text-center</code></li>
+<li>Icon: <code>flex h-16 w-16 items-center justify-center rounded-full bg-secondary</code></li>
+<li>Icon (Search/Inbox): <code>h-7 w-7 text-muted-foreground</code></li>
+<li>Title: <code>mt-4 text-sm font-bold</code></li>
+<li>Subtitle: <code>mt-1 text-xs text-muted-foreground</code></li>
+</ul>
+<h4>FAB (Floating Action Button)</h4>
+<ul>
+<li>Container: <code>fixed bottom-6 right-6 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl shadow-primary/30</code></li>
+<li>Size: 56x56px</li>
+<li>Icon: <code>Plus h-6 w-6</code></li>
+</ul>
+<h4>Bulk Action Bar</h4>
+<ul>
+<li>Container: <code>fixed inset-x-0 bottom-0 z-40 flex justify-center px-4 pb-4</code></li>
+<li>Bar: <code>flex w-full max-w-md items-center gap-2 rounded-2xl border border-border bg-card p-2 shadow-xl</code></li>
+<li>Clear button: <code>flex h-10 w-10 items-center justify-center rounded-xl bg-secondary</code></li>
+<li>Clear icon: <code>X h-4 w-4</code></li>
+<li>Count: <code>flex-1 px-1 text-xs font-semibold</code></li>
+<li>Select all: <code>rounded-xl bg-secondary px-3 py-2 text-[11px] font-semibold</code></li>
+<li>WA bulk: <code>flex items-center gap-1 rounded-xl bg-emerald-600 px-3 py-2 text-[11px] font-semibold text-white</code></li>
+<li>Delete bulk: <code>flex items-center gap-1 rounded-xl bg-rose-600 px-3 py-2 text-[11px] font-semibold text-white</code></li>
+</ul>
+<h4>Menu Dropdown</h4>
+<ul>
+<li>Container: <code>absolute right-0 top-12 z-40 w-52 overflow-hidden rounded-xl border border-border bg-card shadow-lg</code></li>
+<li>Item: <code>flex w-full items-center gap-3 border-b border-border px-3.5 py-3 text-left text-sm hover:bg-secondary/50</code></li>
+<li>Danger item: <code>text-rose-600</code></li>
+<li>Item icon: <code>h-4 w-4</code></li>
+</ul>
+<h4>Import Modal</h4>
+<ul>
+<li>Container: <code>fixed inset-0 z-50 flex items-end justify-center bg-black/40</code></li>
+<li>Sheet: <code>w-full max-w-md rounded-t-2xl bg-card p-5 pb-8 space-y-4</code></li>
+<li>Handle: <code>mx-auto mb-4 h-1 w-10 rounded-full bg-border</code></li>
+<li>Title: <code>text-sm font-bold</code></li>
+<li>Close: <code>text-xs text-muted-foreground</code></li>
+<li>Textarea: <code>w-full rounded-xl border border-border bg-background px-4 py-3 text-xs outline-none resize-none focus:border-primary font-mono</code></li>
+<li>Button: <code>flex-1 flex items-center justify-center gap-2 rounded-xl border border-border py-3 text-xs font-semibold</code></li>
+</ul>
+<h4>Edit Guest Modal</h4>
+<ul>
+<li>Container: <code>fixed inset-0 z-50 flex items-end justify-center bg-black/50 backdrop-blur-sm</code></li>
+<li>Sheet: <code>w-full max-w-md rounded-t-3xl bg-background p-5 pb-8</code></li>
+<li>Handle: <code>mx-auto mb-4 h-1 w-10 rounded-full bg-border</code></li>
+<li>Title: <code>text-base font-bold</code></li>
+<li>Field label: <code>text-xs font-medium text-muted-foreground</code></li>
+<li>Input: <code>mt-1 w-full rounded-xl border border-border bg-card px-4 py-3 text-sm outline-none focus:border-primary</code></li>
+<li>Cancel button: <code>flex-1 rounded-xl border border-border py-3 text-sm font-semibold</code></li>
+<li>Save button: <code>flex-1 flex items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-primary-foreground disabled:opacity-50</code></li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Step 1:</strong> Input data tamu</li>
+<li><strong>Step 2:</strong> Template pesan</li>
+<li><strong>Loading:</strong> Skeleton</li>
+<li><strong>Empty:</strong> Empty state</li>
+<li><strong>Filtered:</strong> Filtered list</li>
+<li><strong>Selected:</strong> Ring highlight</li>
+<li><strong>Copied:</strong> Checkmark icon + "Tersalin"</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Background: pure black</li>
+<li>Cards: dark surface</li>
+<li>Secondary: dark gray</li>
+</ul>
+<h3>Interaksi</h3>
+<ul>
+<li>Pull to refresh (60px threshold)</li>
+<li>Swipe left on guest: delete</li>
+<li>Swipe right on guest: send WA</li>
+<li>Tap checkbox: toggle selection</li>
+<li>Bulk actions untuk multiple select</li>
+</ul>
+<hr>
+<h2>10. Halaman: Broadcast WhatsApp (<code>/invitations/$id/broadcast</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+div.min-h-screen.bg-background
+├── header.sticky (flex items-center gap-3 px-4 py-3)
+│   ├── Back button
+│   ├── Title + subtitle
+│   └── Status badge
+├── div.tabs (flex border-b border-border)
+│   └── 3x Tab button
+└── div.p-4 (space-y-4)
+    ├── Device tab content
+    ├── Send tab content
+    └── History tab content
+</code></pre>
+<h3>Elements</h3>
+<h4>Header</h4>
+<ul>
+<li>Layout: <code>sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-background/80 px-4 py-3 backdrop-blur-lg</code></li>
+<li>Back button: <code>flex h-9 w-9 items-center justify-center rounded-full border border-border</code></li>
+<li>Back icon: <code>ArrowLeft h-4 w-4</code></li>
+<li>Title: <code>text-sm font-bold</code></li>
+<li>Subtitle: <code>text-[11px] text-muted-foreground</code></li>
+<li>Status badge: <code>flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-1 text-[10px] font-semibold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400</code></li>
+<li>Badge icon: <code>Wifi h-3 w-3</code></li>
+</ul>
+<h4>Tab Buttons</h4>
+<ul>
+<li>Layout: <code>flex-1 py-3 text-xs font-semibold transition</code></li>
+<li>Active: <code>border-b-2 border-primary text-primary</code></li>
+<li>Inactive: <code>text-muted-foreground</code></li>
+</ul>
+<h4>Device Card</h4>
+<ul>
+<li>Container: <code>rounded-2xl border border-border bg-card p-4</code></li>
+<li>Icon container: <code>flex h-10 w-10 items-center justify-center rounded-xl</code></li>
+<li>Connected: <code>bg-emerald-100 dark:bg-emerald-950</code></li>
+<li>Disconnected: <code>bg-rose-100 dark:bg-rose-950</code></li>
+<li>Icon: <code>Wifi h-4 w-4</code> atau <code>WifiOff h-4 w-4</code></li>
+<li>Title: <code>text-sm font-semibold</code></li>
+<li>Subtitle: <code>text-xs font-medium</code></li>
+<li>Connected: <code>text-emerald-600</code></li>
+<li>Buttons: <code>flex h-9 w-9 items-center justify-center rounded-xl border border-border</code></li>
+<li>Logout button: <code>border-rose-200 text-rose-600</code></li>
+</ul>
+<h4>QR Code Container</h4>
+<ul>
+<li>Container: <code>flex flex-col items-center rounded-2xl border border-border bg-card p-6</code></li>
+<li>QR image: <code>rounded-xl border border-border bg-white p-3</code></li>
+<li>QR size: <code>h-48 w-48</code></li>
+<li>Refresh button: <code>flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-xs font-semibold text-primary-foreground disabled:opacity-50</code></li>
+<li>Check button: <code>flex items-center gap-2 rounded-xl border border-border px-4 py-2.5 text-xs font-semibold</code></li>
+<li>Instructions: <code>mt-3 text-center text-[11px] text-muted-foreground</code></li>
+</ul>
+<h4>Quota Card</h4>
+<ul>
+<li>Container: <code>rounded-2xl border border-border bg-card p-4</code></li>
+<li>Label: <code>text-xs font-medium text-muted-foreground</code></li>
+<li>Number: <code>text-2xl font-bold</code></li>
+<li>Total: <code>text-xs text-muted-foreground</code></li>
+<li>Progress bar: <code>mt-2 h-2 overflow-hidden rounded-full bg-secondary</code></li>
+<li>Fill: <code>h-full rounded-full bg-primary transition-all</code></li>
+</ul>
+<h4>No Device State</h4>
+<ul>
+<li>Container: <code>flex flex-col items-center py-10 text-center</code></li>
+<li>Icon: <code>Smartphone h-12 w-12 text-muted-foreground</code></li>
+<li>Title: <code>mt-4 text-sm font-semibold</code></li>
+<li>Subtitle: <code>mt-1 text-xs text-muted-foreground</code></li>
+<li>CTA: <code>mt-5 flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground disabled:opacity-50</code></li>
+</ul>
+<h4>Broadcast Active Card</h4>
+<ul>
+<li>Container: <code>rounded-2xl border border-border bg-card p-4</code></li>
+<li>Title: <code>text-sm font-bold</code></li>
+<li>Status badge: <code>rounded-full px-2.5 py-1 text-[10px] font-semibold</code></li>
+<li>Running: <code>bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400</code></li>
+<li>Paused: <code>bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400</code></li>
+<li>Stats grid: <code>mt-3 grid grid-cols-3 gap-3</code></li>
+<li>Stat: <code>rounded-xl bg-secondary p-3 text-center</code></li>
+<li>Stat number: <code>text-lg font-bold</code></li>
+<li>Stat label: <code>text-[10px] text-muted-foreground</code></li>
+<li>Progress bar: <code>mt-3 h-2 overflow-hidden rounded-full bg-secondary</code></li>
+<li>Fill: <code>h-full rounded-full bg-emerald-500 transition-all</code></li>
+</ul>
+<h4>Pause/Resume Button</h4>
+<ul>
+<li>Pause: <code>flex flex-1 items-center justify-center gap-2 rounded-xl border border-border py-3 text-xs font-semibold</code></li>
+<li>Resume: <code>flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary py-3 text-xs font-semibold text-primary-foreground</code></li>
+</ul>
+<h4>Recipient Row</h4>
+<ul>
+<li>Container: <code>flex items-center gap-3 rounded-xl border border-border bg-card px-3 py-2.5</code></li>
+<li>Status icon: <code>h-4 w-4</code></li>
+<li>Sent: <code>text-emerald-500</code></li>
+<li>Failed: <code>text-rose-500</code></li>
+<li>Pending: <code>text-muted-foreground</code></li>
+<li>Name: <code>text-xs font-medium truncate</code></li>
+<li>Phone: <code>text-[10px] text-muted-foreground</code></li>
+<li>Status text: <code>text-[10px] font-semibold</code></li>
+<li>More indicator: "+X lainnya"</li>
+</ul>
+<h4>Send Tab - Eligible Count</h4>
+<ul>
+<li>Container: <code>rounded-2xl border border-border bg-card p-4</code></li>
+<li>Icon: <code>flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10</code></li>
+<li>Icon: <code>Users h-5 w-5 text-primary</code></li>
+<li>Label: <code>text-sm font-semibold</code></li>
+<li>Count: <code>text-xs text-muted-foreground</code></li>
+</ul>
+<h4>Send Button</h4>
+<ul>
+<li>Container: <code>flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 py-4 text-sm font-semibold text-white disabled:opacity-50</code></li>
+<li>Icon: <code>Send h-4 w-4</code></li>
+</ul>
+<h4>Alert Box</h4>
+<ul>
+<li>Container: <code>flex flex-col items-center rounded-2xl border border-dashed border-border py-10 text-center</code></li>
+<li>Icon: <code>AlertTriangle h-10 w-10 text-amber-500</code></li>
+<li>Title: <code>mt-3 text-sm font-semibold</code></li>
+<li>Subtitle: <code>mt-1 text-xs text-muted-foreground</code></li>
+<li>CTA: <code>mt-4 rounded-xl bg-primary px-4 py-2.5 text-xs font-semibold text-primary-foreground</code></li>
+</ul>
+<h4>History Card</h4>
+<ul>
+<li>Container: <code>rounded-2xl border border-border bg-card p-4</code></li>
+<li>Date: <code>text-xs font-semibold</code></li>
+<li>Status badge: <code>rounded-full px-2 py-0.5 text-[10px] font-semibold</code></li>
+<li>Completed: <code>bg-emerald-100 text-emerald-700</code></li>
+<li>Failed: <code>bg-rose-100 text-rose-700</code></li>
+<li>Other: <code>bg-blue-100 text-blue-700</code></li>
+<li>Stats row: <code>mt-2 flex gap-4 text-xs text-muted-foreground</code></li>
+<li>Stat: <code>flex items-center gap-1</code></li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Device disconnected:</strong> Shows QR code</li>
+<li><strong>Device connecting:</strong> Shows loading</li>
+<li><strong>Device connected:</strong> Shows green status</li>
+<li><strong>Broadcast running:</strong> Shows progress</li>
+<li><strong>Broadcast paused:</strong> Shows paused state</li>
+<li><strong>Broadcast completed:</strong> Shows completion</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Background: pure black</li>
+<li>Cards: dark surface</li>
+<li>QR container: white border</li>
+<li>Status badges: dark variants</li>
+</ul>
+<hr>
+<h2>11. Halaman: RSVP Tamu (<code>/invitations/$id/rsvp</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+div.min-h-screen.bg-background
+└── div.max-w-md (mx-auto pb-10)
+    ├── header.flex (items-center justify-between px-5 pt-6 pb-4)
+    ├── section.stats (px-5)
+    ├── section.search (mt-5 px-5)
+    ├── section.tabs (mt-4 px-5)
+    └── section.list (mt-4 px-5)
+</code></pre>
+<h3>Elements</h3>
+<h4>Header</h4>
+<ul>
+<li>Back link: <code>Link to="/invitations/$id/edit"</code></li>
+<li>Back button: <code>flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card</code></li>
+<li>Back icon: <code>ArrowLeft h-4 w-4</code></li>
+<li>Title: <code>text-sm font-semibold</code></li>
+<li>Export button: <code>flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card</code></li>
+<li>Export icon: <code>Download h-4 w-4</code></li>
+</ul>
+<h4>Stats Grid</h4>
+<ul>
+<li>Layout: <code>grid grid-cols-3 gap-2</code></li>
+<li>Card: <code>rounded-2xl border border-border bg-card p-3 text-center</code></li>
+<li>Icon container: <code>mx-auto flex h-7 w-7 items-center justify-center rounded-full bg-secondary</code></li>
+<li>Icon size: <code>h-3.5 w-3.5</code></li>
+<li>Value: <code>text-lg font-bold leading-none tabular-nums mt-2</code></li>
+<li>Label: <code>text-[10px] text-muted-foreground mt-1</code></li>
+</ul>
+<h4>Search Bar</h4>
+<ul>
+<li>Container: <code>flex items-center gap-2 rounded-full border border-border bg-card px-4</code></li>
+<li>Icon: <code>Search h-4 w-4 text-muted-foreground</code></li>
+<li>Input: <code>flex-1 bg-transparent py-3 text-sm outline-none</code></li>
+</ul>
+<h4>Tab Chips</h4>
+<ul>
+<li>Container: <code>flex gap-2 overflow-x-auto</code></li>
+<li>Chip: <code>shrink-0 rounded-full px-4 py-2 text-xs font-semibold transition</code></li>
+<li>Active: <code>bg-primary text-primary-foreground</code></li>
+<li>Inactive: <code>border border-border bg-card text-muted-foreground</code></li>
+</ul>
+<h4>RSVP Row Card</h4>
+<ul>
+<li>Container: <code>rounded-2xl border border-border bg-card p-3</code></li>
+<li>Avatar: <code>flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-semibold</code></li>
+<li>Name: <code>text-sm font-semibold truncate</code></li>
+<li>Meta: <code>flex items-center gap-2 text-[11px] text-muted-foreground</code></li>
+<li>Meta icon: <code>Clock h-3 w-3</code></li>
+<li>Guests: <code>flex items-center gap-1</code></li>
+<li>Guests icon: <code>Users h-3 w-3</code></li>
+<li>Status badge: <code>rounded-full px-2.5 py-1 text-[10px] font-semibold</code></li>
+<li>Hadir: <code>bg-primary text-primary-foreground</code></li>
+<li>Tidak: <code>bg-accent text-foreground</code></li>
+<li>Pending: <code>bg-secondary text-foreground</code></li>
+<li>Edit button: <code>flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground hover:bg-secondary</code></li>
+<li>Delete button: <code>flex h-8 w-8 items-center justify-center rounded-full text-destructive hover:bg-destructive/10</code></li>
+<li>Edit icon: <code>Pencil h-3.5 w-3.5</code></li>
+<li>Delete icon: <code>Trash2 h-3.5 w-3.5</code></li>
+</ul>
+<h4>Message Box</h4>
+<ul>
+<li>Container: <code>mt-3 flex items-start gap-2 rounded-xl bg-secondary/60 p-3</code></li>
+<li>Icon: <code>MessageCircle h-3.5 w-3.5 shrink-0 text-muted-foreground mt-0.5</code></li>
+<li>Text: <code>text-xs text-foreground/80</code></li>
+</ul>
+<h4>Edit Form (Inline)</h4>
+<ul>
+<li>Container: <code>rounded-2xl border border-primary bg-card p-4 space-y-3</code></li>
+<li>Input: <code>w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-primary</code></li>
+<li>Select: <code>flex-1 rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-primary</code></li>
+<li>Pax input: <code>w-20 rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-primary</code></li>
+<li>Textarea: <code>w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-primary resize-none</code></li>
+<li>Cancel button: <code>flex-1 rounded-xl border border-border py-2.5 text-xs font-semibold</code></li>
+<li>Save button: <code>flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-primary py-2.5 text-xs font-semibold text-primary-foreground</code></li>
+</ul>
+<h4>Empty State</h4>
+<ul>
+<li>Container: <code>rounded-2xl border border-dashed border-border bg-card p-8 text-center text-xs text-muted-foreground</code></li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Loading:</strong> Full screen spinner</li>
+<li><strong>Empty:</strong> Empty state message</li>
+<li><strong>Filtered:</strong> Tab-filtered results</li>
+<li><strong>Editing:</strong> Inline edit form</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Background: pure black</li>
+<li>Cards: dark surface</li>
+<li>Secondary: dark gray</li>
+</ul>
+<hr>
+<h2>12. Halaman: Analytics Undangan (<code>/invitations/$id/analytics</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+div.min-h-screen.bg-background
+└── div.max-w-md (mx-auto pb-10)
+    ├── SmartBack header
+    ├── section.inv-info (px-5)
+    ├── section.metrics (mt-4 grid grid-cols-2 gap-3 px-5)
+    ├── section.chart (mt-6 px-5)
+    └── section.summary (mt-6 px-5)
+</code></pre>
+<h3>Elements</h3>
+<h4>Invitation Info Card</h4>
+<ul>
+<li>Container: <code>rounded-2xl border border-border bg-card p-5</code></li>
+<li>Title: <code>text-xs text-muted-foreground</code></li>
+<li>Slug: <code>text-sm font-semibold mt-1</code></li>
+<li>Trend badge: <code>mt-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-[11px] font-semibold text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300</code></li>
+<li>Trend icon: <code>TrendingUp h-3 w-3</code></li>
+</ul>
+<h4>Metric Card</h4>
+<ul>
+<li>Container: <code>rounded-2xl border border-border bg-card p-4</code></li>
+<li>Icon container: <code>flex h-8 w-8 items-center justify-center rounded-lg bg-secondary text-muted-foreground</code></li>
+<li>Icon: <code>h-4 w-4</code></li>
+<li>Value: <code>text-lg font-bold mt-3</code></li>
+<li>Label: <code>text-[11px] text-muted-foreground</code></li>
+</ul>
+<h4>Chart Section</h4>
+<ul>
+<li>Title: <code>text-sm font-semibold mb-3</code></li>
+<li>Container: <code>rounded-2xl border border-border bg-card p-5</code></li>
+<li>Bar chart: <code>flex items-end justify-between gap-2</code></li>
+<li>Bar: <code>w-full rounded-md bg-primary/80</code></li>
+<li>Bar label: <code>text-[10px] text-muted-foreground text-center</code></li>
+</ul>
+<h4>Source Row</h4>
+<ul>
+<li>Container: <code>flex items-center gap-3 rounded-xl border border-border bg-card p-3</code></li>
+<li>Icon container: <code>flex h-8 w-8 items-center justify-center rounded-lg bg-secondary text-muted-foreground</code></li>
+<li>Label: <code>text-sm font-medium</code></li>
+<li>Value: <code>text-sm font-bold</code></li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Loading:</strong> Spinner</li>
+<li><strong>No data:</strong> Empty sections</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Background: pure black</li>
+<li>Cards: dark surface</li>
+</ul>
+<hr>
+<h2>13. Halaman: Katalog Paket (<code>/catalog</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+div.min-h-screen.bg-secondary/40
+└── div.max-w-md (mx-auto pb-32)
+    ├── header.flex (items-center justify-between px-5 pt-6 pb-4)
+    ├── Packages section (px-5)
+    ├── Addons section (mt-6 px-5)
+    └── Summary section (mt-6 px-5)
+└── Fixed CTA (bottom)
+</code></pre>
+<h3>Elements</h3>
+<h4>Header</h4>
+<ul>
+<li>Back button: <code>flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card</code></li>
+<li>Back icon: <code>ArrowLeft h-4 w-4</code></li>
+<li>Title: <code>text-sm font-semibold</code></li>
+<li>Spacer: <code>h-10 w-10</code></li>
+</ul>
+<h4>Section Header</h4>
+<ul>
+<li>Icon: <code>Package h-4 w-4 text-primary</code> atau <code>Sparkles h-4 w-4 text-primary</code></li>
+<li>Title: <code>text-base font-bold</code></li>
+</ul>
+<h4>Package Card</h4>
+<ul>
+<li>Container: <code>relative w-full rounded-xl border bg-background p-4 text-left transition</code></li>
+<li>Active: <code>border-primary ring-1 ring-primary/30</code></li>
+<li>Inactive: <code>border-border</code></li>
+<li>Popular badge: <code>absolute -top-2 right-4 rounded-md bg-primary px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide text-primary-foreground</code></li>
+<li>Checkbox: <code>flex h-5 w-5 shrink-0 items-center justify-center rounded-full border</code></li>
+<li>Active checkbox: <code>border-primary bg-primary text-primary-foreground</code></li>
+<li>Inactive checkbox: <code>border-border</code></li>
+<li>Check icon: <code>h-3 w-3</code></li>
+<li>Title: <code>text-sm font-bold</code></li>
+<li>Price: <code>text-sm font-bold text-primary</code></li>
+<li>Tier badge: <code>text-[10px] font-semibold uppercase tracking-wider text-muted-foreground</code></li>
+<li>Features grid: <code>mt-2 grid grid-cols-2 gap-x-2 gap-y-1</code></li>
+<li>Feature item: <code>flex items-center gap-1 text-[11px] text-muted-foreground</code></li>
+<li>Feature icon: <code>Check h-2.5 w-2.5 text-emerald-600</code></li>
+</ul>
+<h4>Addon Card</h4>
+<ul>
+<li>Container: <code>relative rounded-xl border bg-background p-3 text-left transition</code></li>
+<li>Icon container: <code>flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-foreground</code></li>
+<li>Icon: <code>h-4 w-4</code></li>
+<li>Title: <code>text-sm font-bold leading-tight mt-2</code></li>
+<li>Desc: <code>text-[10px] text-muted-foreground</code></li>
+<li>Price: <code>text-xs font-bold text-primary mt-1.5</code></li>
+<li>Price format: <code>+Rp Xk</code></li>
+<li>Check badge: <code>absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-primary-foreground</code></li>
+</ul>
+<h4>Summary Card</h4>
+<ul>
+<li>Container: <code>rounded-xl bg-background p-4 shadow-sm</code></li>
+<li>Row: <code>flex items-center justify-between text-sm</code></li>
+<li>Label: <code>text-muted-foreground</code></li>
+<li>Value: <code>font-semibold</code></li>
+<li>Divider: <code>my-2 border-t border-dashed border-border</code></li>
+<li>Total label: <code>text-sm font-bold</code></li>
+<li>Total value: <code>text-lg font-bold text-primary</code></li>
+</ul>
+<h4>CTA Button</h4>
+<ul>
+<li>Container: <code>mx-auto max-w-md px-5 pt-3 bg-gradient-to-t from-background via-background to-transparent</code></li>
+<li>Button: <code>flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3.5 text-sm font-semibold text-primary-foreground shadow-lg</code></li>
+<li>Icon: <code>ShoppingCart h-4 w-4</code></li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Loading:</strong> Full screen spinner</li>
+<li><strong>Selected package:</strong> Ring + checkmark</li>
+<li><strong>Selected addon:</strong> Check badge visible</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Background: pure black</li>
+<li>Cards: dark surface</li>
+</ul>
+<hr>
+<h2>14. Halaman: Checkout (<code>/checkout/$slug</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+div.min-h-screen.bg-secondary/40
+└── div.max-w-md (mx-auto pb-32)
+    ├── header.flex (items-center justify-between px-5 pt-6 pb-4)
+    ├── Error alert (mx-5 mb-4)
+    ├── Product summary section
+    ├── Addons section (mt-5 px-5)
+    ├── Registration section (mt-6 px-5)
+    ├── Payment methods section (mt-6 px-5)
+    ├── Voucher section (mt-6 px-5)
+    └── Summary section (mt-6 px-5)
+└── Fixed CTA (bottom)
+</code></pre>
+<h3>Elements</h3>
+<h4>Product Card</h4>
+<ul>
+<li>Container: <code>overflow-hidden rounded-2xl bg-background shadow-sm border border-border</code></li>
+<li>Header: <code>bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-5</code></li>
+<li>Badge: <code>inline-flex items-center rounded-full bg-primary/15 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary</code></li>
+<li>Title: <code>text-xl font-bold</code></li>
+<li>Price: <code>text-2xl font-bold text-primary</code></li>
+<li>Unit: <code>text-xs text-muted-foreground</code></li>
+<li>Divider: <code>border-t border-border</code></li>
+<li>Feature list: <code>border-t border-border px-5 py-4</code></li>
+<li>Feature header: <code>text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-2.5</code></li>
+</ul>
+<h4>Feature Row</h4>
+<ul>
+<li>Layout: <code>flex items-center gap-2</code></li>
+<li>Check: <code>Check h-3 w-3 text-emerald-600</code></li>
+<li>Text: varies</li>
+</ul>
+<h4>Addon Row</h4>
+<ul>
+<li>Container: <code>flex w-full items-center gap-3 rounded-xl border bg-background p-4 text-left transition</code></li>
+<li>Active: <code>border-primary ring-1 ring-primary/30</code></li>
+<li>Inactive: <code>border-border</code></li>
+<li>Checkbox: <code>flex h-5 w-5 shrink-0 items-center justify-center rounded-md border</code></li>
+<li>Name: <code>text-sm font-semibold</code></li>
+<li>Desc: <code>text-[11px] text-muted-foreground</code></li>
+<li>Price: <code>shrink-0 text-xs font-semibold</code></li>
+</ul>
+<h4>Registration Section</h4>
+<ul>
+<li>Title: <code>text-base font-bold mb-3</code></li>
+<li>Container: <code>space-y-3 rounded-xl bg-background p-5 shadow-sm</code></li>
+<li>Field: <code>space-y-1</code></li>
+<li>Field label: <code>text-xs font-semibold</code></li>
+<li>Input: <code>flex-1 rounded-lg border border-border bg-secondary/40 px-4 py-3 text-sm outline-none transition focus:border-primary focus:bg-background</code></li>
+<li>Verify button: <code>rounded-lg bg-primary px-4 text-xs font-semibold text-primary-foreground disabled:opacity-50</code></li>
+<li>Verified badge: <code>flex items-center gap-1 rounded-lg bg-emerald-100 px-3 text-xs font-semibold text-emerald-700</code></li>
+</ul>
+<h4>Payment Method Row</h4>
+<ul>
+<li>Container: <code>flex w-full items-center gap-3 rounded-xl border bg-background p-4 text-left transition</code></li>
+<li>Radio: <code>flex h-5 w-5 shrink-0 items-center justify-center rounded-full border</code></li>
+<li>Payment image: <code>h-6 w-auto</code></li>
+<li>Name: <code>text-sm font-semibold</code></li>
+<li>Fee: <code>text-[11px] text-muted-foreground</code></li>
+</ul>
+<h4>Voucher Section</h4>
+<ul>
+<li>Title: <code>text-base font-bold mb-3</code></li>
+<li>Container: <code>rounded-xl bg-background p-3 shadow-sm</code></li>
+<li>Input: <code>flex-1 rounded-lg border border-border bg-secondary/40 px-4 py-3 text-sm uppercase outline-none</code></li>
+<li>Apply button: <code>rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground disabled:opacity-50</code></li>
+<li>Result: <code>mt-2 text-[11px] font-semibold</code></li>
+<li>Success: <code>text-emerald-600</code></li>
+<li>Error: <code>text-destructive</code></li>
+</ul>
+<h4>Summary Section</h4>
+<ul>
+<li>Title: <code>text-base font-bold mb-3</code></li>
+<li>Container: <code>space-y-2 rounded-xl bg-background p-5 shadow-sm</code></li>
+<li>Row: <code>flex items-center justify-between</code></li>
+<li>Label: <code>text-muted-foreground</code> atau <code>text-sm font-bold</code></li>
+<li>Value: <code>font-semibold</code> atau <code>text-lg font-bold text-primary</code></li>
+<li>Divider: <code>my-2 border-t border-dashed border-border</code></li>
+</ul>
+<h4>CTA Button</h4>
+<ul>
+<li>Container: <code>mx-auto max-w-md px-5 pb-5 pt-3 bg-gradient-to-t from-background via-background to-transparent</code></li>
+<li>Button: <code>flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3.5 text-sm font-semibold text-primary-foreground shadow-lg</code></li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Loading:</strong> Full screen spinner</li>
+<li><strong>Error:</strong> Red alert box</li>
+<li><strong>Logged in:</strong> Registration section hidden</li>
+<li><strong>Voucher applied:</strong> Success/error message</li>
+<li><strong>Phone verified:</strong> Green badge</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Background: pure black</li>
+<li>Cards: dark surface</li>
+<li>Gradient header: dark variant</li>
+</ul>
+<hr>
+<h2>15. Halaman: Profil (<code>/profile</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+div.min-h-screen.bg-background
+└── div.max-w-md (mx-auto pb-10)
+    ├── header.flex (items-center justify-between px-5 pt-6 pb-4)
+    ├── section.profile-card (px-5)
+    ├── section.quick-stats (mt-4 px-5)
+    ├── section.info (mt-6 px-5)
+    ├── section.akun (mt-6 px-5)
+    ├── section.pengaturan (mt-6 px-5)
+    └── section.logout (mt-6 px-5)
+</code></pre>
+<h3>Elements</h3>
+<h4>Header</h4>
+<ul>
+<li>Back link: <code>Link to="/"</code></li>
+<li>Back button: <code>flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card</code></li>
+<li>Back icon: <code>ArrowLeft h-4 w-4</code></li>
+<li>Title: <code>text-sm font-semibold</code></li>
+<li>Edit button: <code>Link to="/profile/edit"</code></li>
+<li>Edit button: <code>flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card</code></li>
+<li>Edit icon: <code>Pencil h-4 w-4</code></li>
+</ul>
+<h4>Profile Card</h4>
+<ul>
+<li>Container: <code>rounded-3xl border border-border bg-card p-5 text-center</code></li>
+<li>Avatar container: <code>relative mx-auto h-20 w-20</code></li>
+<li>Avatar image: <code>h-20 w-20 rounded-full object-cover</code></li>
+<li>Avatar fallback: <code>flex h-20 w-20 items-center justify-center rounded-full bg-primary text-xl font-bold text-primary-foreground</code></li>
+<li>Camera button: <code>absolute -bottom-1 -right-1 flex h-8 w-8 items-center justify-center rounded-full border-2 border-background bg-primary text-primary-foreground shadow</code></li>
+<li>Camera icon: <code>Camera h-3.5 w-3.5</code> atau <code>Loader2 h-3.5 w-3.5 animate-spin</code></li>
+<li>Name: <code>text-lg font-bold mt-3</code></li>
+<li>Email: <code>text-xs text-muted-foreground</code></li>
+<li>Package badge: <code>mt-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-[11px] font-semibold text-primary-foreground</code></li>
+<li>Badge icon: <code>Crown h-3 w-3</code></li>
+</ul>
+<h4>Quick Stats</h4>
+<ul>
+<li>Container: <code>grid grid-cols-3 divide-x divide-border rounded-2xl border border-border bg-card</code></li>
+<li>Cell: <code>p-3 text-center</code></li>
+<li>Value: <code>text-lg font-bold tabular-nums</code></li>
+<li>Label: <code>text-[10px] text-muted-foreground</code></li>
+</ul>
+<h4>Info Section</h4>
+<ul>
+<li>Section label: <code>text-xs font-semibold text-muted-foreground uppercase tracking-wider</code></li>
+</ul>
+<h4>Info Row</h4>
+<ul>
+<li>Container: <code>flex items-center gap-3 rounded-2xl border border-border bg-card p-3.5</code></li>
+<li>Icon container: <code>flex h-9 w-9 items-center justify-center rounded-xl bg-secondary</code></li>
+<li>Icon: <code>h-4 w-4</code></li>
+<li>Label: <code>text-[11px] text-muted-foreground</code></li>
+<li>Value: <code>text-sm font-medium truncate</code></li>
+</ul>
+<h4>Menu Group</h4>
+<ul>
+<li>Container: <code>overflow-hidden rounded-2xl border border-border bg-card</code></li>
+</ul>
+<h4>Menu Row</h4>
+<ul>
+<li>Container: <code>flex w-full items-center gap-3 px-4 py-3.5 text-left transition hover:bg-secondary/50</code></li>
+<li>Last item: no border</li>
+<li>Other items: <code>border-b border-border</code></li>
+<li>Icon container: <code>flex h-9 w-9 items-center justify-center rounded-xl bg-secondary</code></li>
+<li>Icon: <code>h-4 w-4</code></li>
+<li>Label: <code>text-sm font-medium</code></li>
+<li>Hint: <code>text-xs text-muted-foreground</code></li>
+<li>Chevron: <code>ChevronRight h-4 w-4 text-muted-foreground</code></li>
+</ul>
+<h4>Theme Toggle Row</h4>
+<ul>
+<li>Container: <code>flex w-full items-center gap-3 border-b border-border px-4 py-3.5 text-left transition hover:bg-secondary/50</code></li>
+<li>Icon container: <code>flex h-9 w-9 items-center justify-center rounded-xl bg-secondary</code></li>
+<li>Toggle: <code>relative h-6 w-11 rounded-full transition-colors</code></li>
+<li>Active: <code>bg-primary</code></li>
+<li>Inactive: <code>bg-secondary</code></li>
+<li>Knob: <code>absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform</code></li>
+<li>Active transform: <code>translate-x-5</code></li>
+<li>Inactive transform: <code>translate-x-0.5</code></li>
+</ul>
+<h4>Logout Button</h4>
+<ul>
+<li>Container: <code>flex w-full items-center justify-center gap-2 rounded-2xl border border-border bg-card py-3.5 text-sm font-semibold text-foreground</code></li>
+<li>Icon: <code>LogOut h-4 w-4</code></li>
+</ul>
+<h4>Version Text</h4>
+<ul>
+<li>Container: <code>mt-4 text-center</code></li>
+<li>Font: <code>text-[11px] text-muted-foreground</code></li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Loading:</strong> Full screen spinner</li>
+<li><strong>Uploading avatar:</strong> Camera button shows spinner</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Background: pure black</li>
+<li>Cards: dark surface</li>
+<li>Toggle: inverted</li>
+</ul>
+<hr>
+<h2>16. Halaman: Notifikasi (<code>/notifications</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+div.min-h-screen.bg-background
+├── header.sticky (flex items-center gap-3 px-4 py-3)
+│   ├── Back button
+│   ├── Title + unread count
+│   ├── Refresh button
+│   └── Mark all read button
+├── div.tabs (flex border-b border-border)
+│   ├── Inbox tab
+│   └── General tab
+└── div.p-4
+    └── Notification list
+</code></pre>
+<h3>Elements</h3>
+<h4>Header</h4>
+<ul>
+<li>Layout: <code>sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-background/80 px-4 py-3 backdrop-blur-lg</code></li>
+<li>Back button: <code>flex h-9 w-9 items-center justify-center rounded-full border border-border</code></li>
+<li>Back icon: <code>ArrowLeft h-4 w-4</code></li>
+<li>Title: <code>text-sm font-bold</code></li>
+<li>Unread: <code>text-[11px] text-primary font-medium</code></li>
+<li>Refresh button: <code>flex h-9 w-9 items-center justify-center rounded-full border border-border</code></li>
+<li>Refresh icon: <code>RefreshCw h-4 w-4</code> dengan conditional <code>animate-spin</code></li>
+<li>Mark all button: <code>flex h-9 items-center gap-1.5 rounded-full border border-border px-3 text-[11px] font-semibold</code></li>
+<li>Icon: <code>CheckCheck h-3.5 w-3.5</code></li>
+</ul>
+<h4>Tab Buttons</h4>
+<ul>
+<li>Layout: <code>flex-1 py-3 text-xs font-semibold transition</code></li>
+<li>Active: <code>border-b-2 border-primary text-primary</code></li>
+<li>Inactive: <code>text-muted-foreground</code></li>
+<li>Badge: <code>ml-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[9px] text-primary-foreground</code></li>
+</ul>
+<h4>Notification Card</h4>
+<ul>
+<li>Container: <code>flex w-full items-start gap-3 rounded-2xl border p-4 text-left transition</code></li>
+<li>Unread: <code>border-primary/20 bg-primary/5</code></li>
+<li>Read: <code>border-border bg-card</code></li>
+<li>Icon container: <code>mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl</code></li>
+<li>Admin: <code>bg-amber-100 dark:bg-amber-950</code></li>
+<li>Regular: <code>bg-blue-100 dark:bg-blue-950</code></li>
+<li>Icon: <code>Megaphone h-4 w-4 text-amber-600</code> atau <code>Info h-4 w-4 text-blue-600</code></li>
+<li>Title: <code>text-xs font-bold</code> (unread) atau <code>text-xs font-medium</code> (read)</li>
+<li>Unread dot: <code>h-2 w-2 shrink-0 rounded-full bg-primary</code></li>
+<li>Message: <code>text-[11px] text-muted-foreground line-clamp-2 mt-0.5</code></li>
+<li>Time: <code>text-[10px] text-muted-foreground mt-1</code></li>
+</ul>
+<h4>Empty State</h4>
+<ul>
+<li>Container: <code>flex flex-col items-center py-16 text-center</code></li>
+<li>Icon: <code>flex h-14 w-14 items-center justify-center rounded-full bg-secondary</code></li>
+<li>Icon: <code>BellOff h-6 w-6 text-muted-foreground</code></li>
+<li>Title: <code>mt-4 text-sm font-semibold</code></li>
+<li>Subtitle: <code>mt-1 text-xs text-muted-foreground</code></li>
+</ul>
+<h4>Loading State</h4>
+<ul>
+<li>Container: <code>flex items-center justify-center py-16</code></li>
+<li>Spinner: <code>Loader2 h-6 w-6 animate-spin text-muted-foreground</code></li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Loading:</strong> Spinner</li>
+<li><strong>Empty:</strong> BellOff icon + message</li>
+<li><strong>Unread:</strong> Blue/amber background + dot</li>
+<li><strong>Read:</strong> Default card style</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Background: pure black</li>
+<li>Unread: dark tint</li>
+<li>Admin icon: dark amber</li>
+<li>Regular icon: dark blue</li>
+</ul>
+<hr>
+<h2>17. Halaman: AI Assistant (<code>/ai-assistant</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+div.min-h-screen.bg-background
+├── header.sticky (flex items-center gap-3 px-4 py-3)
+│   ├── Back button
+│   ├── Title + subtitle
+│   └── Sparkles icon
+└── div.p-4 (space-y-4)
+    ├── Mode tabs
+    ├── Input section
+    └── Results section
+</code></pre>
+<h3>Elements</h3>
+<h4>Header</h4>
+<ul>
+<li>Layout: <code>sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-background/80 px-4 py-3 backdrop-blur-lg</code></li>
+<li>Back button: <code>flex h-9 w-9 items-center justify-center rounded-full border border-border</code></li>
+<li>Back icon: <code>ArrowLeft h-4 w-4</code></li>
+<li>Title: <code>text-sm font-bold</code></li>
+<li>Subtitle: <code>text-[11px] text-muted-foreground</code></li>
+<li>Icon: <code>Sparkles h-5 w-5 text-primary</code></li>
+</ul>
+<h4>Mode Tabs</h4>
+<ul>
+<li>Container: <code>flex gap-1 rounded-xl bg-secondary p-1</code></li>
+<li>Tab: <code>flex flex-1 items-center justify-center gap-2 rounded-lg py-3 text-xs font-semibold transition</code></li>
+<li>Active: <code>bg-background shadow-sm</code></li>
+<li>Inactive: <code>text-muted-foreground</code></li>
+<li>Icon: <code>FileText h-4 w-4</code> atau <code>Image h-4 w-4</code></li>
+</ul>
+<h4>Text Input Section</h4>
+<ul>
+<li>Description: <code>text-xs text-muted-foreground</code></li>
+<li>Textarea: <code>w-full rounded-xl border border-border bg-card px-4 py-3 text-sm outline-none resize-none focus:border-primary</code></li>
+<li>Rows: 8</li>
+<li>Placeholder: multi-line example text</li>
+</ul>
+<h4>Image Upload Section</h4>
+<ul>
+<li>Image grid: <code>grid grid-cols-3 gap-2</code></li>
+<li>Image tile: <code>relative aspect-square rounded-xl overflow-hidden border border-border</code></li>
+<li>Image: <code>h-full w-full object-cover</code></li>
+<li>Remove button: <code>absolute top-1 right-1 flex h-5 w-5 items-center justify-center rounded-full bg-black/60 text-white text-[10px]</code></li>
+<li>Upload button: <code>flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border py-6 text-xs font-semibold text-muted-foreground</code></li>
+<li>Upload icon: <code>Image h-5 w-5</code></li>
+</ul>
+<h4>Submit Button</h4>
+<ul>
+<li>Container: <code>flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3.5 text-sm font-semibold text-primary-foreground disabled:opacity-50</code></li>
+<li>Icon: <code>Sparkles h-4 w-4</code> atau <code>Loader2 h-4 w-4 animate-spin</code></li>
+</ul>
+<h4>Result Header</h4>
+<ul>
+<li>Container: <code>flex items-center justify-between</code></li>
+<li>Left: <code>flex items-center gap-2</code></li>
+<li>Left icon: <code>CheckCircle2 h-4 w-4 text-emerald-500</code></li>
+<li>Left text: <code>text-xs font-bold</code></li>
+<li>Right: <code>flex items-center gap-2</code></li>
+<li>Confidence badge: <code>rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary</code></li>
+<li>Copy button: <code>flex h-7 w-7 items-center justify-center rounded-lg border border-border</code></li>
+<li>Copy icon: <code>Copy h-3.5 w-3.5</code> atau <code>Check h-3.5 w-3.5 text-emerald-500</code></li>
+</ul>
+<h4>Warning Box</h4>
+<ul>
+<li>Container: <code>rounded-xl border border-amber-200 bg-amber-50 p-3 dark:border-amber-900 dark:bg-amber-950/30</code></li>
+<li>Warning item: <code>flex items-start gap-2 text-[11px] text-amber-800 dark:text-amber-300</code></li>
+<li>Icon: <code>AlertTriangle h-3 w-3 shrink-0 mt-0.5</code></li>
+</ul>
+<h4>Result Section</h4>
+<ul>
+<li>Container: <code>rounded-xl border border-border bg-card p-3</code></li>
+<li>Section label: <code>mb-2 text-[10px] font-bold text-muted-foreground uppercase</code></li>
+<li>Row: <code>flex items-start gap-2 py-1.5 border-b border-border last:border-0</code></li>
+<li>Key: <code>w-28 shrink-0 text-[10px] font-medium text-muted-foreground uppercase</code></li>
+<li>Value: <code>flex-1 text-xs</code></li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Mode text:</strong> Textarea visible</li>
+<li><strong>Mode image:</strong> Upload grid visible</li>
+<li><strong>Loading:</strong> Spinner + disabled button</li>
+<li><strong>Success:</strong> Result sections visible</li>
+<li><strong>Warnings:</strong> Warning box visible</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Background: pure black</li>
+<li>Warning: dark variant</li>
+</ul>
+<hr>
+<h2>18. Halaman: Share Picker (<code>/share</code>)</h2>
+<h3>Layout Structure</h3>
+<pre><code>
+div.min-h-screen.bg-secondary/40
+└── div.max-w-md (mx-auto pb-10)
+    ├── header.flex (items-center justify-between px-5 pt-6 pb-4)
+    └── section (px-5 space-y-2)
+        └── List of invitation links
+</code></pre>
+<h3>Elements</h3>
+<h4>Header</h4>
+<ul>
+<li>Back button: <code>flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card</code></li>
+<li>Back icon: <code>ArrowLeft h-4 w-4</code></li>
+<li>Title: <code>text-sm font-semibold</code></li>
+<li>Spacer: <code>w-10</code></li>
+</ul>
+<h4>Invitation Row</h4>
+<ul>
+<li>Container: <code>flex items-center gap-3 rounded-xl bg-card p-4</code></li>
+<li>Icon: <code>flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary</code></li>
+<li>Icon: <code>Share2 h-4 w-4</code></li>
+<li>Title: <code>text-sm font-bold truncate</code></li>
+<li>Slug: <code>text-[11px] text-muted-foreground</code></li>
+<li>Chevron: <code>ChevronRight h-4 w-4 text-muted-foreground</code></li>
+</ul>
+<h4>Empty State</h4>
+<ul>
+<li>Container: <code>rounded-2xl border border-dashed border-border bg-card px-5 py-8 text-center</code></li>
+<li>Text: <code>text-sm text-muted-foreground</code></li>
+<li>CTA: <code>mt-3 inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-xs font-semibold text-primary-foreground</code></li>
+</ul>
+<h4>Loading State</h4>
+<ul>
+<li>Container: <code>flex min-h-screen items-center justify-center bg-background</code></li>
+<li>Spinner: <code>Loader2 h-5 w-5 animate-spin text-primary</code></li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Loading:</strong> Spinner, auto-redirect if 1 invitation</li>
+<li><strong>Single invitation:</strong> Auto-redirect to share page</li>
+<li><strong>Multiple invitations:</strong> List displayed</li>
+<li><strong>Empty:</strong> Empty state with CTA</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Background: pure black</li>
+<li>Cards: dark surface</li>
+</ul>
+<hr>
+<h2>19. Components: KelolaUndangan</h2>
+<h3>Layout</h3>
+<pre><code>
+section.mt-7.px-5
+├── div.header (flex items-end justify-between)
+│   ├── h3.title
+│   └── Link &quot;Semua&quot;
+├── div.tabs (conditional, horizontal scroll)
+│   └── Buttons
+└── div.grid (grid-cols-4 gap-3)
+    └── 4x QuickLink
+</code></pre>
+<h3>Elements</h3>
+<h4>Section Title</h4>
+<ul>
+<li>Font: <code>text-base font-semibold</code></li>
+<li>Margin bottom: <code>mb-3</code></li>
+</ul>
+<h4>View All Link</h4>
+<ul>
+<li>Font: <code>text-xs text-muted-foreground</code></li>
+</ul>
+<h4>Tab Pills (Multi-invitation)</h4>
+<ul>
+<li>Container: <code>mb-3 -mx-1 flex gap-2 overflow-x-auto px-1 pb-1</code></li>
+<li>Pill: <code>shrink-0 rounded-full border px-3.5 py-1.5 text-[11px] font-semibold transition</code></li>
+<li>Active: <code>border-primary bg-primary text-primary-foreground</code></li>
+<li>Inactive: <code>border-border bg-card text-muted-foreground</code></li>
+</ul>
+<h4>Quick Link</h4>
+<ul>
+<li>Container: <code>flex flex-col items-center gap-2</code></li>
+<li>Icon box: <code>flex h-14 w-14 items-center justify-center rounded-2xl border border-border bg-card</code></li>
+<li>Icon: varies</li>
+<li>Label: <code>text-[11px] font-medium text-muted-foreground</code></li>
+</ul>
+<h3>States</h3>
+<ul>
+<li><strong>Single invitation:</strong> No tabs</li>
+<li><strong>Multiple invitations:</strong> Tab pills visible</li>
+<li><strong>Active tab:</strong> Primary style</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Cards: dark surface</li>
+<li>Active tab: inverted</li>
+</ul>
+<hr>
+<h2>20. Components: CommandPalette</h2>
+<h3>Layout</h3>
+<pre><code>
+CommandDialog (shadcn/ui)
+├── CommandInput (placeholder)
+├── CommandList
+│   ├── CommandEmpty
+│   ├── CommandGroup &quot;Navigasi&quot;
+│   ├── CommandSeparator
+│   ├── CommandGroup &quot;Akun&quot;
+│   ├── CommandSeparator
+│   └── CommandGroup &quot;Tindakan&quot;
+└── CommandItems
+</code></pre>
+<h3>Elements</h3>
+<h4>CommandInput</h4>
+<ul>
+<li>Placeholder: "Cari halaman atau fitur..."</li>
+<li>Styled by shadcn Command component</li>
+</ul>
+<h4>CommandGroup</h4>
+<ul>
+<li>Heading: defined by shadcn, styled via CSS</li>
+</ul>
+<h4>CommandItem</h4>
+<ul>
+<li>Icon: <code>h-4 w-4 mr-2</code></li>
+<li>Text: varies per item</li>
+<li>Active state: handled by shadcn</li>
+</ul>
+<h4>Available Items</h4>
+<ul>
+<li>Dashboard: <code>Home</code></li>
+<li>Katalog Tema: <code>LayoutGrid</code></li>
+<li>Buat Undangan Baru: <code>Plus</code></li>
+<li>Bagikan Undangan: <code>Share2</code></li>
+<li>Profil: <code>User</code></li>
+<li>Paket Layanan: <code>Crown</code></li>
+<li>Tagihan: <code>Receipt</code></li>
+<li>Analytics: <code>BarChart3</code></li>
+<li>Notifikasi: <code>Bell</code></li>
+<li>Keamanan: <code>Shield</code></li>
+<li>Bantuan: <code>HelpCircle</code></li>
+<li>Ganti Tema: <code>Sun</code>/<code>Moon</code></li>
+<li>Keluar: <code>LogOut</code></li>
+</ul>
+<h3>Trigger</h3>
+<ul>
+<li>Keyboard: <code>Ctrl/Cmd + K</code></li>
+<li>Event: <code>command-palette:open</code></li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Dialog: dark surface</li>
+<li>Handled by shadcn theming</li>
+</ul>
+<hr>
+<h2>21. Components: Countdown</h2>
+<h3>Layout</h3>
+<pre><code>
+div.rounded-2xl.border.border-border.bg-card.p-4
+├── p.title (conditional, text-xs text-muted-foreground)
+└── div.grid (grid-cols-4 gap-2 text-center)
+    └── 4x Unit boxes
+</code></pre>
+<h3>Elements</h3>
+<h4>Title</h4>
+<ul>
+<li>Font: <code>text-xs font-semibold text-muted-foreground</code></li>
+<li>Margin bottom: <code>mb-3</code></li>
+<li>Conditional: only rendered if <code>title</code> prop provided</li>
+</ul>
+<h4>Unit Box</h4>
+<ul>
+<li>Container: <code>rounded-xl bg-secondary py-2.5</code></li>
+<li>Value: <code>text-lg font-bold tabular-nums leading-none</code></li>
+<li>Format: 2 digits, zero-padded (padStart 2)</li>
+<li>Label: <code>text-[10px] text-muted-foreground mt-1</code></li>
+</ul>
+<h4>Units</h4>
+<ul>
+<li>Hari: <code>day</code></li>
+<li>Jam: <code>h</code></li>
+<li>Menit: <code>m</code></li>
+<li>Detik: <code>s</code></li>
+</ul>
+<h3>Behavior</h3>
+<ul>
+<li>Updates every 1 second via <code>setInterval</code></li>
+<li>Zero-padded display</li>
+<li>SSR-safe (initial zeros, client hydration)</li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Card: dark surface</li>
+<li>Box: dark secondary</li>
+</ul>
+<hr>
+<h2>22. Components: SkeletonCard & SkeletonList</h2>
+<h3>SkeletonCard</h3>
+<pre><code>
+div.flex.animate-pulse.items-center.gap-3.rounded-2xl.border.border-border.bg-card.p-3
+├── div.avatar (h-10 w-10 rounded-xl bg-secondary)
+├── div.content (flex-1 space-y-2)
+│   ├── div.title (h-3 w-2/3 rounded bg-secondary)
+│   └── div.subtitle (h-2.5 w-1/3 rounded bg-secondary)
+└── div.badge (h-6 w-14 rounded-full bg-secondary)
+</code></pre>
+<h3>SkeletonList</h3>
+<pre><code>
+div.space-y-3
+└── N x SkeletonCard
+</code></pre>
+<h3>Animation</h3>
+<ul>
+<li><code>animate-pulse</code> from Tailwind</li>
+<li>Skeleton color: <code>bg-secondary</code></li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Card: dark surface</li>
+<li>Skeleton: dark secondary</li>
+</ul>
+<hr>
+<h2>23. Global Pattern: Bottom Navigation</h2>
+<h3>Structure</h3>
+<pre><code>
+nav.fixed.inset-x-0.bottom-0.z-40
+└── div.mx-auto.max-w-md.px-5.pb-5
+    └── div.flex.items-center.justify-around.rounded-full.border.border-border.bg-card/95.p-2.shadow-lg.backdrop-blur
+        ├── NavItem (home, active)
+        ├── NavItem (catalog)
+        ├── NavItem (create, primary)
+        ├── NavItem (share)
+        └── NavItem (profile)
+</code></pre>
+<h3>NavItem</h3>
+<ul>
+<li>Container: <code>h-12 w-12 rounded-full</code></li>
+<li>Active: <code>bg-secondary text-foreground</code></li>
+<li>Inactive: <code>text-muted-foreground</code></li>
+<li>Icon: <code>h-5 w-5</code></li>
+</ul>
+<h3>FAB Center Button</h3>
+<ul>
+<li>Container: <code>bg-primary text-primary-foreground</code></li>
+<li>Icon: <code>Plus h-5 w-5</code></li>
+</ul>
+<h3>Dark Mode</h3>
+<ul>
+<li>Background: pure black</li>
+<li>Card: dark with blur</li>
+<li>Active: dark secondary</li>
+</ul>
+<hr>
+<h2>24. Global Pattern: Error States</h2>
+<h3>404 Page</h3>
+<pre><code>
+div.flex.min-h-screen.items-center.justify-center.bg-background.px-4
+└── div.max-w-md.text-center
+    ├── h1 (text-7xl font-bold)
+    ├── h2 (text-xl font-semibold)
+    ├── p (text-sm text-muted-foreground)
+    └── Link button
+</code></pre>
+<h3>Error Page</h3>
+<pre><code>
+div.flex.min-h-screen.items-center.justify-center.bg-background.px-4
+└── div.max-w-md.text-center
+    ├── h1 (text-xl font-semibold)
+    ├── p (text-sm text-muted-foreground)
+    └── div.mt-6 flex flex-wrap justify-center gap-2
+        ├── Retry button (primary)
+        └── Dashboard button (outline)
+</code></pre>
+<h3>Toast Notifications</h3>
+<ul>
+<li>Position: top-center</li>
+<li>Rich colors enabled</li>
+<li>Close button visible</li>
+<li>Auto-dismiss</li>
+</ul>
+<hr>
+<h2>25. Responsive Behavior</h2>
+<h3>Breakpoints</h3>
+<ul>
+<li>Mobile-first approach</li>
+<li>Max container width: <code>max-w-md</code> (448px)</li>
+<li>All pages centered in this container</li>
+</ul>
+<h3>Safe Areas</h3>
+<ul>
+<li>Bottom padding accounts for mobile navigation bar</li>
+<li><code>pb-28</code> on pages with bottom nav</li>
+<li><code>pb-32</code> on pages with tall bottom CTAs</li>
+</ul>
+<h3>Touch Targets</h3>
+<ul>
+<li>Minimum tap target: 44x44px</li>
+<li>Icon buttons: <code>h-11 w-11</code> or <code>h-10 w-10</code></li>
+<li>List items: adequate padding for touch</li>
+</ul>
+<h3>iOS Considerations</h3>
+<ul>
+<li><code>backdrop-blur</code> for overlays</li>
+<li>Safe area insets via CSS</li>
+<li>No hover states relying on hover only</li>
+</ul>
+<hr>
+<h2>26. Icon Reference (Lucide React)</h2>
+<div class="tw"><table><thead>
+<tr><th>Icon</th><th>Usage</th></tr>
+</thead><tbody>
+<tr><td><code>Menu</code></td><td>Hamburger menu</td></tr>
+<tr><td><code>X</code></td><td>Close, remove</td></tr>
+<tr><td><code>Plus</code></td><td>Add, create</td></tr>
+<tr><td><code>Eye</code></td><td>Views, preview</td></tr>
+<tr><td><code>Users</code></td><td>Guests, RSVPs</td></tr>
+<tr><td><code>MessageCircle</code></td><td>Wishes, messages</td></tr>
+<tr><td><code>Share2</code></td><td>Share invitation</td></tr>
+<tr><td><code>Settings</code></td><td>Settings section</td></tr>
+<tr><td><code>Image</code></td><td>Photo, gallery</td></tr>
+<tr><td><code>Music</code></td><td>Music section</td></tr>
+<tr><td><code>Clock</code></td><td>Time, timestamps</td></tr>
+<tr><td><code>ChevronRight</code></td><td>Navigation arrow</td></tr>
+<tr><td><code>Home</code></td><td>Dashboard nav</td></tr>
+<tr><td><code>LayoutGrid</code></td><td>Catalog nav</td></tr>
+<tr><td><code>BarChart3</code></td><td>Analytics</td></tr>
+<tr><td><code>User</code></td><td>Profile nav</td></tr>
+<tr><td><code>Sparkles</code></td><td>AI, premium badge</td></tr>
+<tr><td><code>Sun</code></td><td>Light mode</td></tr>
+<tr><td><code>Receipt</code></td><td>Bills, invoices</td></tr>
+<tr><td><code>Package</code></td><td>Packages</td></tr>
+<tr><td><code>UserPlus</code></td><td>Affiliate</td></tr>
+<tr><td><code>Globe</code></td><td>Domain</td></tr>
+<tr><td><code>Ticket</code></td><td>Quota</td></tr>
+<tr><td><code>Calendar</code></td><td>Events</td></tr>
+<tr><td><code>Heart</code></td><td>Couple, love</td></tr>
+<tr><td><code>BookHeart</code></td><td>Love story</td></tr>
+<tr><td><code>Quote</code></td><td>Quotes</td></tr>
+<tr><td><code>Palette</code></td><td>Theme</td></tr>
+<tr><td><code>Gift</code></td><td>Gift, envelope</td></tr>
+<tr><td><code>Camera</code></td><td>Photo upload</td></tr>
+<tr><td><code>Images</code></td><td>Gallery</td></tr>
+<tr><td><code>Video</code></td><td>Live stream</td></tr>
+<tr><td><code>CalendarPlus</code></td><td>Google Calendar</td></tr>
+<tr><td><code>Cloud</code></td><td>Cloud sync</td></tr>
+<tr><td><code>Wallet</code></td><td>Digital envelope</td></tr>
+<tr><td><code>Search</code></td><td>Search</td></tr>
+<tr><td><code>Bell</code></td><td>Notifications</td></tr>
+<tr><td><code>Trash2</code></td><td>Delete</td></tr>
+<tr><td><code>Loader2</code></td><td>Loading spinner</td></tr>
+<tr><td><code>ArrowLeft</code></td><td>Back navigation</td></tr>
+<tr><td><code>ArrowRight</code></td><td>Forward</td></tr>
+<tr><td><code>Mail</code></td><td>Email</td></tr>
+<tr><td><code>Lock</code></td><td>Password</td></tr>
+<tr><td><code>Eye</code> / <code>EyeOff</code></td><td>Show/hide password</td></tr>
+<tr><td><code>Phone</code></td><td>Phone number</td></tr>
+<tr><td><code>ShieldCheck</code></td><td>Verify</td></tr>
+<tr><td><code>Check</code></td><td>Confirm</td></tr>
+<tr><td><code>Copy</code></td><td>Copy to clipboard</td></tr>
+<tr><td><code>Link2</code></td><td>Link URL</td></tr>
+<tr><td><code>Download</code></td><td>Export</td></tr>
+<tr><td><code>Upload</code></td><td>Import</td></tr>
+<tr><td><code>Send</code></td><td>Send broadcast</td></tr>
+<tr><td><code>Inbox</code></td><td>Empty state</td></tr>
+<tr><td><code>MoreHorizontal</code></td><td>More options</td></tr>
+<tr><td><code>Pencil</code></td><td>Edit</td></tr>
+<tr><td><code>Wifi</code> / <code>WifiOff</code></td><td>Device status</td></tr>
+<tr><td><code>QrCode</code></td><td>QR code</td></tr>
+<tr><td><code>RefreshCw</code></td><td>Refresh</td></tr>
+<tr><td><code>Pause</code> / <code>Play</code></td><td>Broadcast control</td></tr>
+<tr><td><code>CheckCircle2</code> / <code>XCircle</code></td><td>Status indicators</td></tr>
+<tr><td><code>Crown</code></td><td>Premium package</td></tr>
+<tr><td><code>BellOff</code></td><td>No notifications</td></tr>
+<tr><td><code>CheckCheck</code></td><td>Mark all read</td></tr>
+<tr><td><code>Info</code></td><td>Info notification</td></tr>
+<tr><td><code>Megaphone</code></td><td>Admin notification</td></tr>
+<tr><td><code>AlertTriangle</code></td><td>Warning</td></tr>
+<tr><td><code>Shield</code></td><td>Security</td></tr>
+<tr><td><code>HelpCircle</code></td><td>Help</td></tr>
+<tr><td><code>LogOut</code></td><td>Logout</td></tr>
+<tr><td><code>Moon</code></td><td>Dark mode</td></tr>
+<tr><td><code>CheckCircle2</code></td><td>AI success</td></tr>
+<tr><td><code>FileText</code></td><td>Text mode</td></tr>
+<tr><td><code>Tag</code></td><td>Voucher</td></tr>
+<tr><td><code>ShoppingCart</code></td><td>Checkout</td></tr>
+<tr><td><code>TrendingUp</code></td><td>Analytics trend</td></tr>
+</tbody></table></div>
+<hr>
+<h2>27. Form Validation Patterns</h2>
+<h3>Input States</h3>
+<ul>
+<li><strong>Default:</strong> <code>border-border</code></li>
+<li><strong>Focus:</strong> <code>border-primary</code> (ring via ring token)</li>
+<li><strong>Error:</strong> <code>border-red-400</code></li>
+<li><strong>Disabled:</strong> <code>opacity-50</code>, pointer-events-none</li>
+</ul>
+<h3>Button States</h3>
+<ul>
+<li><strong>Default:</strong> <code>bg-primary text-primary-foreground</code></li>
+<li><strong>Hover:</strong> <code>hover:opacity-90</code></li>
+<li><strong>Active:</strong> press feedback via opacity</li>
+<li><strong>Disabled:</strong> <code>disabled:opacity-50 disabled:cursor-not-allowed</code></li>
+<li><strong>Loading:</strong> Spinner icon + disabled</li>
+</ul>
+<h3>Loading Indicators</h3>
+<ul>
+<li>Spinner: <code>Loader2</code> with <code>animate-spin</code></li>
+<li>Pulse: <code>animate-pulse</code> for skeletons</li>
+<li>Progress bars: <code>transition-all</code> width changes</li>
+</ul>
+<hr>
+<p>Dokumen ini mencakup SEMUA elemen UI pada aplikasi m.undangyah.id dengan spesifikasi exact yang diperlukan untuk handoff ke designer dan developer.</p>
+<footer><p>PRD UI Detail v1.0 — m.undangyah.id — 22 Mei 2026</p></footer>
+</body>
+</html>

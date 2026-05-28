@@ -16,7 +16,7 @@ const path = require('path');
 const API_BASE = 'http://127.0.0.1/wp-json/undangyah/v1/landing';
 const ARTIKEL_DIR = path.join(__dirname, 'artikel');
 const TEMPLATE_PATH = path.join(ARTIKEL_DIR, '_template.html');
-const PER_PAGE = 100; // fetch all at once for static generation
+const PER_PAGE = 51; // WP API caps at ~50, use 51 to ensure all are fetched per page
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
